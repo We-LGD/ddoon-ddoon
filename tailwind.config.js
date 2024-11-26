@@ -12,6 +12,7 @@ export default {
         main: '#748D70',
         active: '#455C3F',
         highlight: '#0B4203',
+        input: '#D2D2D2',
         disabled: '#D9D9D9',
         disabledHover: '#999999',
       },
