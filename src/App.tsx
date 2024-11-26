@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+import Layout from '@/shared/components/templates/Layout';
 import Main from '@pages/Main';
 import Login from '@pages/Login';
 import NicknameSetup from '@pages/NicknameSetup';
@@ -15,16 +16,18 @@ function App() {
   return (
     <Router>
       <Suspense fallback={<Loading />}>
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/nickname-setup" element={<NicknameSetup />} />
-          <Route path="/tutorial" element={<Tutorial />} />
-          <Route path="/ddoon-ddoon-gool" element={<Gool />} />
-          <Route path="/challenge" element={<Challenge />} />
-          <Route path="/ddoon-ddoon-trip" element={<Trip />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/nickname-setup" element={<NicknameSetup />} />
+            <Route path="/tutorial" element={<Tutorial />} />
+            <Route path="/ddoon-ddoon-gool" element={<Gool />} />
+            <Route path="/challenge" element={<Challenge />} />
+            <Route path="/ddoon-ddoon-trip" element={<Trip />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Layout>
       </Suspense>
     </Router>
   );
