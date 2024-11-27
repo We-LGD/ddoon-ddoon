@@ -4,3 +4,11 @@ export interface NavItemProps {
   path: string;
   isSelected: boolean;
 }
+
+export interface InputProps {
+  name: string;
+  title?: string;
+  placeholder: string;
+  description?: string;
+  maxLength: number;
+}
