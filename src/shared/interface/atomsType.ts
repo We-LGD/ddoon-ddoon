@@ -18,7 +18,7 @@ export interface FailProps {
 
 export interface TitleProps {
   children: React.ReactNode;
-};
+}
 
 export interface ButtonProps {
   name: string;
@@ -30,4 +30,9 @@ export interface ChallengeProps {
   memo: string;
   day: number;
   fail?: true;
+}
+
+export interface SlideProps {
+  page: number;
+  setPage: (page: number) => void;
 }
