@@ -1,5 +1,5 @@
-import CloseBtn from '@/shared/components/atoms/CloseBtn';
 import { useState } from 'react';
+import CloseBtn from '@/shared/components/atoms/CloseBtn';
 
 function ChallengeBox() {
   const [fail, setFail] = useState(false);
