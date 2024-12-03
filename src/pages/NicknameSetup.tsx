@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import Input from '@/shared/components/atoms/Input';
 import useInputStore from '@/store/useInputStore';
+import Input from '@/shared/components/atoms/Input';
 import Button from '@/shared/components/atoms/Button';
 
 function NicknameSetup() {
