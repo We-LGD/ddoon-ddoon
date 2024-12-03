@@ -2,7 +2,7 @@ import React from 'react';
 import useInputStore from '@/store/useInputStore';
 import { InputProps } from '@/shared/interface/atomsType';
 
-const Input: React.FC<InputProps> = ({ title, placeholder, name, description, maxLength }) => {
+function Input({ title, placeholder, name, description, maxLength }: InputProps) {
   const { inputs, setInput } = useInputStore();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,11 +21,11 @@ const Input: React.FC<InputProps> = ({ title, placeholder, name, description, ma
         value={inputs[name] || ''}
         onChange={handleChange}
         maxLength={maxLength}
-        className="w-[20rem] h-[3.5rem] mt-[0.5rem] px-[1rem] py-[0.5rem] border border-input rounded-[0.25rem] placeholder-input focus:outline-none  focus:ring-transparent focus:border-main  focus:ring-0 focus:ring-main"
+        className="w-[20rem] h-[3.5rem] mt-[0.5rem] px-[1rem] py-[0.5rem] border border-input rounded-[0.25rem] placeholder-input focus:outline-none focus:ring-transparent focus:border-main focus:ring-0  focus:ring-main"
       />
       {description && <p className="text-[0.75rem] mt-[0.5rem] text-input">{description}</p>}
     </div>
   );
-};
+}
 
 export default Input;

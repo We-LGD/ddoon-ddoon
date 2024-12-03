@@ -1,20 +1,15 @@
-//
-import { useState } from 'react';
+import { ButtonProps } from '@/shared/interface/atomsType';
+import useButtonStore from '@/store/useButtonStore';
 
-function Button() {
-  const [isClicked, setIsClicked] = useState(false);
-
-  const handleClick = () => {
-    setIsClicked(!isClicked);
-  };
+function Button({ name, cancel }: ButtonProps) {
+  const { click, setClick } = useButtonStore();
 
   return (
     <button
-      onClick={handleClick}
-      className={`w-[10rem] h-[3.125rem] text-white rounded bg-main hover:bg-active disabled:bg-disabled ${isClicked ? 'bg-active' : 'bg-main'}`}
-      // disabled
+      onClick={setClick}
+      className={`w-[10rem] h-[3.125rem] text-white rounded hover:bg-active ${cancel ? 'bg-disabled' : ''} ${click ? 'bg-active' : 'bg-main'}`}
     >
-      Button
+      {name}
     </button>
   );
 }
