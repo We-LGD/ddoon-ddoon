@@ -4,6 +4,7 @@ export interface NavItemProps {
   path: string;
   isSelected: boolean;
 }
+
 export interface InputProps {
   name: string;
   title?: string;
@@ -13,4 +14,13 @@ export interface InputProps {
 }
 export interface FailProps {
   isFail: boolean;
+}
+
+export interface TitleProps {
+  children: React.ReactNode;
+};
+
+export interface ButtonProps {
+  name: string;
+  cancel?: true;
 }
