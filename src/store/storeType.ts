@@ -8,3 +8,8 @@ export interface ButtonStore {
   click: boolean;
   setClick: () => void;
 }
+export interface MobileState {
+  isMobile: boolean;
+  setIsMobile: (value: boolean) => void;
+  checkMobile: () => void;
+}
