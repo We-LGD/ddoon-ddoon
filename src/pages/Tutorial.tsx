@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useMobileStore } from '@/store/useMobileStore';
 import Title from '@/shared/components/atoms/Title';
 import Slide from '@/shared/components/atoms/Slide';
+import Button from '@/shared/components/atoms/Button';
 
 function Tutorial() {
   const navigate = useNavigate();
@@ -108,9 +109,7 @@ function Tutorial() {
           <div className="flex justify-center items-center h-full">
             <div>
               <Title>자, 이제 우리 같이 갓생살이 도전해볼까?</Title>
-              <button onClick={handleFinishTutorial} className="px-4 py-2 bg-main text-white rounded">
-                튜토리얼 완료
-              </button>
+              <Button name="도전!" event={handleFinishTutorial} />
             </div>
           </div>
         )}
@@ -122,9 +121,7 @@ function Tutorial() {
             <Slide page={page} setPage={setPage} />
           ) : (
             <div className="absolute bottom-0 left-0 w-full mb-10 flex justify-center items-center">
-              <button onClick={handleNextPage} className="px-4 py-2 bg-blue-500 text-white rounded">
-                다음
-              </button>
+              <Button name="다음" event={handleNextPage} />
             </div>
           )}
         </>

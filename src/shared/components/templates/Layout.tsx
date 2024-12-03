@@ -4,7 +4,7 @@ import { LayoutProps } from '@/shared/interface/templatesType';
 function Layout({ children }: LayoutProps) {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-200">
-      <div className="relative w-[40rem] h-screen bg-white p-4 pb-16 box-border">
+      <div className="relative w-[40rem] h-screen bg-white pb-16 box-border">
         {children}
         <NavBar />
       </div>
