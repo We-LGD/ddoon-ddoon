@@ -1,5 +1,5 @@
-import { ButtonProps } from '@/shared/interface/atomsType';
 import useButtonStore from '@/store/useButtonStore';
+import { ButtonProps } from '@/shared/interface/atomsType';
 
 function Button({ name, cancel }: ButtonProps) {
   const { click, setClick } = useButtonStore();
