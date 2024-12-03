@@ -1,5 +1,136 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useMobileStore } from '@/store/useMobileStore';
+import Title from '@/shared/components/atoms/Title';
+import Slide from '@/shared/components/atoms/Slide';
+
 function Tutorial() {
-  return <div>Tutorial</div>;
+  const navigate = useNavigate();
+  const { isMobile } = useMobileStore();
+  const [page, setPage] = useState(1);
+
+  const handleNextPage = () => {
+    if (page < 7) {
+      setPage(page + 1);
+    }
+  };
+
+  const handleFinishTutorial = () => {
+    navigate('/ddoon-ddoon-gool');
+  };
+
+  return (
+    <div className="text-center h-full">
+      <div className="h-full">
+        {page === 1 && (
+          <div className="flex justify-center items-center h-full">
+            <div>
+              <div>뚠뚠이 그림</div>
+              <p>
+                안녕! 난 뚠뚠이라고해 <br />
+                지금부터 (사용자가 지정한 굴이름)을 어떻게 하면 완성할 수 있는지 알려줄께
+                <br /> 따라와
+              </p>
+            </div>
+          </div>
+        )}
+        {page === 2 && (
+          <div>
+            <div className="w-full h-[41rem] bg-disabled"></div>
+            <div className="py-6">
+              <Title>챌린지 소개</Title>
+              <p>
+                챌린지 추가 버튼을 누르면 <br />
+                나만의 챌린지 이름과 도전 일수를 정하고
+                <br /> 다짐을 적을 수 있어!
+              </p>
+            </div>
+          </div>
+        )}
+        {page === 3 && (
+          <div>
+            <div className="w-full h-[41.25rem] bg-disabled"></div>
+            <div className="py-6">
+              <Title>챌린지 소개</Title>
+              <p>
+                일수에 따라서 성공 시 보상되는 굴이 달라져! <br />
+                어떻게 달라지냐고?
+                <br /> 그건 뚠뚠굴 소개때 알려줄께!
+              </p>
+            </div>
+          </div>
+        )}
+        {page === 4 && (
+          <div>
+            <div className="w-full h-[41.25rem] bg-disabled"></div>
+            <div className="py-6">
+              <Title>뚠뚠여행 소개</Title>
+              <p>
+                챌린지를 시작하면 볼 수 있는 화면이야!
+                <br /> 도전 일수에 따라 뚠뚠이가 산 {'>'} 하늘 {'>'} 우주로 더더 멀리 올라갈 수 있다구!
+                <br /> 매일매일 성공해야 한 칸씩 올라갈 수 있어
+                <br /> 단, 하루라도 실패하면 챌린지는 그 즉시 종료되니 주의하라구!
+              </p>
+            </div>
+          </div>
+        )}
+        {page === 5 && (
+          <div>
+            <div className="w-full h-[41.25rem] bg-disabled"></div>
+            <div className="py-6">
+              <Title>뚠뚠굴 소개</Title>
+              <p>
+                모든 일수를 성공하면 챌린지는 성공이야!
+                <br /> 보상으로 굴이 하나씩 열려 <br />
+                도전 일수에 따라 열리는 굴도 달라져
+                <br />
+                어떻게 달라지냐고?
+              </p>
+            </div>
+          </div>
+        )}
+        {page === 6 && (
+          <div>
+            <div className="w-full h-[41.25rem] bg-disabled"></div>
+            <div className="py-6">
+              <Title>뚠뚠굴 소개</Title>
+              <p>
+                위에 예시를 참고해줘! <br />
+                정확한건 성공하면 볼 수 있어
+                <br /> 챌린지가 실패하면 먼지만 쌓일지도... <br />
+                어때, (사용자가 지정한 굴 이름)굴이 더 멋있어지려면 <br />
+                열심히 해야겠지?
+              </p>
+            </div>
+          </div>
+        )}
+        {page === 7 && (
+          <div className="flex justify-center items-center h-full">
+            <div>
+              <Title>자, 이제 우리 같이 갓생살이 도전해볼까?</Title>
+              <button onClick={handleFinishTutorial} className="px-4 py-2 bg-main text-white rounded">
+                튜토리얼 완료
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {page < 7 && (
+        <>
+          {isMobile ? (
+            <Slide page={page} setPage={setPage} />
+          ) : (
+            <div className="absolute bottom-0 left-0 w-full mb-10 flex justify-center items-center">
+              <button onClick={handleNextPage} className="px-4 py-2 bg-blue-500 text-white rounded">
+                다음
+              </button>
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  );
 }
 
 export default Tutorial;
