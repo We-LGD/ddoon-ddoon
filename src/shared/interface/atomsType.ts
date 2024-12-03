@@ -1,3 +1,11 @@
+export interface InputProps {
+  name: string;
+  title?: string;
+  placeholder: string;
+  description?: string;
+  maxLength: number;
+}
+
 export interface NavItemProps {
   icon: React.ReactNode;
   label: string;
@@ -5,10 +13,11 @@ export interface NavItemProps {
   isSelected: boolean;
 }
 
-export interface InputProps {
+export interface TitleProps {
+  children: React.ReactNode;
+};
+
+export interface ButtonProps {
   name: string;
-  title?: string;
-  placeholder: string;
-  description?: string;
-  maxLength: number;
+  cancel?: true;
 }
