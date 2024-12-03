@@ -11,7 +11,6 @@ function Button() {
     <button
       onClick={handleClick}
       className={`w-[10rem] h-[3.125rem] text-white rounded bg-main hover:bg-active disabled:bg-disabled ${isClicked ? 'bg-active' : 'bg-main'}`}
-      // disabled
     >
       Button
     </button>
