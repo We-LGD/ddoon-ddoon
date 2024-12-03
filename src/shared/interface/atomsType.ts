@@ -20,11 +20,11 @@ export interface FailProps {
 
 export interface TitleProps {
   children: React.ReactNode;
-};
+}
 
 export interface ButtonProps {
-  name: string;
-  cancel?: true;
+  children: React.ReactNode;
+  cancel?: boolean;
   event?: MouseEventHandler<HTMLButtonElement>;
 }
 
