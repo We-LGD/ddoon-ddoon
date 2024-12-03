@@ -3,3 +3,8 @@ export interface InputStore {
   setInput: (name: string, value: string) => void;
   resetInputs: () => void;
 }
+
+export interface ButtonStore {
+  click: boolean;
+  setClick: () => void;
+}
