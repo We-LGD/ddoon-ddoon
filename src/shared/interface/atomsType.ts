@@ -13,7 +13,7 @@ export interface InputProps {
   maxLength: number;
 }
 export interface FailProps {
-  isFail?: boolean;
+  isFail: boolean;
 }
 
 export interface TitleProps {
@@ -23,11 +23,4 @@ export interface TitleProps {
 export interface ButtonProps {
   name: string;
   cancel?: true;
-}
-
-export interface ChallengeProps {
-  title: string;
-  memo: string;
-  day: number;
-  fail?: true;
 }
