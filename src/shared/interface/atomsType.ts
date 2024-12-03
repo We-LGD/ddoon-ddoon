@@ -1,3 +1,10 @@
+export interface NavItemProps {
+  icon: React.ReactNode;
+  label: string;
+  path: string;
+  isSelected: boolean;
+}
+
 export interface InputProps {
   name: string;
   title?: string;
@@ -5,12 +12,8 @@ export interface InputProps {
   description?: string;
   maxLength: number;
 }
-
-export interface NavItemProps {
-  icon: React.ReactNode;
-  label: string;
-  path: string;
-  isSelected: boolean;
+export interface FailProps {
+  isFail?: boolean;
 }
 
 export interface TitleProps {
@@ -20,4 +23,11 @@ export interface TitleProps {
 export interface ButtonProps {
   name: string;
   cancel?: true;
+}
+
+export interface ChallengeProps {
+  title: string;
+  memo: string;
+  day: number;
+  fail?: true;
 }
