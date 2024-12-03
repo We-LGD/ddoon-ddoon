@@ -15,4 +15,9 @@ export interface NavItemProps {
 
 export interface TitleProps {
   children: React.ReactNode;
+};
+
+export interface ButtonProps {
+  name: string;
+  cancel?: true;
 }
