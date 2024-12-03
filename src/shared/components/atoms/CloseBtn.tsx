@@ -1,8 +1,5 @@
+import { FailProps } from '@/shared/interface/atomsType';
 import { SlClose } from 'react-icons/sl';
-
-interface FailProps {
-  isFail: boolean;
-}
 
 function CloseBtn({ isFail }: FailProps) {
   return (
