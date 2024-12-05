@@ -1,5 +1,3 @@
-import { MouseEventHandler } from 'react';
-
 export interface NavItemProps {
   icon: React.ReactNode;
   label: string;

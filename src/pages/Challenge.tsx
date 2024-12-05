@@ -13,8 +13,8 @@ function Challenge() {
       <h1 className="text-lg font-bold my-7">뚠뚠 챌린지</h1>
       <section className="flex flex-col gap-3 mb-1">
         <p className="text-right text-base">{dummy.length + 1} / 10</p>
-        {dummy.map((v) => {
-          return <ChallengeBox title={v.title} memo={v.memo} day={v.day} />;
+        {dummy.map((v, i) => {
+          return <ChallengeBox key={i} title={v.title} memo={v.memo} day={v.day} />;
         })}
       </section>
       <ChellengeAddBtn />
