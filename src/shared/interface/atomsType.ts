@@ -23,8 +23,8 @@ export interface TitleProps {
 }
 
 export interface ButtonProps {
-  name: string;
-  cancel?: true;
+  children: React.ReactNode;
+  cancel?: boolean;
   event?: MouseEventHandler<HTMLButtonElement>;
 }
 
