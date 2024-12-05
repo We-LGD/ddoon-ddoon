@@ -1,6 +1,6 @@
 import { FiPlus } from 'react-icons/fi';
 
-function ChellengeAddBtn() {
+function ChallengeAddBtn() {
   return (
     <button
       onClick={() => alert('추가!')}
@@ -11,4 +11,4 @@ function ChellengeAddBtn() {
   );
 }
 
-export default ChellengeAddBtn;
+export default ChallengeAddBtn;
