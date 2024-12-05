@@ -109,7 +109,7 @@ function Tutorial() {
           <div className="flex justify-center items-center h-full">
             <div>
               <Title>자, 이제 우리 같이 갓생살이 도전해볼까?</Title>
-              <Button name="도전!" event={handleFinishTutorial} />
+              <Button event={handleFinishTutorial}>도전!</Button>
             </div>
           </div>
         )}
@@ -121,7 +121,7 @@ function Tutorial() {
             <Slide page={page} setPage={setPage} />
           ) : (
             <div className="absolute bottom-0 left-0 w-full mb-10 flex justify-center items-center">
-              <Button name="다음" event={handleNextPage} />
+              <Button event={handleNextPage}>다음</Button>
             </div>
           )}
         </>
