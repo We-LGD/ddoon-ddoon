@@ -10,8 +10,9 @@ const dummy = [
 function Challenge() {
   return (
     <div className="flex flex-col items-center">
-      <h1 className="text-lg font-bold my-8">뚠뚠 챌린지</h1>
-      <section className="flex flex-col gap-4 mb-1">
+      <h1 className="text-lg font-bold my-7">뚠뚠 챌린지</h1>
+      <section className="flex flex-col gap-3 mb-1">
+        <p className="text-right text-base">{dummy.length + 1} / 10</p>
         {dummy.map((v) => {
           return <ChallengeBox title={v.title} memo={v.memo} day={v.day} />;
         })}
