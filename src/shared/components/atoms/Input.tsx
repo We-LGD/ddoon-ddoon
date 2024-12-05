@@ -6,9 +6,9 @@ function Input({ title, placeholder, name, description, maxLength }: InputProps)
   const { inputs, setInput } = useInputStore();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(name, e.target.value);
-    // TODO: 데이터 확인용, 작업 후 삭제 예정
-    console.log(e.target.value);
+    if (e.target.value.length <= maxLength) {
+      setInput(name, e.target.value);
+    }
   };
 
   return (
