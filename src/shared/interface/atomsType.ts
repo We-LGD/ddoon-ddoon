@@ -37,5 +37,4 @@ export interface ChallengeProps {
 
 export interface SlideProps {
   page: number;
-  setPage: (page: number) => void;
 }

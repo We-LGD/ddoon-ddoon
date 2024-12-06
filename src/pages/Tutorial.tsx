@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMobileStore } from '@/store/useMobileStore';
 import Title from '@/shared/components/atoms/Title';
@@ -9,6 +9,7 @@ function Tutorial() {
   const navigate = useNavigate();
   const { isMobile } = useMobileStore();
   const [page, setPage] = useState(1);
+  const [startTouch, setStartTouch] = useState(0);
 
   const handleNextPage = () => {
     if (page < 7) {
@@ -20,9 +21,42 @@ function Tutorial() {
     navigate('/ddoon-ddoon-gool');
   };
 
+  const handleTouchStart = useCallback((e: TouchEvent) => {
+    setStartTouch(e.touches[0].clientX);
+  }, []);
+
+  const handleTouchEnd = useCallback(
+    (e: TouchEvent) => {
+      const touchDiff = startTouch - e.changedTouches[0].clientX;
+
+      if (touchDiff > 50 && page < 7) {
+        setPage((prevPage) => prevPage + 1);
+      } else if (touchDiff < -50 && page > 1) {
+        setPage((prevPage) => prevPage - 1);
+      }
+    },
+    [startTouch, page],
+  );
+
+  useEffect(() => {
+    const touchArea = document.getElementById('slider-area');
+
+    if (touchArea) {
+      touchArea.addEventListener('touchstart', handleTouchStart, { capture: true });
+      touchArea.addEventListener('touchend', handleTouchEnd, { capture: true });
+    }
+
+    return () => {
+      if (touchArea) {
+        touchArea.removeEventListener('touchstart', handleTouchStart, { capture: true });
+        touchArea.removeEventListener('touchend', handleTouchEnd, { capture: true });
+      }
+    };
+  }, [handleTouchStart, handleTouchEnd]);
+
   return (
     <div className="text-center h-full">
-      <div className="h-full">
+      <div id="slider-area" className="h-full">
         {page === 1 && (
           <div className="flex justify-center items-center h-full">
             <div>
@@ -37,7 +71,7 @@ function Tutorial() {
         )}
         {page === 2 && (
           <div>
-            <div className="w-full h-[41rem] bg-disabled"></div>
+            <div className="w-full h-[50vh] bg-disabled"></div>
             <div className="py-6">
               <Title>챌린지 소개</Title>
               <p>
@@ -50,7 +84,7 @@ function Tutorial() {
         )}
         {page === 3 && (
           <div>
-            <div className="w-full h-[41.25rem] bg-disabled"></div>
+            <div className="w-full h-[50vh] bg-disabled"></div>
             <div className="py-6">
               <Title>챌린지 소개</Title>
               <p>
@@ -63,7 +97,7 @@ function Tutorial() {
         )}
         {page === 4 && (
           <div>
-            <div className="w-full h-[41.25rem] bg-disabled"></div>
+            <div className="w-full h-[50vh] bg-disabled"></div>
             <div className="py-6">
               <Title>뚠뚠여행 소개</Title>
               <p>
@@ -77,7 +111,7 @@ function Tutorial() {
         )}
         {page === 5 && (
           <div>
-            <div className="w-full h-[41.25rem] bg-disabled"></div>
+            <div className="w-full h-[50vh] bg-disabled"></div>
             <div className="py-6">
               <Title>뚠뚠굴 소개</Title>
               <p>
@@ -92,7 +126,7 @@ function Tutorial() {
         )}
         {page === 6 && (
           <div>
-            <div className="w-full h-[41.25rem] bg-disabled"></div>
+            <div className="w-full h-[50vh] bg-disabled"></div>
             <div className="py-6">
               <Title>뚠뚠굴 소개</Title>
               <p>
@@ -118,7 +152,7 @@ function Tutorial() {
       {page < 7 && (
         <>
           {isMobile ? (
-            <Slide page={page} setPage={setPage} />
+            <Slide page={page} />
           ) : (
             <div className="absolute bottom-0 left-0 w-full mb-10 flex justify-center items-center">
               <Button event={handleNextPage}>다음</Button>
