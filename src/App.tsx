@@ -1,6 +1,6 @@
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
+import { useMobileStore } from '@store/useMobileStore';
 import Layout from '@/shared/components/templates/Layout';
 import Main from '@pages/Main';
 import Login from '@pages/Login';
@@ -13,6 +13,17 @@ import NotFound from '@pages/NotFound';
 import Loading from '@pages/Loading';
 
 function App() {
+  const checkMobile = useMobileStore((state) => state.checkMobile);
+
+  useEffect(() => {
+    window.addEventListener('resize', checkMobile);
+    checkMobile();
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, [checkMobile]);
+
   return (
     <Router>
       <Suspense fallback={<Loading />}>

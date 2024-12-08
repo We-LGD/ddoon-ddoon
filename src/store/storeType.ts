@@ -3,3 +3,9 @@ export interface InputStore {
   setInput: (name: string, value: string) => void;
   resetInputs: () => void;
 }
+
+export interface MobileState {
+  isMobile: boolean;
+  setIsMobile: (value: boolean) => void;
+  checkMobile: () => void;
+}

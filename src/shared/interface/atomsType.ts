@@ -34,3 +34,7 @@ export interface ChallengeProps {
   day: number;
   fail?: true;
 }
+
+export interface SlideProps {
+  page: number;
+}
