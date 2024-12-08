@@ -59,14 +59,12 @@ function Tutorial() {
       <div id="slider-area" className="h-full">
         {page === 1 && (
           <div className="flex justify-center items-center h-full">
-            <div>
-              <div>뚠뚠이 그림</div>
-              <p>
-                안녕! 난 뚠뚠이라고해 <br />
-                지금부터 (사용자가 지정한 굴이름)을 어떻게 하면 완성할 수 있는지 알려줄께
-                <br /> 따라와
-              </p>
-            </div>
+            <div>뚠뚠이 그림</div>
+            <p>
+              안녕! 난 뚠뚠이라고해 <br />
+              지금부터 (사용자가 지정한 굴이름)을 어떻게 하면 완성할 수 있는지 알려줄께
+              <br /> 따라와
+            </p>
           </div>
         )}
         {page === 2 && (
