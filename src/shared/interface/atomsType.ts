@@ -13,7 +13,8 @@ export interface InputProps {
   maxLength: number;
 }
 export interface FailProps {
-  isFail?: boolean;
+  fail?: boolean;
+  index: number;
 }
 
 export interface TitleProps {
@@ -24,6 +25,7 @@ export interface ButtonProps {
   children: React.ReactNode;
   cancel?: boolean;
   event?: MouseEventHandler<HTMLButtonElement>;
+  type?: 'button' | 'submit' | 'reset';
 }
 
 export interface ChallengeProps {
@@ -31,4 +33,19 @@ export interface ChallengeProps {
   memo: string;
   day: number;
   fail?: true;
+  index: number;
+}
+
+export interface NewChallengeProps {
+  title: string;
+  memo: string;
+  day: number;
+}
+
+
+//TODO - 서버 연결시 삭제하기
+export interface DummyProps {
+  dummy: Pick<ChallengeProps, "title" | "memo" | "day">[];
+  setDummy: (challenge: Pick<ChallengeProps, "title" | "memo" | "day">) => void;
+  deleteDummy: (index: number) => void;
 }

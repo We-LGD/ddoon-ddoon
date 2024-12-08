@@ -2,7 +2,7 @@ import { useState } from 'react';
 import CloseBtn from '@/shared/components/atoms/CloseBtn';
 import { ChallengeProps } from '@/shared/interface/atomsType';
 
-function ChallengeBox({ title, memo, day, fail }: ChallengeProps) {
+function ChallengeBox({ title, memo, day, fail, index }: ChallengeProps) {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -26,7 +26,7 @@ function ChallengeBox({ title, memo, day, fail }: ChallengeProps) {
         >
           D-{day}
         </p>
-        <CloseBtn isFail={fail} />
+        <CloseBtn fail={fail} index={index} />
       </div>
     </>
   );

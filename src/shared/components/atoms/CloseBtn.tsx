@@ -1,9 +1,12 @@
 import Swal from 'sweetalert2';
 import { SlClose } from 'react-icons/sl';
 import { FailProps } from '@/shared/interface/atomsType';
+import useDummyStore from '@/store/useDummyStore';
 
-function CloseBtn({ isFail }: FailProps) {
-  const showDeleteAlert = () => {
+function CloseBtn({ fail, index }: FailProps) {
+  const { deleteDummy } = useDummyStore();
+
+  const showDeleteModal = () => {
     Swal.fire({
       title: '정말로 삭제하시겠어요?',
       html: '삭제된 챌린지는 복구 할 수 없습니다.',
@@ -21,14 +24,14 @@ function CloseBtn({ isFail }: FailProps) {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log('삭제');
+        deleteDummy(index);
       }
     });
   };
   return (
     <button
-      onClick={showDeleteAlert}
-      className={`w-{1rem} h-{1rem} flex justify-center items-center absolute right-2 top-2 ${isFail ? 'hidden' : ''}`}
+      onClick={showDeleteModal}
+      className={`w-{1rem} h-{1rem} flex justify-center items-center absolute right-2 top-2 ${fail ? 'hidden' : ''}`}
     >
       <SlClose />
     </button>
