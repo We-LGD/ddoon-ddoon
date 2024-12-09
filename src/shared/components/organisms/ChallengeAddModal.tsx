@@ -50,7 +50,7 @@ function ChallengeAddModal({ open, event }: { open: boolean; event: MouseEventHa
     >
       <form
         onSubmit={handleFormSubmit}
-        className="w-[31.125rem] h-[32.625rem] bg-white flex flex-col justify-center items-center gap-3"
+        className="w-[31.125rem] h-[32.625rem] bg-white flex flex-col justify-center items-center gap-3 rounded-lg"
       >
         <fieldset className="flex flex-col gap-4">
           <Input title="챌린지 제목을 작성해주세요" placeholder="매일 책 10분 읽기" name="title" maxLength={20} />
