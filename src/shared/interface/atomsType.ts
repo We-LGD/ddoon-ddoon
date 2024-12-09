@@ -49,3 +49,7 @@ export interface DummyProps {
   setDummy: (challenge: Pick<ChallengeProps, "title" | "memo" | "day">) => void;
   deleteDummy: (index: number) => void;
 }
+
+export interface SlideProps {
+  page: number;
+}

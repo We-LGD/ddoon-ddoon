@@ -6,6 +6,13 @@ export interface InputStore {
   resetInputs: () => void;
 }
 
+export interface MobileState {
+  isMobile: boolean;
+  setIsMobile: (value: boolean) => void;
+  checkMobile: () => void;
+}
+
+
 export interface NewChallengeStore {
   newChallenge: NewChallengeProps;
   setNewChallenge: (fields: Partial<NewChallengeProps>) => void;
