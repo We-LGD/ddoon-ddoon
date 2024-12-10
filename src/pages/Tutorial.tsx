@@ -18,7 +18,7 @@ function Tutorial() {
   };
 
   const handleFinishTutorial = () => {
-    navigate('/ddoon-ddoon-gool');
+    navigate('/ddoon-ddoon-gool', { state: { tutorialCompleted: true } });
   };
 
   const handleTouchStart = useCallback((e: TouchEvent) => {
