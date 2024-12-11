@@ -16,6 +16,19 @@ export default {
         disabled: '#D9D9D9',
         disabledHover: '#999999',
       },
+      animation: {
+        showModal: 'showModal 0.3s ease-in-out',
+      },
+      keyframes: {
+        showModal: {
+          '0%, 100%': {
+            transform: 'scale(1)',
+          },
+          '50%': {
+            transform: 'scale(0.9)',
+          },
+        },
+      },
     },
   },
   plugins: [],
