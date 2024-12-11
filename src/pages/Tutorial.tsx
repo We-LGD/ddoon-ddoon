@@ -1,13 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useMobileStore } from '@/store/useMobileStore';
+import { isMobile } from 'react-device-detect';
 import Title from '@/shared/components/atoms/Title';
 import Slide from '@/shared/components/atoms/Slide';
 import Button from '@/shared/components/atoms/Button';
 
 function Tutorial() {
   const navigate = useNavigate();
-  const { isMobile } = useMobileStore();
   const [page, setPage] = useState(1);
   const [startTouch, setStartTouch] = useState(0);
 
@@ -58,7 +57,7 @@ function Tutorial() {
     <div className="text-center h-full">
       <div id="slider-area" className="h-full">
         {page === 1 && (
-          <div className="flex justify-center items-center h-full">
+          <div className="content-center h-full">
             <div>뚠뚠이 그림</div>
             <p>
               안녕! 난 뚠뚠이라고해 <br />
