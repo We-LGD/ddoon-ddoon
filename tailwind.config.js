@@ -7,6 +7,7 @@ export default {
         default: ['GothicA1', 'sans-serif'],
         sub: ['Gaegu', 'cursive'],
         display: ['인천교육자람', 'sans-serif'],
+        woodSign: ['Maplestory', 'sans-serif'],
       },
       colors: {
         main: '#748D70',
