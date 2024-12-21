@@ -16,13 +16,15 @@ function Gool() {
     const nextChallengeNumber = challengeResults.length + 1;
     if (nextChallengeNumber <= successImagesData.length) {
       setChallengeResults([...challengeResults, { success, number: nextChallengeNumber }]);
+      localStorage.setItem(`clickBtn${nextChallengeNumber}`, 'true');
     }
   };
 
-  const handleSuccessBtnClick = ({ imgSrc, idx }: { imgSrc: string; idx?: number }) => {
+  const handleSuccessImgClick = ({ imgSrc, idx }: { imgSrc: string; idx: number }) => {
     setSelectedImage(Images[imgSrc]);
     console.log(idx); // TODO: 방 번호 저장 확인 - 작업 후 삭제 예정
     setSuccessModal(true);
+    localStorage.setItem(`clickBtn${idx}`, 'false');
   };
 
   useEffect(() => {
@@ -107,19 +109,6 @@ function Gool() {
           }}
         ></div>
 
-        <button
-          className="absolute z-30 text-center font-bold text-white animate-pulse"
-          style={{
-            top: '30%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            textShadow: '0 0 5px rgba(255, 255, 0, 0.7), 0 0 10px rgba(255, 255, 0, 0.6)',
-            fontSize: `${window.innerHeight * 0.03}px`,
-          }}
-          onClick={() => handleSuccessBtnClick({ imgSrc: '튜토리얼오픈' })}
-        >
-          Click
-        </button>
         <div
           className="absolute"
           style={{
@@ -128,6 +117,16 @@ function Gool() {
             left: '31%',
           }}
         >
+          <button
+            className={`absolute z-30 text-center ${localStorage.getItem(`clickBtn0`) === 'false' ? 'opacity-0 w-full h-full top-0 left-0' : 'opacity-1 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] font-bold text-white animate-pulse'}`}
+            style={{
+              textShadow: '0 0 5px rgba(255, 255, 0, 0.7), 0 0 10px rgba(255, 255, 0, 0.6)',
+              fontSize: `${window.innerHeight * 0.03}px`,
+            }}
+            onClick={() => handleSuccessImgClick({ imgSrc: '튜토리얼오픈', idx: 0 })}
+          >
+            Click
+          </button>
           <img src={Images.튜토리얼오픈} alt="튜토리얼 오픈방" className="w-full h-auto object-contain" />
         </div>
 
@@ -135,6 +134,7 @@ function Gool() {
           const result = challengeResults.find((res) => res.number === item.idx);
           const buttonStyle = getClickButtonPosition(item.idx);
           const failureStyle = getFailureImagePosition(item.idx, item.style);
+          const isClickBtnTrue = localStorage.getItem(`clickBtn${item.idx}`) === 'true';
 
           return (
             <div
@@ -142,15 +142,15 @@ function Gool() {
               className="absolute"
               style={result && result.success ? { ...item.style } : { ...failureStyle }}
             >
-              {result && result.success ? (
+              {localStorage.getItem(`clickBtn${item.idx}`) && result && result.success ? (
                 <button
-                  className="absolute z-30 font-bold text-white animate-pulse"
+                  className={`absolute z-30 ${isClickBtnTrue ? 'opacity-1 font-bold text-white animate-pulse' : 'opacity-0 w-full h-full top-0 left-0'}`}
                   style={{
-                    ...buttonStyle,
+                    ...(isClickBtnTrue ? buttonStyle : {}),
                     textShadow: '0 0 5px rgba(255, 255, 0, 0.7), 0 0 10px rgba(255, 255, 0, 0.6)',
                     fontSize: `${window.innerHeight * 0.03}px`,
                   }}
-                  onClick={() => handleSuccessBtnClick({ imgSrc: item.imgSrc, idx: item.idx })}
+                  onClick={() => handleSuccessImgClick({ imgSrc: item.imgSrc, idx: item.idx })}
                 >
                   Click
                 </button>
