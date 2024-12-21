@@ -17,7 +17,8 @@ function Tutorial() {
   };
 
   const handleFinishTutorial = () => {
-    navigate('/ddoon-ddoon-gool', { state: { tutorialCompleted: true } });
+    localStorage.setItem('tutorialModal', 'true');
+    navigate('/ddoon-ddoon-gool');
   };
 
   const handleTouchStart = useCallback((e: TouchEvent) => {

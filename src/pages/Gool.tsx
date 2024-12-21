@@ -1,52 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { createRoot } from 'react-dom/client';
-import Swal from 'sweetalert2';
-import Button from '@/shared/components/atoms/Button';
-import successImagesData from '@/utils/constants/successImages.json';
+import { Images } from '@/shared/assets/images';
+import TutorialRewardModal from '@/shared/components/templates/TutorialRewardModal';
+import { successImagesData } from '@/utils/constants/successImages';
 import { getClickButtonPosition } from '@/utils/constants/buttonPositions';
 import { getFailureImagePosition } from '@/utils/constants/failurePositions';
-import { Images } from '@/shared/assets/images';
 
 function Gool() {
-  const { state } = useLocation();
   const [width, setWidth] = useState(0);
   const [challengeResults, setChallengeResults] = useState<{ success: boolean; number: number }[]>([]);
-
-  const openTutorialRewardModal = () => {
-    Swal.fire({
-      title: '튜토리얼 성공!',
-      html: `
-        <div>
-          <p>성공 보상으로 굴 하나를 열어줄께</p>
-          <div class="flex justify-center mt-4">
-            <div id="customConfirmButton"></div>
-          </div>
-        </div>
-      `,
-      showConfirmButton: false,
-      showCancelButton: false,
-      customClass: {
-        popup: 'w-[25.375rem] h-[13.625rem] pt-5 font-default text-sm',
-      },
-      didOpen: () => {
-        const confirmButtonContainer = document.getElementById('customConfirmButton');
-
-        if (confirmButtonContainer) {
-          const root = createRoot(confirmButtonContainer);
-          root.render(
-            <Button
-              event={() => {
-                Swal.close();
-              }}
-            >
-              보상받기
-            </Button>,
-          );
-        }
-      },
-    });
-  };
 
   const handleChallenge = (success: boolean) => {
     const nextChallengeNumber = challengeResults.length + 1;
@@ -56,6 +17,11 @@ function Gool() {
   };
 
   useEffect(() => {
+    const tutorialModal = localStorage.getItem('tutorialModal');
+    if (tutorialModal === 'true') {
+      TutorialRewardModal();
+    }
+
     const aspectRatio = 640 / 1283;
 
     const calculateWidth = () => {
@@ -72,27 +38,8 @@ function Gool() {
     };
   }, []);
 
-  useEffect(() => {
-    if (state?.tutorialCompleted) {
-      openTutorialRewardModal();
-    }
-  }, [state]);
-
   return (
     <div className="relative h-[calc(100vh-54px)] flex justify-center items-center">
-      <button
-        className="absolute z-30 text-center font-bold text-white animate-pulse"
-        style={{
-          top: '30%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          textShadow: '0 0 5px rgba(255, 255, 0, 0.7), 0 0 10px rgba(255, 255, 0, 0.6)',
-          fontSize: `${window.innerHeight * 0.03}px`,
-        }}
-      >
-        Click
-      </button>
-
       <div
         className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[16.5625rem] h-[6rem] z-30 flex items-center justify-center"
         style={{
@@ -119,16 +66,6 @@ function Gool() {
           backgroundImage: `url(${Images.뚠뚠굴})`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'contain',
-        }}
-      ></div>
-
-      <div
-        className="absolute top-0 left-0 w-full h-full bg-cover bg-center"
-        style={{
-          backgroundImage: `url(${Images.뚠뚠굴_튜토리얼})`,
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
         }}
       ></div>
 
