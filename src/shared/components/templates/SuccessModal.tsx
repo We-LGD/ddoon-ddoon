@@ -17,7 +17,7 @@ function SuccessModal({ title, imageSrc, onClose }: SuccessModalProps) {
           className="absolute bottom-10 left-10 font-display text-4xl font-bold transform rotate-12"
           style={{ textShadow: '1px 1px 0px #FFFFFF' }}
         >
-          갓생시 뚠뚠로30Day
+          갓생시 뚠뚠로 30Day
         </p>
       </div>
     ),
