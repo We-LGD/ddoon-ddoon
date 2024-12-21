@@ -18,7 +18,7 @@ import 실패방 from '@shared/assets/images/실패방.png';
 import 통나무 from '@shared/assets/images/통나무.png';
 import 튜토리얼오픈 from '@shared/assets/images/튜토리얼오픈.png';
 
-export const Images = {
+export const Images: Record<string, string> = {
   뚠뚠로고,
   뚠뚠굴,
   뚠뚠굴_배경,

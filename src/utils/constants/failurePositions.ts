@@ -8,6 +8,6 @@ const failurePositions: { [key: number]: PositionProps } = {
   9: { top: '83%', left: '11%', width: '31%' },
 };
 
-export function getFailureImagePosition(index: number, style: PositionProps): PositionProps {
-  return failurePositions[index] || style;
+export function getFailureImagePosition(idx: number, style: PositionProps): PositionProps {
+  return failurePositions[idx] || style;
 }
