@@ -12,9 +12,9 @@ export interface InputProps {
   description?: string;
   maxLength: number;
 }
-export interface FailProps {
-  fail?: boolean;
-  index: number;
+export interface ResultProps {
+  result: 'success' | 'fail' | 'progress';
+  index?: number;
 }
 
 export interface TitleProps {
@@ -32,22 +32,25 @@ export interface ChallengeProps {
   title: string;
   memo: string;
   day: number;
-  fail?: true;
-  index: number;
+  result: 'success' | 'fail' | 'progress';
+  index?: number;
+  successCheck: boolean;
 }
 
 export interface NewChallengeProps {
   title: string;
   memo: string;
   day: number;
+  result: 'progress';
+  successCheck: boolean;
 }
-
 
 //TODO - 서버 연결시 삭제하기
 export interface DummyProps {
-  dummy: Pick<ChallengeProps, "title" | "memo" | "day">[];
-  setDummy: (challenge: Pick<ChallengeProps, "title" | "memo" | "day">) => void;
+  dummy: ChallengeProps[];
+  setDummy: (challenge: ChallengeProps) => void;
   deleteDummy: (index: number) => void;
+  updateDummy: (index: number, result?: 'progress' | 'success' | 'fail', successCheck?: boolean) => void;
 }
 
 export interface SlideProps {

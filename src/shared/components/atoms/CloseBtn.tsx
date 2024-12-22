@@ -1,39 +1,56 @@
 import Swal from 'sweetalert2';
-import { SlClose } from 'react-icons/sl';
-import { FailProps } from '@/shared/interface/atomsType';
+import withReactContent from 'sweetalert2-react-content';
 import useDummyStore from '@/store/useDummyStore';
+import { SlClose } from 'react-icons/sl';
+import { ResultProps } from '@/shared/interface/atomsType';
+import Button from '@/shared/components/atoms/Button';
 
-function CloseBtn({ fail, index }: FailProps) {
+function CloseBtn({ result, index }: ResultProps) {
   const { deleteDummy } = useDummyStore();
 
-  const showDeleteModal = () => {
-    Swal.fire({
-      title: '정말로 삭제하시겠어요?',
-      html: '삭제된 챌린지는 복구 할 수 없습니다.',
-      showCancelButton: true,
-      confirmButtonText: '확인',
-      confirmButtonColor: '#748D70',
-      cancelButtonText: '취소',
-      cancelButtonColor: '#D9D9D9',
-      reverseButtons: true,
+  const handleDelete = () => {
+    deleteDummy(index);
+    Swal.close();
+
+    window.scrollTo(0, document.body.scrollHeight);
+  };
+
+  const showDeleteModal = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+
+    const MySwal = withReactContent(Swal);
+
+    MySwal.fire({
+      title: <h2 className="font-bold text-lg">정말로 삭제하시겠어요?</h2>,
+      html: (
+        <div className="flex flex-col gap-10 overflow-y-hidden">
+          <p className="font-default text-sm">삭제된 챌린지는 복구 할 수 없습니다.</p>
+          <section className="flex justify-center items-center gap-3">
+            <Button
+              cancel={true}
+              event={() => {
+                Swal.close();
+              }}
+            >
+              취소
+            </Button>
+            <Button event={handleDelete}>확인</Button>
+          </section>
+        </div>
+      ),
+      showConfirmButton: false,
       customClass: {
-        title: 'text-lg',
-        popup: 'w-[25.375rem] h-[13.625rem] pt-5 font-default text-sm',
-        cancelButton: 'w-[10rem] h-[3.125rem] text-white rounded hover:bg-#999999',
-        confirmButton: 'w-[10rem] h-[3.125rem] text-white rounded hover:bg-active',
+        popup: 'max-w-[25.375rem] w-full h-[13.625rem]',
       },
-    }).then((result) => {
-      if (result.isConfirmed) {
-        deleteDummy(index);
-      }
     });
   };
+
   return (
     <button
       onClick={showDeleteModal}
-      className={`w-{1rem} h-{1rem} flex justify-center items-center absolute right-2 top-2 ${fail ? 'hidden' : ''}`}
+      className={`w-[1.563rem] h-[1.563rem] text-center leading-[1.563em] absolute right-2 top-2 z-10 p-0 rounded-full border-2 hover:border-highlight hover:text-highlight ${result === 'success' || result === 'fail' ? 'hidden' : ''}`}
     >
-      <SlClose />
+      {/* <SlClose size={25} /> */}x
     </button>
   );
 }

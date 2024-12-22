@@ -17,15 +17,24 @@ export default {
         disabledHover: '#999999',
       },
       animation: {
-        showModal: 'showModal 0.3s ease-in-out',
+        successLight: 'successLight 2s ease-in-out infinite',
+        tooltip: 'tooltip 3s ease-in-out infinite',
       },
       keyframes: {
-        showModal: {
+        successLight: {
           '0%, 100%': {
-            transform: 'scale(1)',
+            boxShadow: '0 0 10px 1px #F8E163, 0 0 15px 1px #F8E163',
           },
           '50%': {
-            transform: 'scale(0.9)',
+            boxShadow: 'none',
+          },
+        },
+        tooltip: {
+          '0%, 100%': {
+            opacity: '0',
+          },
+          '50%': {
+            opacity: '1',
           },
         },
       },
