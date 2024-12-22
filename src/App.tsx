@@ -2,7 +2,6 @@ import { Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useMobileStore } from '@store/useMobileStore';
 import Layout from '@/shared/components/templates/Layout';
-import Main from '@pages/Main';
 import Login from '@pages/Login';
 import NicknameSetup from '@pages/NicknameSetup';
 import Tutorial from '@pages/Tutorial';
@@ -29,8 +28,7 @@ function App() {
       <Suspense fallback={<Loading />}>
         <Layout>
           <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Login />} />
             <Route path="/nickname-setup" element={<NicknameSetup />} />
             <Route path="/tutorial" element={<Tutorial />} />
             <Route path="/ddoon-ddoon-gool" element={<Gool />} />
