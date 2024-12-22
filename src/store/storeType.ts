@@ -17,3 +17,13 @@ export interface NewChallengeStore {
   newChallenge: NewChallengeProps;
   setNewChallenge: (fields: Partial<NewChallengeProps>) => void;
 }
+
+export interface SelectDayProps {
+  select: null | string,
+  setSelect: (day: string | null) => void;
+}
+
+export interface ToolTipProps {
+  toolTip: boolean;
+  setToolTip: (state: boolean) => void;
+}
