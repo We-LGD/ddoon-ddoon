@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
+import { Images } from '@/shared/assets/images';
 import Title from '@/shared/components/atoms/Title';
 import Slide from '@/shared/components/atoms/Slide';
 import Button from '@/shared/components/atoms/Button';
@@ -58,8 +59,8 @@ function Tutorial() {
     <div className="text-center h-full">
       <div id="slider-area" className="h-full">
         {page === 1 && (
-          <div className="content-center h-full">
-            <div>뚠뚠이 그림</div>
+          <div className="flex flex-col justify-center items-center h-full">
+            <img src={Images.기본뚠뚠} className="w-36 mb-4" />
             <p>
               안녕! 난 뚠뚠이라고해 <br />
               지금부터 (사용자가 지정한 굴이름)을 어떻게 하면 완성할 수 있는지 알려줄께

@@ -3,6 +3,7 @@ import 첫번째굴50일 from '@shared/assets/images/1번굴_운동50일.png';
 import 첫번째굴100일 from '@shared/assets/images/1번굴_운동100일.png';
 import 구름맵30일 from '@shared/assets/images/30일_구름맵.jpg';
 import 구름맵100일 from '@shared/assets/images/100일_구름맵.png';
+import 기본뚠뚠 from '@shared/assets/images/기본뚠뚠.png';
 import 실패방3번 from '@shared/assets/images/뚠뚠굴_3번실패.png';
 import 실패방8번 from '@shared/assets/images/뚠뚠굴_8번실패.png';
 import 뚠뚠굴_배경 from '@shared/assets/images/뚠뚠굴_배경.png';
@@ -21,6 +22,7 @@ import GithubLogo from '@/shared/assets/images/github-logo.svg';
 
 export const Images: Record<string, string> = {
   GithubLogo,
+  기본뚠뚠,
   뚠뚠로고,
   뚠뚠굴,
   뚠뚠굴_배경,
