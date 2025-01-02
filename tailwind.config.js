@@ -18,9 +18,14 @@ export default {
         disabledHover: '#999999',
       },
       animation: {
+        loading: 'loading 2s linear infinite',
         textGlow: 'textGlow 1.5s infinite',
       },
       keyframes: {
+        loading: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(300%)' },
+        },
         textGlow: {
           '0%': { textShadow: '0 0 5px rgba(255, 255, 0, 0.7), 0 0 10px rgba(255, 255, 0, 0.6)' },
           '50%': { textShadow: '0 0 10px rgba(255, 255, 0, 0.8), 0 0 20px rgba(255, 255, 0, 0.7)' },
