@@ -4,7 +4,7 @@ import { LayoutProps } from '@/shared/interface/templatesType';
 
 function Layout({ children }: LayoutProps) {
   const location = useLocation();
-  const excludeNavBarPaths = ['/', '/nickname-setup', '/tutorial'];
+  const excludeNavBarPaths = ['/ddoon-ddoon-gool', '/challenge', '/ddoon-ddoon-trip'];
 
   const shouldHideNavBar = excludeNavBarPaths.includes(location.pathname);
 
@@ -12,7 +12,7 @@ function Layout({ children }: LayoutProps) {
     <div className="flex justify-center items-center min-h-screen bg-gray-200">
       <div className="relative w-[40rem] h-screen bg-white pb-16 box-border">
         {children}
-        {!shouldHideNavBar && <NavBar />}
+        {shouldHideNavBar && <NavBar />}
       </div>
     </div>
   );
