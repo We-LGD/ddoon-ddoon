@@ -18,7 +18,7 @@ export default {
       },
       animation: {
         successLight: 'successLight 2s ease-in-out infinite',
-        tooltip: 'tooltip 3s ease-in-out infinite',
+        tooltip: 'tooltip 3s ease-in-out',
       },
       keyframes: {
         successLight: {
