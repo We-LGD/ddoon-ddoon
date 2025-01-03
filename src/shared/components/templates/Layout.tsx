@@ -4,7 +4,7 @@ import { LayoutProps } from '@/shared/interface/templatesType';
 
 function Layout({ children }: LayoutProps) {
   const location = useLocation();
-  const excludeNavBarPaths = ['/login', '/nickname-setup', '/tutorial'];
+  const excludeNavBarPaths = ['/', '/nickname-setup', '/tutorial'];
 
   const shouldHideNavBar = excludeNavBarPaths.includes(location.pathname);
 
