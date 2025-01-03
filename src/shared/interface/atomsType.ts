@@ -1,3 +1,5 @@
+import { MouseEventHandler } from 'react';
+
 export interface NavItemProps {
   icon: React.ReactNode;
   label: string;
@@ -29,6 +31,7 @@ export interface ButtonProps {
 }
 
 export interface ChallengeProps {
+  idx?: number,
   title: string;
   memo: string;
   day: number;

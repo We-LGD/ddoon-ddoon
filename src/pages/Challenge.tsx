@@ -28,7 +28,6 @@ function Challenge() {
 
     if (!currentSelect) {
       setToolTip(true);
-      console.log(toolTip);
     } else {
       setDummy(useNewChallengeStore.getState().newChallenge);
       setSelect(null);
@@ -62,13 +61,11 @@ function Challenge() {
             </fieldset>
             <fieldset className="w-full max-w-[20rem] flex flex-col justify-center items-center relative">
               <legend className="mb-[0.75rem] text-center">도전 일수를 선택해주세요</legend>
-              {toolTip && (
-                <span
-                  className={`absolute w-[13.75rem] bottom-1/2 left-1/2 -translate-x-1/2 translate-y-1/2 bg-zinc-800 text-white py-1 rounded-md animate-tooltip`}
-                >
-                  도전 일수를 선택해주세요.
-                </span>
-              )}
+              <span
+                className={`absolute w-[13.75rem] bottom-1/2 left-1/2 -translate-x-1/2 translate-y-1/2 bg-zinc-800 text-white py-1 rounded-md ${toolTip ? 'animate-tooltip' : 'opacity-0'}`}
+              >
+                도전 일수를 선택해주세요.
+              </span>
               <SelectDay />
             </fieldset>
             <fieldset className="w-full max-w-[20rem] flex justify-between items-center gap-3 mt-5">
@@ -88,11 +85,13 @@ function Challenge() {
         ),
         allowOutsideClick: () => {
           setSelect(null);
+          setToolTip(false);
           setNewChallenge({ day: undefined });
           return true;
         },
         allowEscapeKey: () => {
           setSelect(null);
+          setToolTip(false);
           setNewChallenge({ day: undefined });
           return true;
         },
@@ -118,7 +117,7 @@ function Challenge() {
                 title={v.title}
                 memo={v.memo}
                 day={v.day}
-                index={i}
+                index={v.idx}
                 result={v.result}
                 successCheck={v.successCheck}
               />
