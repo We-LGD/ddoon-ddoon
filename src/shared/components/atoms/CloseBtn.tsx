@@ -1,7 +1,6 @@
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import useDummyStore from '@/store/useDummyStore';
-import { SlClose } from 'react-icons/sl';
 import { ResultProps } from '@/shared/interface/atomsType';
 import Button from '@/shared/components/atoms/Button';
 
@@ -9,10 +8,10 @@ function CloseBtn({ result, index }: ResultProps) {
   const { deleteDummy } = useDummyStore();
 
   const handleDelete = () => {
-    deleteDummy(index);
     Swal.close();
-
-    window.scrollTo(0, document.body.scrollHeight);
+    if (index) {
+      deleteDummy(index);
+    }
   };
 
   const showDeleteModal = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -50,7 +49,7 @@ function CloseBtn({ result, index }: ResultProps) {
       onClick={showDeleteModal}
       className={`w-[1.563rem] h-[1.563rem] text-center leading-[1.563em] absolute right-2 top-2 z-10 p-0 rounded-full border-2 hover:border-highlight hover:text-highlight ${result === 'success' || result === 'fail' ? 'hidden' : ''}`}
     >
-      {/* <SlClose size={25} /> */}x
+      x
     </button>
   );
 }
