@@ -25,13 +25,14 @@ export interface TitleProps {
 
 export interface ButtonProps {
   children: React.ReactNode;
+  disabled?: boolean;
   cancel?: boolean;
   event?: MouseEventHandler<HTMLButtonElement>;
   type?: 'button' | 'submit' | 'reset';
 }
 
 export interface ChallengeProps {
-  idx?: number,
+  idx?: number;
   title: string;
   memo: string;
   day: number;
