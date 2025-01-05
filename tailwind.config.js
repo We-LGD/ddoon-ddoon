@@ -21,7 +21,6 @@ export default {
         loading: 'loading 2s linear infinite',
         textGlow: 'textGlow 1.5s infinite',
         successLight: 'successLight 2s ease-in-out infinite',
-        tooltip: 'tooltip 3s ease-in-out',
       },
       keyframes: {
         loading: {
@@ -39,14 +38,6 @@ export default {
           },
           '50%': {
             boxShadow: 'none',
-          },
-        },
-        tooltip: {
-          '0%, 100%': {
-            opacity: '0',
-          },
-          '50%': {
-            opacity: '1',
           },
         },
       },

@@ -1,15 +1,12 @@
 import useNewChallengeStore from '@/store/useNewChallengeStore';
 import useSelectDayStore from '@/store/useSelectDayStore';
-import useToolTipStore from '@/store/useTooltipStore';
 
 function SelectDay() {
   const { setNewChallenge } = useNewChallengeStore();
   const { select, setSelect } = useSelectDayStore();
-  const { setToolTip } = useToolTipStore();
 
   const handleSelectDay = (v: string) => {
     setSelect(v);
-    setToolTip(false);
     setNewChallenge({ day: Number(v.slice(0, -1)) });
   };
 
