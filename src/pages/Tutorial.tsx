@@ -71,71 +71,61 @@ function Tutorial() {
         {page === 2 && (
           <div>
             <div className="w-full h-[50vh] bg-disabled"></div>
-            <div className="py-6">
-              <Title>챌린지 소개</Title>
-              <p>
-                챌린지 추가 버튼을 누르면 <br />
-                나만의 챌린지 이름과 도전 일수를 정하고
-                <br /> 다짐을 적을 수 있어!
-              </p>
-            </div>
+            <Title>챌린지 소개</Title>
+            <p>
+              챌린지 추가 버튼을 누르면 <br />
+              나만의 챌린지 이름과 도전 일수를 정하고
+              <br /> 다짐을 적을 수 있어!
+            </p>
           </div>
         )}
         {page === 3 && (
           <div>
             <div className="w-full h-[50vh] bg-disabled"></div>
-            <div className="py-6">
-              <Title>챌린지 소개</Title>
-              <p>
-                일수에 따라서 성공 시 보상되는 굴이 달라져! <br />
-                어떻게 달라지냐고?
-                <br /> 그건 뚠뚠굴 소개때 알려줄께!
-              </p>
-            </div>
+            <Title>챌린지 소개</Title>
+            <p>
+              일수에 따라서 성공 시 보상되는 굴이 달라져! <br />
+              어떻게 달라지냐고?
+              <br /> 그건 뚠뚠굴 소개때 알려줄께!
+            </p>
           </div>
         )}
         {page === 4 && (
           <div>
             <div className="w-full h-[50vh] bg-disabled"></div>
-            <div className="py-6">
-              <Title>뚠뚠여행 소개</Title>
-              <p>
-                챌린지를 시작하면 볼 수 있는 화면이야!
-                <br /> 도전 일수에 따라 뚠뚠이가 산 {'>'} 하늘 {'>'} 우주로 더더 멀리 올라갈 수 있다구!
-                <br /> 매일매일 성공해야 한 칸씩 올라갈 수 있어
-                <br /> 단, 하루라도 실패하면 챌린지는 그 즉시 종료되니 주의하라구!
-              </p>
-            </div>
+            <Title>뚠뚠여행 소개</Title>
+            <p>
+              챌린지를 시작하면 볼 수 있는 화면이야!
+              <br /> 도전 일수에 따라 뚠뚠이가 산 {'>'} 하늘 {'>'} 우주로 더더 멀리 올라갈 수 있다구!
+              <br /> 매일매일 성공해야 한 칸씩 올라갈 수 있어
+              <br /> 단, 하루라도 실패하면 챌린지는 그 즉시 종료되니 주의하라구!
+            </p>
           </div>
         )}
         {page === 5 && (
           <div>
             <div className="w-full h-[50vh] bg-disabled"></div>
-            <div className="py-6">
-              <Title>뚠뚠굴 소개</Title>
-              <p>
-                모든 일수를 성공하면 챌린지는 성공이야!
-                <br /> 보상으로 굴이 하나씩 열려 <br />
-                도전 일수에 따라 열리는 굴도 달라져
-                <br />
-                어떻게 달라지냐고?
-              </p>
-            </div>
+            <Title>뚠뚠굴 소개</Title>
+            <p>
+              모든 일수를 성공하면 챌린지는 성공이야!
+              <br /> 보상으로 굴이 하나씩 열려 <br />
+              도전 일수에 따라 열리는 굴도 달라져
+              <br />
+              어떻게 달라지냐고?
+            </p>
           </div>
         )}
         {page === 6 && (
           <div>
             <div className="w-full h-[50vh] bg-disabled"></div>
-            <div className="py-6">
-              <Title>뚠뚠굴 소개</Title>
-              <p>
-                위에 예시를 참고해줘! <br />
-                정확한건 성공하면 볼 수 있어
-                <br /> 챌린지가 실패하면 먼지만 쌓일지도... <br />
-                어때, (사용자가 지정한 굴 이름)굴이 더 멋있어지려면 <br />
-                열심히 해야겠지?
-              </p>
-            </div>
+            <Title>뚠뚠굴 소개</Title>
+            <p>
+              위에 예시를 참고해줘! <br />
+              정확한건 성공하면 볼 수 있어
+              <br /> 챌린지가 실패하면 먼지만 쌓일지도... <br />
+              어때, (사용자가 지정한 굴 이름)굴이 더 멋있어지려면 <br />
+              열심히 해야겠지?
+            </p>
           </div>
         )}
         {page === 7 && (

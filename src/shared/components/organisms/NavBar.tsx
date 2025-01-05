@@ -13,7 +13,7 @@ function NavBar() {
   ];
 
   return (
-    <nav className="absolute bottom-0 left-0 w-full h-[3.375rem] bg-white border-t flex justify-around items-center z-[1000]">
+    <nav className="z-10 fixed bottom-0 left-1/2 -translate-x-1/2 max-w-[40rem] w-full h-[3.375rem] bg-white border-t flex justify-around items-center">
       {navItemList.map((item) => (
         <NavItem
           key={item.path}

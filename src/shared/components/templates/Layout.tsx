@@ -10,7 +10,7 @@ function Layout({ children }: LayoutProps) {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-200">
-      <div className="relative w-[40rem] h-screen bg-white pb-16 box-border">
+      <div className="relative w-[40rem] h-screen bg-white box-border">
         {children}
         {shouldHideNavBar && <NavBar />}
       </div>
