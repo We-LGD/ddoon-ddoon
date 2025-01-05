@@ -34,33 +34,34 @@ export default {
           '100%': { textShadow: '0 0 5px rgba(255, 255, 0, 0.7), 0 0 10px rgba(255, 255, 0, 0.6)' },
         },
         successLight: {
-        '0%, 100%': {
-          boxShadow: '0 0 10px 1px #F8E163, 0 0 15px 1px #F8E163',
-        },
-        '50%': {
-          boxShadow: 'none',
-        },
-        },
-        tooltip: {
-        '0%, 100%': {
-          opacity: '0',
-        },
-        '50%': {
-          opacity: '1',
-        },
-        },
-    },
-  },
-  plugins: [
-    function ({ addUtilities }) {
-      addUtilities(
-        {
-          '.text-shadow-glow': {
-            textShadow: '0 0 5px rgba(255, 255, 0, 0.7), 0 0 10px rgba(255, 255, 0, 0.6)',
+          '0%, 100%': {
+            boxShadow: '0 0 10px 1px #F8E163, 0 0 15px 1px #F8E163',
+          },
+          '50%': {
+            boxShadow: 'none',
           },
         },
-        ['responsive', 'hover'],
-      );
+        tooltip: {
+          '0%, 100%': {
+            opacity: '0',
+          },
+          '50%': {
+            opacity: '1',
+          },
+        },
+      },
     },
-  ],
+    plugins: [
+      function ({ addUtilities }) {
+        addUtilities(
+          {
+            '.text-shadow-glow': {
+              textShadow: '0 0 5px rgba(255, 255, 0, 0.7), 0 0 10px rgba(255, 255, 0, 0.6)',
+            },
+          },
+          ['responsive', 'hover'],
+        );
+      },
+    ],
+  },
 };
