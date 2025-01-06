@@ -13,6 +13,7 @@ export interface NavItemProps {
 
 export interface InputProps extends themeProps {
   name: string;
+  type?: string;
   title?: string;
   placeholder: string;
   description?: string;
