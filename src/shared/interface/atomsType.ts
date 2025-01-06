@@ -1,5 +1,9 @@
 import { MouseEventHandler } from 'react';
 
+export interface themeProps {
+  theme: 'auth' | 'tutorial' | 'challenge' | 'modal';
+}
+
 export interface NavItemProps {
   icon: React.ReactNode;
   label: string;
@@ -7,7 +11,7 @@ export interface NavItemProps {
   isSelected: boolean;
 }
 
-export interface InputProps {
+export interface InputProps extends themeProps {
   name: string;
   title?: string;
   placeholder: string;
@@ -23,7 +27,7 @@ export interface TitleProps {
   children: React.ReactNode;
 }
 
-export interface ButtonProps {
+export interface ButtonProps extends themeProps {
   children: React.ReactNode;
   disabled?: boolean;
   cancel?: boolean;
