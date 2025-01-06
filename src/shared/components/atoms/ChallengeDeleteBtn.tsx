@@ -2,6 +2,7 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import useDummyStore from '@/store/useDummyStore';
 import { ResultProps } from '@/shared/interface/atomsType';
+import Title from '@/shared/components/atoms/Title';
 import Button from '@/shared/components/atoms/Button';
 
 function CloseBtn({ result, index }: ResultProps) {
@@ -20,7 +21,7 @@ function CloseBtn({ result, index }: ResultProps) {
     const MySwal = withReactContent(Swal);
 
     MySwal.fire({
-      title: <h2 className="font-bold text-lg">정말로 삭제하시겠어요?</h2>,
+      title: <Title>정말로 삭제하시겠어요?</Title>,
       html: (
         <div className="flex flex-col gap-10 overflow-y-hidden">
           <p className="font-default text-sm">삭제된 챌린지는 복구 할 수 없습니다.</p>
