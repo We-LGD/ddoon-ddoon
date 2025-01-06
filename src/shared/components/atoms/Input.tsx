@@ -2,7 +2,7 @@ import React from 'react';
 import useInputStore from '@/store/useInputStore';
 import { InputProps } from '@/shared/interface/atomsType';
 
-function Input({ theme, title, placeholder, name, description, maxLength }: InputProps) {
+function Input({ theme, type = 'text', title, placeholder, name, description, maxLength }: InputProps) {
   const { inputs, setInput } = useInputStore();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,7 +21,7 @@ function Input({ theme, title, placeholder, name, description, maxLength }: Inpu
     >
       {title && <label className="block mb-[0.25rem]">{title}</label>}
       <input
-        type="text"
+        type={type}
         required
         autoComplete="off"
         placeholder={placeholder}

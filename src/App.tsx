@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useMobileStore } from '@store/useMobileStore';
 import Layout from '@/shared/components/templates/Layout';
 import Login from '@pages/Login';
+import SignUp from '@pages/SignUp';
 import NicknameSetup from '@pages/NicknameSetup';
 import Tutorial from '@pages/Tutorial';
 import Gool from '@pages/Gool';
@@ -29,6 +30,7 @@ function App() {
         <Layout>
           <Routes>
             <Route path="/" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
             <Route path="/nickname-setup" element={<NicknameSetup />} />
             <Route path="/tutorial" element={<Tutorial />} />
             <Route path="/ddoon-ddoon-gool" element={<Gool />} />
