@@ -26,6 +26,7 @@ function CloseBtn({ result, index }: ResultProps) {
           <p className="font-default text-sm">삭제된 챌린지는 복구 할 수 없습니다.</p>
           <section className="flex justify-center items-center gap-3">
             <Button
+              theme="modal"
               cancel={true}
               event={() => {
                 Swal.close();
@@ -33,7 +34,9 @@ function CloseBtn({ result, index }: ResultProps) {
             >
               취소
             </Button>
-            <Button event={handleDelete}>확인</Button>
+            <Button theme="modal" event={handleDelete}>
+              확인
+            </Button>
           </section>
         </div>
       ),

@@ -12,6 +12,7 @@ const TutorialRewardModal = () => {
         <p>성공 보상으로 굴 하나를 열어줄께</p>
         <div className="flex justify-center mt-4">
           <Button
+            theme="modal"
             event={() => {
               Swal.close();
               localStorage.setItem('tutorialModal', 'false');
