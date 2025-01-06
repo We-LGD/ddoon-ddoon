@@ -1,12 +1,13 @@
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import Title from '@/shared/components/atoms/Title';
 import Button from '@/shared/components/atoms/Button';
 
 const TutorialRewardModal = () => {
   const ReactSwal = withReactContent(Swal);
 
   ReactSwal.fire({
-    title: <h2 className="font-bold text-lg">튜토리얼 성공!</h2>,
+    title: <Title>튜토리얼 성공!</Title>,
     html: (
       <div className="font-default text-sm">
         <p>성공 보상으로 굴 하나를 열어줄께</p>
