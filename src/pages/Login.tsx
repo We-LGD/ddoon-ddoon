@@ -1,11 +1,15 @@
 import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 import { Images } from '@/shared/assets/images';
 import useInputStore from '@/store/useInputStore';
+import Title from '@/shared/components/atoms/Title';
 import Input from '@/shared/components/atoms/Input';
 import Button from '@/shared/components/atoms/Button';
 import SnsButton from '@/shared/components/atoms/SnsButton';
 
 function Login() {
+  const ReactSwal = withReactContent(Swal);
   const navigate = useNavigate();
   const { inputs } = useInputStore();
   const { id, password } = inputs;
@@ -13,10 +17,30 @@ function Login() {
   const handleLoginBtnClick = () => {
     // TODO: 백엔드 연결 후 제거
     console.log(`로그인 버튼 클릭 : id: ${id} / password: ${password}`);
+
     // TODO: 튜토리얼 완료 여부 저장
     // - 튜토리얼 미 완료 시 navigate('/tutorial')
     // - 튜토리얼 완료 시 navigate('/challenge')
-    navigate('/challenge');
+
+    if (id && password) {
+      navigate('/challenge');
+    } else {
+      ReactSwal.fire({
+        title: <Title>아이디와 비밀번호를 모두 입력해주세요.</Title>,
+        icon: 'info',
+        html: (
+          <Button
+            theme="modal"
+            event={() => {
+              Swal.close();
+            }}
+          >
+            확인
+          </Button>
+        ),
+        showConfirmButton: false,
+      });
+    }
   };
 
   return (
