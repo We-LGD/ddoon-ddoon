@@ -4,7 +4,6 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { Images } from '@/shared/assets/images';
 import useInputStore from '@/store/useInputStore';
-import Title from '@/shared/components/atoms/Title';
 import Input from '@/shared/components/atoms/Input';
 import Button from '@/shared/components/atoms/Button';
 import SnsButton from '@/shared/components/atoms/SnsButton';
@@ -27,19 +26,28 @@ function Login() {
       navigate('/challenge');
     } else {
       ReactSwal.fire({
-        title: <Title>아이디와 비밀번호를 모두 입력해주세요.</Title>,
         icon: 'info',
         html: (
-          <Button
-            theme="modal"
-            event={() => {
-              Swal.close();
-            }}
-          >
-            확인
-          </Button>
+          <div className="font-default text-sm">
+            <p className="mb-4">
+              아이디와 비밀번호를
+              <br />
+              모두 입력해주세요.
+            </p>
+            <Button
+              theme="modal"
+              event={() => {
+                Swal.close();
+              }}
+            >
+              확인
+            </Button>
+          </div>
         ),
         showConfirmButton: false,
+        customClass: {
+          popup: 'max-w-[25.375rem] w-full',
+        },
       });
     }
   };

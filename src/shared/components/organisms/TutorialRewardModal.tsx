@@ -7,11 +7,11 @@ const TutorialRewardModal = () => {
   const ReactSwal = withReactContent(Swal);
 
   ReactSwal.fire({
-    title: <Title>튜토리얼 성공!</Title>,
     html: (
-      <div className="font-default text-sm">
-        <p>성공 보상으로 굴 하나를 열어줄께</p>
-        <div className="flex justify-center mt-4">
+      <>
+        <Title>튜토리얼 성공!</Title>
+        <div className="font-default text-sm">
+          <p className="mb-4">성공 보상으로 굴 하나를 열어줄께</p>
           <Button
             theme="modal"
             event={() => {
@@ -22,11 +22,11 @@ const TutorialRewardModal = () => {
             보상받기
           </Button>
         </div>
-      </div>
+      </>
     ),
     showConfirmButton: false,
     customClass: {
-      popup: 'w-[25.375rem] h-[13.625rem] pt-5',
+      popup: 'max-w-[25.375rem]',
     },
   });
 };
