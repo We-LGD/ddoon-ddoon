@@ -1,8 +1,9 @@
 import React from 'react';
+import { isMobile } from 'react-device-detect';
 import useInputStore from '@/store/useInputStore';
 import { InputProps } from '@/shared/interface/atomsType';
 
-function Input({ title, placeholder, name, description, maxLength }: InputProps) {
+function Input({ theme, type = 'text', title, placeholder, name, description, maxLength }: InputProps) {
   const { inputs, setInput } = useInputStore();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -12,10 +13,17 @@ function Input({ title, placeholder, name, description, maxLength }: InputProps)
   };
 
   return (
-    <div className="mb-[1rem] text-center w-full max-w-[20rem]">
+    <div
+      className={`
+        ${theme === 'auth' ? 'w-[27.375rem]' : null} 
+        ${theme === 'tutorial' || theme === 'challenge' ? 'mb-[1rem] w-full max-w-[20rem]' : null}
+        ${isMobile ? 'w-full' : null}
+        text-center
+      `}
+    >
       {title && <label className="block mb-[0.25rem]">{title}</label>}
       <input
-        type="text"
+        type={type}
         required
         autoComplete="off"
         placeholder={placeholder}
@@ -23,7 +31,7 @@ function Input({ title, placeholder, name, description, maxLength }: InputProps)
         value={inputs[name] || ''}
         onChange={handleChange}
         maxLength={maxLength}
-        className="w-full h-[3.5rem] mt-[0.5rem] px-[1rem] py-[0.5rem] border border-input rounded-[0.25rem] placeholder-input focus:outline-none focus:ring-transparent focus:border-main focus:ring-0  focus:ring-main"
+        className={`${title && 'mt-[0.5rem]'} w-full h-[3.5rem] px-[1rem] py-[0.5rem] border border-input rounded-[0.25rem] placeholder-input focus:outline-none focus:ring-transparent focus:border-main focus:ring-0  focus:ring-main`}
       />
       {description && <p className="text-[0.75rem] mt-[0.5rem] text-input">{description}</p>}
     </div>

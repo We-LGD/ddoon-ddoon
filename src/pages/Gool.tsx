@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Images } from '@/shared/assets/images';
-import TutorialRewardModal from '@/shared/components/templates/TutorialRewardModal';
-import SuccessModal from '@/shared/components/templates/SuccessModal';
+import TutorialRewardModal from '@/shared/components/organisms/TutorialRewardModal';
+import SuccessModal from '@/shared/components/organisms/SuccessModal';
 import { getClickButtonPosition } from '@/utils/constants/buttonPositions';
 import { successImagesData } from '@/utils/constants/successImages';
 import { getFailureImagePosition } from '@/utils/constants/failurePositions';
