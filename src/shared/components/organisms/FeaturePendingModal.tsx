@@ -18,7 +18,7 @@ const FeaturePendingModal = () => {
               localStorage.setItem('tutorialModal', 'false');
             }}
           >
-            보상받기
+            확인
           </Button>
         </div>
       </>
