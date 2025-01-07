@@ -8,6 +8,7 @@ import ChallengeBox from '@/shared/components/organisms/ChallengeBox';
 import ChellengeAddBtn from '@/shared/components/atoms/ChallengeAddBtn';
 import ChallengeAddForm from '@/shared/components/templates/ChallengeAddForm';
 import Title from '@/shared/components/atoms/Title';
+import Button from '@/shared/components/atoms/Button';
 
 function Challenge() {
   const MySwal = withReactContent(Swal);
@@ -18,16 +19,20 @@ function Challenge() {
 
   const handleChallengeAddModal = () => {
     if (dummy.length >= 10) {
-      Swal.fire({
-        title: '챌린지는 10개까지만 가능합니다.',
+      MySwal.fire({
+        title: <Title>챌린지는 10개까지만 가능합니다.</Title>,
         icon: 'info',
-        confirmButtonText: '확인',
-        confirmButtonColor: '#748D70',
-        customClass: {
-          title: 'text-lg',
-          popup: 'w-[25.375rem] h-[15.625rem] font-default text-sm',
-          confirmButton: 'w-[10rem] h-[3.125rem] text-white rounded hover:bg-active',
-        },
+        html: (
+          <Button
+            theme="modal"
+            event={() => {
+              Swal.close();
+            }}
+          >
+            확인
+          </Button>
+        ),
+        showConfirmButton: false,
       });
     } else {
       MySwal.fire({

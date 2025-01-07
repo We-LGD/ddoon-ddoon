@@ -20,13 +20,14 @@ function NicknameSetup() {
   return (
     <div className="flex flex-col items-center justify-center h-full">
       <Input
+        theme="tutorial"
         title="개미 뚠뚠이의 개미굴 이름을 지어주세요!"
         name="nickname"
         maxLength={10}
         placeholder="갓생뚠뚠"
         description="10자까지 입력할 수 있어요. (띄어쓰기 포함)"
       />
-      <Button event={handleStart} cancel={isButtonDisabled}>
+      <Button theme="tutorial" event={handleStart} cancel={isButtonDisabled}>
         시작하기
       </Button>
     </div>

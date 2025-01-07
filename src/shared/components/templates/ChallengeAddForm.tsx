@@ -36,8 +36,20 @@ function ChallengeAddForm() {
   return (
     <form className="w-full flex flex-col items-center py-10">
       <fieldset className="w-full flex flex-col justify-center items-center">
-        <Input title="챌린지 제목을 작성해주세요" placeholder="매일 책 10분 읽기" name="title" maxLength={20} />
-        <Input title="다짐을 작성해주세요" placeholder="한 달에 한 권은 끝내보자" name="memo" maxLength={20} />
+        <Input
+          theme="challenge"
+          title="챌린지 제목을 작성해주세요"
+          placeholder="매일 책 10분 읽기"
+          name="title"
+          maxLength={20}
+        />
+        <Input
+          theme="challenge"
+          title="다짐을 작성해주세요"
+          placeholder="한 달에 한 권은 끝내보자"
+          name="memo"
+          maxLength={20}
+        />
       </fieldset>
       <fieldset className="w-full max-w-[20rem] flex flex-col justify-center items-center relative">
         <legend className="mb-[0.75rem] text-center">도전 일수를 선택해주세요</legend>
@@ -45,6 +57,7 @@ function ChallengeAddForm() {
       </fieldset>
       <fieldset className="w-full max-w-[20rem] flex justify-between items-center gap-3 mt-5">
         <Button
+          theme="challenge"
           cancel={true}
           event={() => {
             MySwal.close();
@@ -54,7 +67,7 @@ function ChallengeAddForm() {
         >
           취소
         </Button>
-        <Button disabled={disabledBtn} event={handleFormSubmit}>
+        <Button theme="challenge" disabled={disabledBtn} event={handleFormSubmit}>
           도전 시작
         </Button>
       </fieldset>
