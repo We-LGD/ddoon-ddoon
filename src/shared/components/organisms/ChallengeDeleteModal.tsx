@@ -1,6 +1,6 @@
-import withReactContent from 'sweetalert2-react-content';
-import Title from '../atoms/Title';
 import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import Title from '@/shared/components/atoms/Title';
 import Button from '@/shared/components/atoms/Button';
 
 function ChallengeDeleteModal({ handleDelete }: { handleDelete: () => void }) {

@@ -1,6 +1,6 @@
 import Swal from 'sweetalert2';
 import useDummyStore from '@/store/useDummyStore';
-import ChallengeDeleteModal from '@/shared/components/templates/ChallengeDeleteModal';
+import ChallengeDeleteModal from '@/shared/components/organisms/ChallengeDeleteModal';
 import { ResultProps } from '@/shared/interface/atomsType';
 
 function CloseBtn({ result, index }: ResultProps) {
