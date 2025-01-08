@@ -23,6 +23,8 @@ function SignUp() {
   useEffect(() => {
     if (id && password && passwordCheck) {
       setDisabledBtn(false);
+    } else {
+      setDisabledBtn(true);
     }
   }, [id, password, passwordCheck]);
 
