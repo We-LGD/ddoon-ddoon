@@ -70,7 +70,7 @@ function Gool() {
           backgroundSize: 'contain',
         }}
       >
-        <p className="text-center font-woodSign text-[#b89d80] text-3xl font-bold">갓생뚠뚠굴</p>
+        <p className="wood-sign">갓생뚠뚠굴</p>
       </div>
 
       <div

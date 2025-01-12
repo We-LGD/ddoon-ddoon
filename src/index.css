@@ -40,3 +40,9 @@ body {
   font-family: 'GothicA1', sans-serif;
   font-size: 0.875rem;
 }
+
+@layer utilities {
+  .wood-sign {
+    @apply text-center font-woodSign text-3xl font-bold text-[#b89d80];
+  }
+}
