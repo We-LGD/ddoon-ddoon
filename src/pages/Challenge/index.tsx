@@ -4,11 +4,11 @@ import useDummyStore from '@/store/useDummyStore';
 import useInputStore from '@/store/useInputStore';
 import useSelectDayStore from '@/store/useSelectDayStore';
 import useNewChallengeStore from '@/store/useNewChallengeStore';
-import ChallengeBox from '@/shared/components/organisms/ChallengeBox';
-import ChellengeAddBtn from '@/shared/components/atoms/ChallengeAddBtn';
-import ChallengeAddForm from '@/shared/components/templates/ChallengeAddForm';
 import Title from '@/shared/components/atoms/Title';
 import Button from '@/shared/components/atoms/Button';
+import ChallengeBox from '@/pages/Challenge/ChallengeBox';
+import AddBtn from '@/pages/Challenge/AddBtn';
+import AddForm from '@/pages/Challenge/AddForm';
 
 function Challenge() {
   const MySwal = withReactContent(Swal);
@@ -37,7 +37,7 @@ function Challenge() {
     } else {
       MySwal.fire({
         title: '',
-        html: <ChallengeAddForm />,
+        html: <AddForm />,
         allowOutsideClick: () => {
           setSelect(null);
           setNewChallenge({ day: undefined });
@@ -77,7 +77,7 @@ function Challenge() {
           );
         })}
       </section>
-      <ChellengeAddBtn event={handleChallengeAddModal} />
+      <AddBtn event={handleChallengeAddModal} />
     </div>
   );
 }

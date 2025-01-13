@@ -1,9 +1,9 @@
 import Swal from 'sweetalert2';
 import useDummyStore from '@/store/useDummyStore';
-import ChallengeDeleteModal from '@/shared/components/organisms/ChallengeDeleteModal';
-import { ResultProps } from '@/shared/interface/atomsType';
+import DeleteModal from '@/pages/Challenge/DeleteModal';
+import { ResultProps } from '@/pages/interface';
 
-function CloseBtn({ result, index }: ResultProps) {
+function DeleteBtn({ result, index }: ResultProps) {
   const { deleteDummy } = useDummyStore();
 
   const handleDelete = () => {
@@ -16,7 +16,7 @@ function CloseBtn({ result, index }: ResultProps) {
   const showDeleteModal = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
 
-    ChallengeDeleteModal({ handleDelete });
+    DeleteModal({ handleDelete });
   };
 
   return (
@@ -29,4 +29,4 @@ function CloseBtn({ result, index }: ResultProps) {
   );
 }
 
-export default CloseBtn;
+export default DeleteBtn;

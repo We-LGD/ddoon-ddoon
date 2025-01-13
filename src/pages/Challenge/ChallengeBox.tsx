@@ -1,6 +1,6 @@
 import useDummyStore from '@/store/useDummyStore';
-import ChallengeDeleteBtn from '@/shared/components/atoms/ChallengeDeleteBtn';
-import { ChallengeProps } from '@/shared/interface/atomsType';
+import DeleteBtn from '@/pages/Challenge/DeleteBtn';
+import { ChallengeProps } from '@/pages/interface';
 import SuccessImg from '@/shared/assets/images/성공도장.png';
 import FailImg from '@/shared/assets/images/실패도장.png';
 
@@ -40,7 +40,7 @@ function ChallengeBox({ title, memo, day, result, index, successCheck }: Challen
         >
           D-{day}
         </p>
-        <ChallengeDeleteBtn result={result} index={index} />
+        <DeleteBtn result={result} index={index} />
         {result === 'success' && (
           <img className="absolute top-1 right-1 w-[5.875rem] h-[6.25rem]" src={SuccessImg} alt="챌린지성공" />
         )}

@@ -1,7 +1,7 @@
 import { MouseEventHandler } from 'react';
 import { FiPlus } from 'react-icons/fi';
 
-function ChallengeAddBtn({ event }: { event: MouseEventHandler }) {
+function AddBtn({ event }: { event: MouseEventHandler }) {
   return (
     <button
       onClick={event}
@@ -12,4 +12,4 @@ function ChallengeAddBtn({ event }: { event: MouseEventHandler }) {
   );
 }
 
-export default ChallengeAddBtn;
+export default AddBtn;

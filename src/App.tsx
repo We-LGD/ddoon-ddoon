@@ -7,7 +7,7 @@ import SignUp from '@pages/SignUp';
 import NicknameSetup from '@pages/NicknameSetup';
 import Tutorial from '@pages/Tutorial';
 import Gool from '@/pages/Gool';
-import Challenge from '@pages/Challenge';
+import Challenge from '@/pages/Challenge';
 import Trip from '@pages/Trip';
 import NotFound from '@pages/NotFound';
 import Loading from '@pages/Loading';
