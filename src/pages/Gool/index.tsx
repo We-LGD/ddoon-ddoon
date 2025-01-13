@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { Images } from '@/shared/assets/images';
 import TutorialRewardModal from '@/shared/components/organisms/TutorialRewardModal';
 import SuccessModal from '@/shared/components/organisms/SuccessModal';
-import { getClickButtonPosition } from '@/utils/constants/buttonPositions';
-import { successImagesData } from '@/utils/constants/successImages';
-import { getFailureImagePosition } from '@/utils/constants/failurePositions';
+import { getClickButtonPosition } from '@/pages/Gool/ButtonPositions';
+import { successImagesData } from '@/pages/Gool/SuccessImages';
+import { getFailureImagePosition } from '@/pages/Gool/FailurePositions';
 
 function Gool() {
   const [width, setWidth] = useState(0);
