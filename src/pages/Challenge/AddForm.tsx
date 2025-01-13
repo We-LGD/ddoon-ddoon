@@ -7,9 +7,9 @@ import useSelectDayStore from '@/store/useSelectDayStore';
 import useNewChallengeStore from '@/store/useNewChallengeStore';
 import Button from '@/shared/components/atoms/Button';
 import Input from '@/shared/components/atoms/Input';
-import SelectDay from '@/shared/components/atoms/SelectDay';
+import SelectDay from '@/pages/Challenge/SelectDay';
 
-function ChallengeAddForm() {
+function AddForm() {
   const MySwal = withReactContent(Swal);
   const [disabledBtn, setDisabledBtn] = useState(true);
   const { setDummy } = useDummyStore();
@@ -75,4 +75,4 @@ function ChallengeAddForm() {
   );
 }
 
-export default ChallengeAddForm;
+export default AddForm;

@@ -3,7 +3,7 @@ import withReactContent from 'sweetalert2-react-content';
 import Title from '@/shared/components/atoms/Title';
 import Button from '@/shared/components/atoms/Button';
 
-function ChallengeDeleteModal({ handleDelete }: { handleDelete: () => void }) {
+function DeleteModal({ handleDelete }: { handleDelete: () => void }) {
   const MySwal = withReactContent(Swal);
 
   MySwal.fire({
@@ -34,4 +34,4 @@ function ChallengeDeleteModal({ handleDelete }: { handleDelete: () => void }) {
   });
 }
 
-export default ChallengeDeleteModal;
+export default DeleteModal;
