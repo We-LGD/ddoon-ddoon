@@ -1,4 +1,4 @@
-import { PositionProps } from '@/utils/interface/constants';
+import { PositionProps } from '@/pages/interface';
 
 const buttonPositions: { [key: string]: PositionProps } = {
   default: { top: '39%', left: '25%' },

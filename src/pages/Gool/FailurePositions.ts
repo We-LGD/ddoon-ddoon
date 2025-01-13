@@ -1,4 +1,4 @@
-import { PositionProps } from '@/utils/interface/constants';
+import { PositionProps } from '@/pages/interface';
 
 const failurePositions: { [key: number]: PositionProps } = {
   1: { top: '39.5%', left: '5%', width: '30%' },
