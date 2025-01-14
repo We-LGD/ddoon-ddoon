@@ -129,7 +129,7 @@ function Tutorial() {
           </div>
         )}
         {page === 7 && (
-          <div className="flex justify-center items-center h-full">
+          <div className="flex-center h-full">
             <div>
               <Title>자, 이제 우리 같이 갓생살이 도전해볼까?</Title>
               <Button theme="tutorial" event={handleFinishTutorial}>
@@ -145,7 +145,7 @@ function Tutorial() {
           {isMobile ? (
             <Slide page={page} />
           ) : (
-            <div className="absolute bottom-0 left-0 w-full mb-10 flex justify-center items-center">
+            <div className="absolute bottom-0 left-0 w-full mb-10 flex-center">
               <Button theme="tutorial" event={handleNextPage}>
                 다음
               </Button>

@@ -42,7 +42,15 @@ body {
 }
 
 @layer utilities {
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  .horizontal-center {
+    @apply left-1/2 transform -translate-x-1/2;
+  }
+
   .wood-sign {
-    @apply text-center font-woodSign text-3xl font-bold text-[#b89d80];
+    @apply text-center font-woodSign text-xl font-bold text-[#b89d80] truncate;
   }
 }

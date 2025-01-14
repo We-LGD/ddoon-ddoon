@@ -8,7 +8,7 @@ const SnsButton = ({ type }: { type: 'kakao' | 'github' }) => {
     <>
       {type === 'kakao' ? (
         <div
-          className={`flex justify-center items-center ${isMobile ? 'w-full' : 'w-[27.375rem]'} h-[2.75rem] bg-[#FEE500] text-black font-bold rounded-[0.25rem] cursor-pointer`}
+          className={`flex-center ${isMobile ? 'w-full' : 'w-[27.375rem]'} h-[2.75rem] bg-[#FEE500] text-black font-bold rounded-[0.25rem] cursor-pointer`}
           onClick={FeaturePendingModal}
         >
           <IoChatbubble className="h-5 w-5 mr-1 mb-1" />
@@ -17,7 +17,7 @@ const SnsButton = ({ type }: { type: 'kakao' | 'github' }) => {
       ) : null}
       {type === 'github' ? (
         <div
-          className={`flex justify-center items-center  ${isMobile ? 'w-full' : 'w-[27.375rem]'}  h-[2.75rem] bg-white text-black font-bold rounded-[0.25rem] border border-disabled cursor-pointer`}
+          className={`flex-center  ${isMobile ? 'w-full' : 'w-[27.375rem]'} h-[2.75rem] bg-white text-black font-bold rounded-[0.25rem] border border-disabled cursor-pointer`}
           onClick={FeaturePendingModal}
         >
           <img src={Images.GithubLogo} className="h-5 mr-1 mb-1" />

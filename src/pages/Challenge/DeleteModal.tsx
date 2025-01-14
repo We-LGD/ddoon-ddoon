@@ -11,7 +11,7 @@ function DeleteModal({ handleDelete }: { handleDelete: () => void }) {
     html: (
       <div className="flex flex-col gap-10 overflow-y-hidden">
         <p className="font-default text-sm">삭제된 챌린지는 복구 할 수 없습니다.</p>
-        <section className="flex justify-center items-center gap-3">
+        <section className="flex-center gap-3">
           <Button
             theme="modal"
             cancel={true}
