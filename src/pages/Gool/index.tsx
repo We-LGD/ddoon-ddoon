@@ -61,9 +61,9 @@ function Gool() {
   }, []);
 
   return (
-    <div className="relative h-[calc(100vh-54px)] flex justify-center items-center">
+    <div className="relative h-[calc(100vh-54px)] flex-center">
       <div
-        className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[16.5625rem] h-[6rem] z-30 flex items-center justify-center"
+        className="absolute top-0 horizontal-center w-[16.5625rem] h-[6rem] z-30 flex-center"
         style={{
           backgroundImage: `url(${Images.뚠뚠굴_팻말})`,
           backgroundRepeat: 'no-repeat',
