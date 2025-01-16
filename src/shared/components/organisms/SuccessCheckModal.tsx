@@ -2,7 +2,7 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import Button from '@/shared/components/atoms/Button';
 
-function SuccessCheckModal() {
+function SuccessCheckModal({ event }: { event: () => void }) {
   const ReactSwal = withReactContent(Swal);
 
   ReactSwal.fire({
@@ -11,7 +11,7 @@ function SuccessCheckModal() {
       <>
         <div className="font-default text-sm">
           <p className="mb-4">오늘의 챌린지를 완료 하셨나요?</p>
-          <section className="flex justify-center items-center gap-3">
+          <section className="flex-center gap-3">
             <Button
               theme="modal"
               cancel={true}
@@ -25,6 +25,7 @@ function SuccessCheckModal() {
               theme="modal"
               event={() => {
                 Swal.close();
+                event();
               }}
             >
               확인
