@@ -1,11 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Images } from '@/shared/assets/images';
-import CloudPosition from '@/pages/Trip/CloudPosition';
 import ChallengesData from '@/shared/data/challenges';
-import SuccessCheckModal from '@/shared/components/organisms/SuccessCheckModal';
+import SuccessCheckModal from '@/pages/Trip/SuccessCheckModal';
 import WoodSign from '@/pages/Trip/WoodSign';
 import getTodayDate from '@/utils/getTodayDate';
-import calculateButtonPosition from '@/utils/calculateButtonPosition';
 
 function Trip() {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -87,53 +85,48 @@ function Trip() {
         }}
       >
         <WoodSign setCurrentId={setCurrentId} />
-
-        {CloudPosition.map((pos) => (
-          <React.Fragment key={pos.id}>
-            {pos.id === currentSuccessCount && (
-              <>
-                <img
-                  key={pos.id}
-                  src={Images.기본뚠뚠}
-                  alt="기본뚠뚠"
-                  className={`absolute w-[12%] object-contain ${pos.id === 0 && 'horizontal-center'}`}
-                  style={{
-                    right: pos.right !== undefined ? `${pos.right}%` : undefined,
-                    left: pos.left !== undefined ? `${pos.left}%` : undefined,
-                    bottom: `${pos.bottom}%`,
-                  }}
-                />
-
-                {showMessage && pos.id !== 0 && (
-                  <p
-                    className="absolute text-white text-center "
-                    style={{
-                      right: pos.right !== undefined ? `${pos.right - 16}%` : undefined,
-                      left: pos.left !== undefined ? `${pos.left - 16}%` : undefined,
-                      bottom: `${pos.bottom + 2}%`,
-                    }}
-                  >
-                    내일도 화이팅!
-                  </p>
-                )}
-              </>
-            )}
-
-            {!showMessage && pos.id !== 0 && pos.id === currentSuccessCount + 1 && (
-              <button
-                onClick={handleCloudClick}
-                className="absolute text-[100%] font-bold px-10 py-3"
-                style={{
-                  right: pos.right !== undefined ? `${pos.right - 4}%` : undefined,
-                  left: pos.left !== undefined ? `${pos.left - 3}%` : undefined,
-                  bottom: `${calculateButtonPosition(pos.id, pos.bottom)}%`,
-                }}
-              >
-                CLICK
-              </button>
-            )}
-          </React.Fragment>
-        ))}
+        {currentSuccessCount === 0 && (
+          <img
+            src={Images.기본뚠뚠}
+            alt="기본뚠뚠"
+            className={`absolute bottom-[3%] w-[12%] object-contain horizontal-center`}
+          />
+        )}
+        <div
+          className="relative"
+          style={{
+            height: `calc(100% - 200px)`,
+          }}
+        >
+          {Array.from({ length: 30 }, (_, index) => (
+            <div
+              key={index + 1}
+              onClick={!showMessage && index === currentSuccessCount ? handleCloudClick : undefined}
+              className={`absolute text-white text-center flex-center font-bold ${!showMessage && index === currentSuccessCount && 'animate-successLight cursor-pointer'}`}
+              style={{
+                bottom: `${1 + index * 3.1}%`,
+                [index % 2 !== 0 ? 'left' : 'right']: '20%',
+                width: `160px`,
+                height: `60px`,
+                backgroundColor: 'blue',
+              }}
+            >
+              {index + 1} Day
+              {index === currentSuccessCount - 1 && (
+                <>
+                  <img
+                    src={Images.기본뚠뚠}
+                    alt="기본뚠뚠"
+                    className={`absolute w-[50%] bottom-[75%] object-contain`}
+                  />
+                  {showMessage && (
+                    <p className="absolute bottom-[210%] right-[-30%] text-white text-center">내일도 화이팅!</p>
+                  )}
+                </>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
