@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import useDummyStore from '@/store/useDummyStore';
 import DeleteBtn from '@/pages/Challenge/DeleteBtn';
 import { ChallengeProps } from '@/pages/interface';
@@ -6,20 +7,18 @@ import FailImg from '@/shared/assets/images/실패도장.png';
 
 function ChallengeBox({ title, memo, day, result, index, successCheck }: ChallengeProps) {
   const { updateDummy } = useDummyStore();
+  const navigate = useNavigate();
 
-  //TODO: 모든 페이지 완성 시 링크 연결
   const handleOpen = (
     i: ChallengeProps['index'],
     result: ChallengeProps['result'],
     successCheck: ChallengeProps['successCheck'],
   ) => {
     if (result === 'progress') {
-      alert('챌린지이동');
+      navigate('/ddoon-ddoon-trip');
     } else if (result === 'success' && !successCheck && i) {
       updateDummy(i, undefined, true);
-      alert('챌린지이동 및 애니메이션 중지');
-    } else {
-      alert('굴로 이동');
+      navigate('/ddoon-ddoon-gool');
     }
   };
 
@@ -27,7 +26,7 @@ function ChallengeBox({ title, memo, day, result, index, successCheck }: Challen
     <>
       <div
         onClick={() => handleOpen(index, result, successCheck)}
-        className={`w-full h-[7rem] rounded-lg flex space-x-10 justify-between items-center p-4 relative ${result === 'success' && !successCheck ? 'bg-disabled text-gray-400 border shadow-light animate-successLight cursor-pointer' : result === 'fail' || successCheck ? 'bg-disabled text-gray-400' : 'hover:bg-active group bg-main text-white cursor-pointer'}`}
+        className={`w-full h-[7rem] rounded-lg flex space-x-10 justify-between items-center p-4 relative ${result !== 'success' && !successCheck ? 'text-white border shadow-light animate-successLight bg-main cursor-pointer' : result === 'fail' || successCheck ? 'bg-disabled text-gray-400' : 'hover:bg-active group bg-main text-white cursor-pointer'}`}
       >
         <section className="flex flex-col space-y-2 overflow-hidden w-full">
           <h1 className="text-[1.125rem] font-semibold overflow-hidden text-ellipsis whitespace-nowrap w-full">
