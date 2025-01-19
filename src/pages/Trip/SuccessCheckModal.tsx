@@ -1,6 +1,7 @@
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import Button from '@/shared/components/atoms/Button';
+import RetryCheckModal from '@/pages/Trip/RetryCheckModal';
 
 function SuccessCheckModal({ event }: { event: () => void }) {
   const ReactSwal = withReactContent(Swal);
@@ -25,10 +26,10 @@ function SuccessCheckModal({ event }: { event: () => void }) {
               theme="modal"
               event={() => {
                 Swal.close();
-                event();
+                RetryCheckModal({ event });
               }}
             >
-              확인
+              완료
             </Button>
           </section>
         </div>
