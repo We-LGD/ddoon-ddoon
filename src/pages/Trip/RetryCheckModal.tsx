@@ -2,7 +2,7 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import Button from '@/shared/components/atoms/Button';
 
-function RetryCheckModal({ event }: { event: () => void }) {
+export default function RetryCheckModal({ event }: { event: () => void }) {
   const ReactSwal = withReactContent(Swal);
 
   ReactSwal.fire({
@@ -40,5 +40,3 @@ function RetryCheckModal({ event }: { event: () => void }) {
     },
   });
 }
-
-export default RetryCheckModal;

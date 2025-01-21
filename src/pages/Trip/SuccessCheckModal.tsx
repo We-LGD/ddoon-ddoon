@@ -1,12 +1,11 @@
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import Button from '@/shared/components/atoms/Button';
-import RetryCheckModal from '@/pages/Trip/RetryCheckModal';
 
-function SuccessCheckModal({ event }: { event: () => void }) {
+export default async function SuccessCheckModal() {
   const ReactSwal = withReactContent(Swal);
 
-  ReactSwal.fire({
+  await ReactSwal.fire({
     icon: 'question',
     html: (
       <>
@@ -26,7 +25,6 @@ function SuccessCheckModal({ event }: { event: () => void }) {
               theme="modal"
               event={() => {
                 Swal.close();
-                RetryCheckModal({ event });
               }}
             >
               완료
@@ -41,5 +39,3 @@ function SuccessCheckModal({ event }: { event: () => void }) {
     },
   });
 }
-
-export default SuccessCheckModal;
