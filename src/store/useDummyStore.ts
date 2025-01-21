@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { DummyProps } from '@/shared/interface/atomsType';
+import { DummyProps } from '@/pages/interface';
 
 //TODO - 서버 연결 시 삭제하기
 const useDummyStore = create<DummyProps>((set) => ({
@@ -11,23 +11,28 @@ const useDummyStore = create<DummyProps>((set) => ({
   ],
   setDummy: (challenge) => {
     set((state) => ({
-      dummy: [...state.dummy, {
-        ...challenge,
-        result: 'progress',
-        successCheck: false,
-      },],
+      dummy: [
+        ...state.dummy,
+        {
+          ...challenge,
+          result: 'progress',
+          successCheck: false,
+        },
+      ],
     }));
   },
   deleteDummy: (index) => {
     set((state) => ({
-      dummy: state.dummy.filter((v) => v.idx !== index)
+      dummy: state.dummy.filter((v) => v.idx !== index),
     }));
   },
   updateDummy: (index: number, result?: 'progress' | 'success' | 'fail', successCheck?: boolean) => {
     set((state) => ({
-      dummy: state.dummy.map((v, i) => i === index ? { ...v, result: result ?? v.result, successCheck: successCheck ?? v.successCheck } : v)
+      dummy: state.dummy.map((v, i) =>
+        i === index ? { ...v, result: result ?? v.result, successCheck: successCheck ?? v.successCheck } : v,
+      ),
     }));
-  }
+  },
 }));
 
 export default useDummyStore;

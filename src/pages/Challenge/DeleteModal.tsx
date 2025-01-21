@@ -3,7 +3,7 @@ import withReactContent from 'sweetalert2-react-content';
 import Title from '@/shared/components/atoms/Title';
 import Button from '@/shared/components/atoms/Button';
 
-function ChallengeDeleteModal({ handleDelete }: { handleDelete: () => void }) {
+function DeleteModal({ handleDelete }: { handleDelete: () => void }) {
   const MySwal = withReactContent(Swal);
 
   MySwal.fire({
@@ -11,7 +11,7 @@ function ChallengeDeleteModal({ handleDelete }: { handleDelete: () => void }) {
     html: (
       <div className="flex flex-col gap-10 overflow-y-hidden">
         <p className="font-default text-sm">삭제된 챌린지는 복구 할 수 없습니다.</p>
-        <section className="flex justify-center items-center gap-3">
+        <section className="flex-center gap-3">
           <Button
             theme="modal"
             cancel={true}
@@ -34,4 +34,4 @@ function ChallengeDeleteModal({ handleDelete }: { handleDelete: () => void }) {
   });
 }
 
-export default ChallengeDeleteModal;
+export default DeleteModal;

@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { Images } from '@/shared/assets/images';
 import TutorialRewardModal from '@/shared/components/organisms/TutorialRewardModal';
 import SuccessModal from '@/shared/components/organisms/SuccessModal';
-import { getClickButtonPosition } from '@/utils/constants/buttonPositions';
-import { successImagesData } from '@/utils/constants/successImages';
-import { getFailureImagePosition } from '@/utils/constants/failurePositions';
+import { getClickButtonPosition } from '@/pages/Gool/ButtonPositions';
+import { successImagesData } from '@/pages/Gool/SuccessImages';
+import { getFailureImagePosition } from '@/pages/Gool/FailurePositions';
 
 function Gool() {
   const [width, setWidth] = useState(0);
@@ -61,16 +61,16 @@ function Gool() {
   }, []);
 
   return (
-    <div className="relative h-[calc(100vh-54px)] flex justify-center items-center">
+    <div className="relative h-[calc(100vh-54px)] flex-center">
       <div
-        className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[16.5625rem] h-[6rem] z-30 flex items-center justify-center"
+        className="absolute top-0 horizontal-center w-[16.5625rem] h-[6rem] z-30 flex-center"
         style={{
           backgroundImage: `url(${Images.뚠뚠굴_팻말})`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'contain',
         }}
       >
-        <p className="text-center font-woodSign text-[#b89d80] text-3xl font-bold">갓생뚠뚠굴</p>
+        <p className="wood-sign">갓생뚠뚠굴</p>
       </div>
 
       <div
