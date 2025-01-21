@@ -11,6 +11,7 @@ function Trip() {
   const [initialLoad, setInitialLoad] = useState(true);
   const [currentId, setCurrentId] = useState(ChallengesData[0].idx);
   const [currentSuccessCount, setCurrentSuccessCount] = useState(0);
+  const [days, setDays] = useState(30);
   const [showMessage, setShowMessage] = useState(false);
 
   const handleResize = () => {
@@ -39,7 +40,10 @@ function Trip() {
 
   useEffect(() => {
     const img = new Image();
-    img.src = Images.구름맵30일;
+    if (days === 30) img.src = Images.구름맵30일;
+    if (days === 50) img.src = Images.구름맵50일;
+    if (days === 100) img.src = Images.구름맵100일;
+
     img.onload = () => {
       if (containerRef.current) {
         const aspectRatio = img.height / img.width;
@@ -57,7 +61,7 @@ function Trip() {
         }
       }
     };
-  }, [initialLoad]);
+  }, [initialLoad, days]);
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);
@@ -67,8 +71,11 @@ function Trip() {
   }, [imageDimensions]);
 
   useEffect(() => {
-    const successCount = ChallengesData.find((challenge) => challenge.idx === currentId);
-    if (successCount) setCurrentSuccessCount(successCount.successCount);
+    const challengeData = ChallengesData.find((challenge) => challenge.idx === currentId);
+    if (challengeData) {
+      setDays(challengeData.days);
+      setCurrentSuccessCount(challengeData.successCount);
+    }
   }, [currentId]);
 
   return (
@@ -77,7 +84,12 @@ function Trip() {
         className="relative w-full"
         style={{
           height: `${imageDimensions.height}px`,
-          backgroundImage: `url(${Images.구름맵30일})`,
+          backgroundImage:
+            days === 30
+              ? `url(${Images.구름맵30일})`
+              : days === 50
+                ? `url(${Images.구름맵50일})`
+                : `url(${Images.구름맵100일})`,
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'bottom',
@@ -98,20 +110,22 @@ function Trip() {
             height: `calc(100% - 200px)`,
           }}
         >
-          {Array.from({ length: 30 }, (_, index) => (
+          {Array.from({ length: days }, (_, index) => (
             <div
               key={index + 1}
               onClick={!showMessage && index === currentSuccessCount ? handleCloudClick : undefined}
-              className={`absolute text-white text-center flex-center font-bold ${!showMessage && index === currentSuccessCount && 'animate-successLight cursor-pointer'}`}
+              className="absolute text-center flex-center font-sub font-bold cursor-pointer"
               style={{
-                bottom: `${1 + index * 3.1}%`,
+                bottom: days === 30 ? `${1 + index * 3.1}%` : days === 50 ? `${index * 1.9}%` : `${index * 0.98}%`,
                 [index % 2 !== 0 ? 'left' : 'right']: '20%',
-                width: `160px`,
-                height: `60px`,
-                backgroundColor: 'blue',
               }}
             >
-              {index + 1} Day
+              <img src={Images.cloud} alt="구름" />
+              {!showMessage && index === currentSuccessCount && (
+                <p className="absolute bottom-[100%] text-lg text-white animate-pulse animate-textGlow">Click!</p>
+              )}
+
+              <p className="absolute horizontal-center">{index + 1} Day</p>
               {index === currentSuccessCount - 1 && (
                 <>
                   <img
@@ -120,7 +134,7 @@ function Trip() {
                     className={`absolute w-[50%] bottom-[75%] object-contain`}
                   />
                   {showMessage && (
-                    <p className="absolute bottom-[210%] right-[-30%] text-white text-center">내일도 화이팅!</p>
+                    <p className="absolute bottom-[210%] right-[-30%] text-center z-20">내일도 화이팅!</p>
                   )}
                 </>
               )}
