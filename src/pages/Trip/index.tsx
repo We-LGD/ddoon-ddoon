@@ -1,12 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Images } from '@/shared/assets/images';
 import ChallengesData from '@/shared/data/challenges';
 import SuccessCheckModal from '@/pages/Trip/SuccessCheckModal';
+import RetryCheckModal from '@/pages/Trip/RetryCheckModal';
+import AllSuccessModal from '@/pages/Trip/AllSuccessModal';
 import WoodSign from '@/pages/Trip/WoodSign';
 import getTodayDate from '@/utils/getTodayDate';
 
 function Trip() {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const navigation = useNavigate();
   const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
   const [initialLoad, setInitialLoad] = useState(true);
   const [currentId, setCurrentId] = useState(ChallengesData[0].idx);
@@ -25,16 +29,20 @@ function Trip() {
 
   const handleCloudClick = () => {
     const confirmMove = () => {
-      setCurrentSuccessCount(currentSuccessCount + 1);
-      setShowMessage(true);
+      if (currentSuccessCount < days) {
+        setCurrentSuccessCount(currentSuccessCount + 1);
+        setShowMessage(true);
+      }
 
       // TODO: 서버 데이터 업데이트
       console.log('SuccessCount : ', currentSuccessCount + 1);
       console.log('lastSuccessDate : ', getTodayDate());
     };
 
-    SuccessCheckModal({
-      event: confirmMove,
+    SuccessCheckModal().then(() => {
+      RetryCheckModal({
+        event: confirmMove,
+      });
     });
   };
 
@@ -77,6 +85,15 @@ function Trip() {
       setCurrentSuccessCount(challengeData.successCount);
     }
   }, [currentId]);
+
+  useEffect(() => {
+    if (currentSuccessCount === days) {
+      AllSuccessModal().then(() => {
+        navigation('/ddoon-ddoon-gool');
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentSuccessCount, days]);
 
   return (
     <div ref={containerRef} className="w-fill h-[calc(100vh-54px)] overflow-y-auto">
@@ -121,11 +138,11 @@ function Trip() {
               }}
             >
               <img src={Images.cloud} alt="구름" />
+              <p className="absolute horizontal-center">{index + 1} Day</p>
               {!showMessage && index === currentSuccessCount && (
                 <p className="absolute bottom-[100%] text-lg text-white animate-pulse animate-textGlow">Click!</p>
               )}
 
-              <p className="absolute horizontal-center">{index + 1} Day</p>
               {index === currentSuccessCount - 1 && (
                 <>
                   <img
@@ -133,7 +150,7 @@ function Trip() {
                     alt="기본뚠뚠"
                     className={`absolute w-[50%] bottom-[75%] object-contain`}
                   />
-                  {showMessage && (
+                  {showMessage && currentSuccessCount < days && (
                     <p className="absolute bottom-[210%] right-[-30%] text-center z-20">내일도 화이팅!</p>
                   )}
                 </>
