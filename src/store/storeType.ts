@@ -1,4 +1,4 @@
-import { NewChallengeProps } from '@/shared/interface/atomsType';
+import { NewChallengeProps } from '@/pages/interface';
 
 export interface InputStore {
   inputs: Record<string, string>;

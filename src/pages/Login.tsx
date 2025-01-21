@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 import Swal from 'sweetalert2';
@@ -51,6 +52,21 @@ function Login() {
       });
     }
   };
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      handleLoginBtnClick();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, password]);
 
   return (
     <div className="flex flex-col items-center justify-center h-full">
