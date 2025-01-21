@@ -36,7 +36,7 @@ function WoodSign({ setCurrentId }: { setCurrentId: React.Dispatch<React.SetStat
       ></div>
 
       <div
-        className="fixed top-[1%] horizontal-center w-[14rem] h-[4rem] z-30 flex-center cursor-pointer"
+        className="fixed top-[1%] horizontal-center w-[19rem] h-[5rem] z-30 flex-center cursor-pointer"
         style={{
           backgroundImage: `url(${Images.통나무})`,
           backgroundRepeat: 'no-repeat',
@@ -56,9 +56,9 @@ function WoodSign({ setCurrentId }: { setCurrentId: React.Dispatch<React.SetStat
             <IoMdArrowDropup className="wood-sign text-3xl" />
             <div
               ref={woodSignRef}
-              className="absolute top-[105%] horizontal-center bg-white w-[14rem] shadow-lg rounded-lg overflow-hidden"
+              className="absolute top-[90%] horizontal-center bg-white w-[14rem] shadow-lg rounded-lg overflow-hidden"
             >
-              {ChallengesData.filter((challenge) => challenge.status !== 'fail').map((challenge) => (
+              {ChallengesData.filter((challenge) => challenge.result !== 'fail').map((challenge) => (
                 <p
                   key={challenge.idx}
                   id={challenge.idx}
