@@ -1,19 +1,20 @@
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Images } from '@/shared/assets/images';
-import ChallengesData from '@/shared/data/challenges';
+import ChallengesData from '@/shared/data/ChallengesData';
 import SuccessCheckModal from '@/pages/Trip/SuccessCheckModal';
 import RetryCheckModal from '@/pages/Trip/RetryCheckModal';
 import AllSuccessModal from '@/pages/Trip/AllSuccessModal';
 import WoodSign from '@/pages/Trip/WoodSign';
 import getTodayDate from '@/utils/getTodayDate';
 
-function Trip() {
+export default function Trip() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const navigation = useNavigate();
+  const location = useLocation();
   const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
   const [initialLoad, setInitialLoad] = useState(true);
-  const [currentId, setCurrentId] = useState(ChallengesData[0].idx);
+  const [currentId, setCurrentId] = useState(location.state ? location.state.idx : ChallengesData[0].idx);
   const [currentSuccessCount, setCurrentSuccessCount] = useState(0);
   const [days, setDays] = useState(30);
   const [showMessage, setShowMessage] = useState(false);
@@ -113,7 +114,7 @@ function Trip() {
           zIndex: 10,
         }}
       >
-        <WoodSign setCurrentId={setCurrentId} />
+        <WoodSign currentId={currentId} setCurrentId={setCurrentId} />
         {currentSuccessCount === 0 && (
           <img
             src={Images.기본뚠뚠}
@@ -137,23 +138,22 @@ function Trip() {
                 [index % 2 !== 0 ? 'left' : 'right']: '20%',
               }}
             >
-              <img src={Images.cloud} alt="구름" />
-              <p className="absolute horizontal-center">{index + 1} Day</p>
-              {!showMessage && index === currentSuccessCount && (
-                <p className="absolute bottom-[100%] text-lg text-white animate-pulse animate-textGlow">Click!</p>
-              )}
-
               {index === currentSuccessCount - 1 && (
                 <>
                   <img
                     src={Images.기본뚠뚠}
                     alt="기본뚠뚠"
-                    className={`absolute w-[50%] bottom-[75%] object-contain`}
+                    className="absolute w-[50%] bottom-[75%] object-contain z-20"
                   />
                   {showMessage && currentSuccessCount < days && (
                     <p className="absolute bottom-[210%] right-[-30%] text-center z-20">내일도 화이팅!</p>
                   )}
                 </>
+              )}
+              <img src={Images.cloud} alt="구름" />
+              <p className="absolute horizontal-center">{index + 1} Day</p>
+              {!showMessage && index === currentSuccessCount && (
+                <p className="absolute bottom-[100%] text-lg text-white animate-textGlow">Click!</p>
               )}
             </div>
           ))}
@@ -162,5 +162,3 @@ function Trip() {
     </div>
   );
 }
-
-export default Trip;
