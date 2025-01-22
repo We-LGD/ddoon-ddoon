@@ -3,10 +3,10 @@ import useInputStore from '@/store/useInputStore';
 import useSelectDayStore from '@/store/useSelectDayStore';
 import useNewChallengeStore from '@/store/useNewChallengeStore';
 import ChallengesData from '@/shared/data/ChallengesData';
+import Modal from '@/shared/components/organisms/Modal';
 import Title from '@/shared/components/atoms/Title';
 import ChallengeBox from '@/pages/Challenge/ChallengeBox';
 import AddBtn from '@/pages/Challenge/AddBtn';
-import LimitModal from '@/pages/Challenge/LimitModal';
 import AddModal from '@/pages/Challenge/AddModal';
 
 export default function Challenge() {
@@ -17,7 +17,7 @@ export default function Challenge() {
 
   const handleChallengeAddModal = () => {
     if (ChallengesData.length >= 10) {
-      LimitModal();
+      Modal({ icon: 'info', title: '챌린지는 10개까지만 가능합니다.', buttonTitle: '확인' });
     } else {
       AddModal({
         outsideClick: () => {

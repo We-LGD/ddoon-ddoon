@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useInputStore from '@/store/useInputStore';
+import Modal from '@/shared/components/organisms/Modal';
 import Button from '@/shared/components/atoms/Button';
 import Input from '@/shared/components/atoms/Input';
 import Title from '@/shared/components/atoms/Title';
-import SuccessModal from '@pages/SignUp/SuccessModal';
 import { isValidId, isValidPassword } from '@/utils/validation';
 
 export default function SignUp() {
@@ -16,7 +16,7 @@ export default function SignUp() {
   const handleClick = () => {
     if (id && password && passwordCheck) {
       console.log(id, password, passwordCheck); //TODO: 데이터 확인 용, 백엔드 작업 후 삭제 예정
-      SuccessModal();
+      Modal({ icon: 'success', title: '회원가입이 완료되었습니다.', desc: '로그인을 해주세요.', buttonTitle: '확인' });
       resetInputs();
       navigate('/');
     }
