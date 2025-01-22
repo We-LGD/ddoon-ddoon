@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Images } from '@/shared/assets/images';
-import TutorialRewardModal from '@/shared/components/organisms/TutorialRewardModal';
-import SuccessModal from '@/shared/components/organisms/SuccessModal';
+import TutorialRewardModal from '@/pages/Gool/TutorialRewardModal';
+import SuccessModal from '@/pages/Gool/SuccessModal';
 import { getClickButtonPosition } from '@/pages/Gool/ButtonPositions';
 import { successImagesData } from '@/pages/Gool/SuccessImages';
 import { getFailureImagePosition } from '@/pages/Gool/FailurePositions';
 
-function Gool() {
+export default function Gool() {
   const [width, setWidth] = useState(0);
   const [challengeResults, setChallengeResults] = useState<{ success: boolean; number: number }[]>([]);
   const [selectedImage, setSelectedImage] = useState<string>('');
@@ -183,5 +183,3 @@ function Gool() {
     </div>
   );
 }
-
-export default Gool;

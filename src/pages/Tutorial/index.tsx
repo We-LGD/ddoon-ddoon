@@ -6,7 +6,7 @@ import Title from '@/shared/components/atoms/Title';
 import Slide from '@/shared/components/atoms/Slide';
 import Button from '@/shared/components/atoms/Button';
 
-function Tutorial() {
+export default function Tutorial() {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const [startTouch, setStartTouch] = useState(0);
@@ -156,5 +156,3 @@ function Tutorial() {
     </div>
   );
 }
-
-export default Tutorial;
