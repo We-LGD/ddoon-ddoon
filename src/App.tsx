@@ -5,7 +5,7 @@ import PublicRoute from '@/shared/Route/PublicRoute';
 import ProtectedRoute from '@/shared/Route/ProtectedRoute';
 import Layout from '@/shared/components/templates/Layout';
 import Login from '@pages/Login';
-import SignUp from '@pages/SignUp';
+import SignUp from '@/pages/SignUp';
 import NicknameSetup from '@pages/NicknameSetup';
 import Tutorial from '@pages/Tutorial';
 import Gool from '@/pages/Gool';
