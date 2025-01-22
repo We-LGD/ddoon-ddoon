@@ -4,9 +4,10 @@ import useInputStore from '@/store/useInputStore';
 import Button from '@/shared/components/atoms/Button';
 import Input from '@/shared/components/atoms/Input';
 import Title from '@/shared/components/atoms/Title';
+import SuccessModal from '@pages/SignUp/SuccessModal';
 import { isValidId, isValidPassword } from '@/utils/validation';
 
-function SignUp() {
+export default function SignUp() {
   const navigate = useNavigate();
   const { inputs, resetInputs } = useInputStore();
   const { id, password, passwordCheck } = inputs;
@@ -15,13 +16,14 @@ function SignUp() {
   const handleClick = () => {
     if (id && password && passwordCheck) {
       console.log(id, password, passwordCheck); //TODO: 데이터 확인 용, 백엔드 작업 후 삭제 예정
+      SuccessModal();
       resetInputs();
       navigate('/');
     }
   };
 
   useEffect(() => {
-    if (id && password && passwordCheck) {
+    if (id && password && passwordCheck && isValidId(id) && isValidPassword(password) && password === passwordCheck) {
       setDisabledBtn(false);
     } else {
       setDisabledBtn(true);
@@ -55,5 +57,3 @@ function SignUp() {
     </div>
   );
 }
-
-export default SignUp;
