@@ -1,17 +1,14 @@
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 import useDummyStore from '@/store/useDummyStore';
 import useInputStore from '@/store/useInputStore';
 import useSelectDayStore from '@/store/useSelectDayStore';
 import useNewChallengeStore from '@/store/useNewChallengeStore';
 import Title from '@/shared/components/atoms/Title';
-import Button from '@/shared/components/atoms/Button';
 import ChallengeBox from '@/pages/Challenge/ChallengeBox';
 import AddBtn from '@/pages/Challenge/AddBtn';
-import AddForm from '@/pages/Challenge/AddForm';
+import LimitModal from '@/pages/Challenge/LimitModal';
+import AddModal from '@/pages/Challenge/AddModal';
 
 function Challenge() {
-  const MySwal = withReactContent(Swal);
   const { dummy } = useDummyStore();
   const { resetInputs } = useInputStore();
   const { setSelect } = useSelectDayStore();
@@ -19,38 +16,18 @@ function Challenge() {
 
   const handleChallengeAddModal = () => {
     if (dummy.length >= 10) {
-      MySwal.fire({
-        title: <Title>챌린지는 10개까지만 가능합니다.</Title>,
-        icon: 'info',
-        html: (
-          <Button
-            theme="modal"
-            event={() => {
-              Swal.close();
-            }}
-          >
-            확인
-          </Button>
-        ),
-        showConfirmButton: false,
-      });
+      LimitModal();
     } else {
-      MySwal.fire({
-        title: '',
-        html: <AddForm />,
-        allowOutsideClick: () => {
+      AddModal({
+        outsideClick: () => {
           setSelect(null);
           setNewChallenge({ day: undefined });
           return true;
         },
-        allowEscapeKey: () => {
+        allowEscapKey: () => {
           setSelect(null);
           setNewChallenge({ day: undefined });
           return true;
-        },
-        showConfirmButton: false,
-        customClass: {
-          popup: 'w-full max-w-[31.125rem] h-auto px-2 font-default text-sm flex justify-center',
         },
       });
       resetInputs();
