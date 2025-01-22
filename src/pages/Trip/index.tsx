@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Images } from '@/shared/assets/images';
 import ChallengesData from '@/shared/data/ChallengesData';
+import Modal from '@/shared/components/organisms/Modal';
 import SuccessCheckModal from '@/pages/Trip/SuccessCheckModal';
 import RetryCheckModal from '@/pages/Trip/RetryCheckModal';
-import AllSuccessModal from '@/pages/Trip/AllSuccessModal';
 import WoodSign from '@/pages/Trip/WoodSign';
 import getTodayDate from '@/utils/getTodayDate';
 
@@ -89,7 +89,7 @@ export default function Trip() {
 
   useEffect(() => {
     if (currentSuccessCount === days) {
-      AllSuccessModal().then(() => {
+      Modal({ title: '챌린지 성공', desc: '개미굴이 오픈됩니다!', buttonTitle: '확인' }).then(() => {
         navigation('/ddoon-ddoon-gool');
       });
     }

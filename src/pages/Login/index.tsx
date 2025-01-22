@@ -1,16 +1,14 @@
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 import { Images } from '@/shared/assets/images';
 import useInputStore from '@/store/useInputStore';
+import Modal from '@/shared/components/organisms/Modal';
 import Input from '@/shared/components/atoms/Input';
 import Button from '@/shared/components/atoms/Button';
 import SnsButton from '@/shared/components/atoms/SnsButton';
 
 export default function Login() {
-  const ReactSwal = withReactContent(Swal);
   const navigate = useNavigate();
   const { inputs, resetInputs } = useInputStore();
   const { id, password } = inputs;
@@ -26,30 +24,7 @@ export default function Login() {
       localStorage.setItem('isLoggedIn', 'true');
       console.log(`로그인 버튼 클릭 : id: ${id} / password: ${password}`);
     } else {
-      ReactSwal.fire({
-        icon: 'info',
-        html: (
-          <div className="font-default text-sm">
-            <p className="mb-4">
-              아이디와 비밀번호를
-              <br />
-              모두 입력해주세요.
-            </p>
-            <Button
-              theme="modal"
-              event={() => {
-                Swal.close();
-              }}
-            >
-              확인
-            </Button>
-          </div>
-        ),
-        showConfirmButton: false,
-        customClass: {
-          popup: 'max-w-[25.375rem] w-full',
-        },
-      });
+      Modal({ icon: 'info', title: '아이디와 비밀번호를 확인해주세요.', buttonTitle: '확인' });
     }
   };
 
