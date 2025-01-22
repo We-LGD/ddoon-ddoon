@@ -1,23 +1,22 @@
 import { useNavigate } from 'react-router-dom';
-import useDummyStore from '@/store/useDummyStore';
 import useInputStore from '@/store/useInputStore';
 import useSelectDayStore from '@/store/useSelectDayStore';
 import useNewChallengeStore from '@/store/useNewChallengeStore';
+import ChallengesData from '@/shared/data/ChallengesData';
 import Title from '@/shared/components/atoms/Title';
 import ChallengeBox from '@/pages/Challenge/ChallengeBox';
 import AddBtn from '@/pages/Challenge/AddBtn';
 import LimitModal from '@/pages/Challenge/LimitModal';
 import AddModal from '@/pages/Challenge/AddModal';
 
-function Challenge() {
+export default function Challenge() {
   const navigate = useNavigate();
-  const { dummy } = useDummyStore();
   const { resetInputs } = useInputStore();
   const { setSelect } = useSelectDayStore();
   const { setNewChallenge } = useNewChallengeStore();
 
   const handleChallengeAddModal = () => {
-    if (dummy.length >= 10) {
+    if (ChallengesData.length >= 10) {
       LimitModal();
     } else {
       AddModal({
@@ -50,18 +49,17 @@ function Challenge() {
         </button>
       </div>
 
-      <p className="w-full mb-2 text-right text-base">{dummy.length} / 10</p>
+      <p className="w-full mb-2 text-right text-base">{ChallengesData.length} / 10</p>
       <section className="flex flex-col gap-4 w-full max-h-screen overflow-y-auto">
-        {dummy.map((v, i) => {
+        {ChallengesData.map((challenge) => {
           return (
             <ChallengeBox
-              key={i}
-              title={v.title}
-              memo={v.memo}
-              day={v.day}
-              index={v.idx}
-              result={v.result}
-              successCheck={v.successCheck}
+              key={challenge.idx}
+              idx={challenge.idx}
+              title={challenge.title}
+              memo={challenge.memo}
+              day={challenge.days}
+              result={challenge.result}
             />
           );
         })}
@@ -70,5 +68,3 @@ function Challenge() {
     </div>
   );
 }
-
-export default Challenge;

@@ -1,7 +1,7 @@
 const ChallengesData = [
   {
-    idx: '1',
-    name: '매일매일 코드치기',
+    idx: 1,
+    title: '매일매일 코드치기',
     memo: '취업하장!!',
     days: 30,
     successCount: 0,
@@ -9,8 +9,8 @@ const ChallengesData = [
     result: 'progress',
   },
   {
-    idx: '2',
-    name: '매일 하루 30분 걷기',
+    idx: 2,
+    title: '매일 하루 30분 걷기',
     memo: '다이어트',
     days: 50,
     successCount: 5,
@@ -18,8 +18,8 @@ const ChallengesData = [
     result: 'progress',
   },
   {
-    idx: '3',
-    name: '하루 두끼만 먹기',
+    idx: 3,
+    title: '하루 두끼만 먹기',
     memo: '먹는 양 줄이자',
     days: 100,
     successCount: 7,
@@ -27,8 +27,8 @@ const ChallengesData = [
     result: 'success',
   },
   {
-    idx: '4',
-    name: '퇴근하고 자지않기',
+    idx: 4,
+    title: '퇴근하고 자지않기',
     memo: '생체리듬 돌리쟈 :)',
     days: 30,
     successCount: 10,

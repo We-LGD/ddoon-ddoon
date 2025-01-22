@@ -1,12 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { IoMdArrowDropup, IoMdArrowDropdown } from 'react-icons/io';
 import { Images } from '@/shared/assets/images';
-import ChallengesData from '@/shared/data/challenges';
+import ChallengesData from '@/shared/data/ChallengesData';
 
-function WoodSign({ setCurrentId }: { setCurrentId: React.Dispatch<React.SetStateAction<string>> }) {
+export default function WoodSign({
+  currentId,
+  setCurrentId,
+}: {
+  currentId: number;
+  setCurrentId: React.Dispatch<React.SetStateAction<number>>;
+}) {
   const woodSignRef = useRef<HTMLDivElement>(null);
   const [challengeSelectShow, setChallengeSelectShow] = useState(false);
-  const [currentName, setCurrentName] = useState(ChallengesData[0].name);
+  const [currentName, setCurrentName] = useState(ChallengesData[currentId - 1].title);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -61,14 +67,13 @@ function WoodSign({ setCurrentId }: { setCurrentId: React.Dispatch<React.SetStat
               {ChallengesData.filter((challenge) => challenge.result !== 'fail').map((challenge) => (
                 <p
                   key={challenge.idx}
-                  id={challenge.idx}
                   className="hover:bg-main hover:text-white transition-all  py-2 px-4"
                   onClick={() => {
-                    setCurrentName(challenge.name);
+                    setCurrentName(challenge.title);
                     setCurrentId(challenge.idx);
                   }}
                 >
-                  {challenge.name}
+                  {challenge.title}
                 </p>
               ))}
             </div>
@@ -80,5 +85,3 @@ function WoodSign({ setCurrentId }: { setCurrentId: React.Dispatch<React.SetStat
     </>
   );
 }
-
-export default WoodSign;
