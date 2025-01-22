@@ -37,6 +37,7 @@ export default function Challenge() {
 
   const handleLogout = () => {
     navigate('/');
+    localStorage.setItem('isLoggedIn', 'false');
     resetInputs();
   };
 

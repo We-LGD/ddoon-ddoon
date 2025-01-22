@@ -9,22 +9,22 @@ import Input from '@/shared/components/atoms/Input';
 import Button from '@/shared/components/atoms/Button';
 import SnsButton from '@/shared/components/atoms/SnsButton';
 
-function Login() {
+export default function Login() {
   const ReactSwal = withReactContent(Swal);
   const navigate = useNavigate();
-  const { inputs } = useInputStore();
+  const { inputs, resetInputs } = useInputStore();
   const { id, password } = inputs;
 
   const handleLoginBtnClick = () => {
     // TODO: 백엔드 연결 후 제거
-    console.log(`로그인 버튼 클릭 : id: ${id} / password: ${password}`);
-
     // TODO: 튜토리얼 완료 여부 저장
     // - 튜토리얼 미 완료 시 navigate('/tutorial')
     // - 튜토리얼 완료 시 navigate('/challenge')
 
     if (id && password) {
       navigate('/challenge');
+      localStorage.setItem('isLoggedIn', 'true');
+      console.log(`로그인 버튼 클릭 : id: ${id} / password: ${password}`);
     } else {
       ReactSwal.fire({
         icon: 'info',
@@ -80,11 +80,15 @@ function Login() {
         </Button>
 
         <div>
-          <Link to="/signup" className="text-[0.75rem] text-disabledHover">
+          <Link to="/signup" onClick={resetInputs} className="text-[0.75rem] text-disabledHover">
             회원가입
           </Link>
           <span className="text-[0.75rem] text-disabledHover"> | </span>
-          <Link to="/nickname-setup" className="text-[0.75rem] text-disabledHover">
+          <Link
+            to="/nickname-setup"
+            onClick={() => localStorage.setItem('isLoggedIn', 'true')}
+            className="text-[0.75rem] text-disabledHover"
+          >
             게스트로 입장하기 {'>'}
           </Link>
         </div>
@@ -102,5 +106,3 @@ function Login() {
     </div>
   );
 }
-
-export default Login;
