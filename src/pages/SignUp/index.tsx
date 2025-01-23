@@ -13,6 +13,12 @@ export default function SignUp() {
   const { id, password, passwordCheck } = inputs;
   const [disabledBtn, setDisabledBtn] = useState(true);
 
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      handleClick();
+    }
+  };
+
   const handleClick = () => {
     if (id && password && passwordCheck) {
       console.log(id, password, passwordCheck); //TODO: 데이터 확인 용, 백엔드 작업 후 삭제 예정
@@ -25,9 +31,16 @@ export default function SignUp() {
   useEffect(() => {
     if (id && password && passwordCheck && isValidId(id) && isValidPassword(password) && password === passwordCheck) {
       setDisabledBtn(false);
+      window.addEventListener('keydown', handleKeyDown);
+
+      return () => {
+        window.removeEventListener('keydown', handleKeyDown);
+      };
     } else {
       setDisabledBtn(true);
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, password, passwordCheck]);
 
   return (
