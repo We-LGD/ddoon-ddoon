@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Images } from '@/shared/assets/images';
+import ChallengesData from '@/shared/data/ChallengesData';
 import TutorialRewardModal from '@/pages/Gool/TutorialRewardModal';
 import SuccessModal from '@/pages/Gool/SuccessModal';
 import { getClickButtonPosition } from '@/pages/Gool/ButtonPositions';
@@ -8,21 +9,22 @@ import { getFailureImagePosition } from '@/pages/Gool/FailurePositions';
 
 export default function Gool() {
   const [width, setWidth] = useState(0);
-  const [challengeResults, setChallengeResults] = useState<{ success: boolean; number: number }[]>([]);
   const [selectedImage, setSelectedImage] = useState<string>('');
   const [successModal, setSuccessModal] = useState(false);
+  const [title, setTitle] = useState<string>('');
 
-  const handleChallenge = (success: boolean) => {
-    const nextChallengeNumber = challengeResults.length + 1;
-    if (nextChallengeNumber <= successImagesData.length) {
-      setChallengeResults([...challengeResults, { success, number: nextChallengeNumber }]);
-      localStorage.setItem(`clickBtn${nextChallengeNumber}`, 'true');
-    }
-  };
-
-  const handleSuccessImgClick = ({ imgSrc, idx }: { imgSrc: string; idx: number }) => {
+  const handleSuccessImgClick = ({
+    imgSrc,
+    idx,
+    title,
+  }: {
+    imgSrc: string;
+    idx: number;
+    title: string | undefined;
+  }) => {
     setSelectedImage(Images[imgSrc]);
-    console.log(idx); // TODO: 방 번호 저장 확인 - 작업 후 삭제 예정
+    if (title) setTitle(title);
+    console.log(title);
     setSuccessModal(true);
     localStorage.setItem(`clickBtn${idx}`, 'false');
   };
@@ -30,7 +32,7 @@ export default function Gool() {
   useEffect(() => {
     if (successModal) {
       SuccessModal({
-        title: '챌린지 이름',
+        title: title,
         imageSrc: selectedImage,
         onClose: () => setSuccessModal(false),
       });
@@ -131,18 +133,15 @@ export default function Gool() {
         </div>
 
         {successImagesData.map((item) => {
-          const result = challengeResults.find((res) => res.number === item.idx);
           const buttonStyle = getClickButtonPosition(item.idx);
           const failureStyle = getFailureImagePosition(item.idx, item.style);
+          const successIdx = localStorage.getItem(`clickBtn${item.idx}`);
           const isClickBtnTrue = localStorage.getItem(`clickBtn${item.idx}`) === 'true';
+          const challengesData = ChallengesData.find((challenge) => challenge.idx === item.idx);
 
           return (
-            <div
-              key={item.idx}
-              className="absolute"
-              style={result && result.success ? { ...item.style } : { ...failureStyle }}
-            >
-              {localStorage.getItem(`clickBtn${item.idx}`) && result && result.success ? (
+            <div key={item.idx} className="absolute" style={successIdx ? { ...item.style } : { ...failureStyle }}>
+              {localStorage.getItem(`clickBtn${item.idx}`) ? (
                 <button
                   className={`absolute z-30 ${isClickBtnTrue ? 'opacity-1 font-bold text-white animate-pulse' : 'opacity-0 w-full h-full top-0 left-0'}`}
                   style={{
@@ -150,35 +149,32 @@ export default function Gool() {
                     textShadow: '0 0 5px rgba(255, 255, 0, 0.7), 0 0 10px rgba(255, 255, 0, 0.6)',
                     fontSize: `${window.innerHeight * 0.03}px`,
                   }}
-                  onClick={() => handleSuccessImgClick({ imgSrc: item.imgSrc, idx: item.idx })}
+                  onClick={() =>
+                    handleSuccessImgClick({
+                      imgSrc: `${item.imgSrc}${challengesData?.days}일`,
+                      idx: item.idx,
+                      title: challengesData?.title,
+                    })
+                  }
                 >
                   Click
                 </button>
               ) : null}
 
-              {result ? (
+              {successIdx ? (
                 <img
-                  src={result.success ? Images[item.imgSrc] : Images.실패방}
-                  alt={`방 ${item.idx} ${result.success ? '성공' : '실패'}`}
+                  src={
+                    challengesData?.result === 'success'
+                      ? Images[`${item.imgSrc}${challengesData.days}일`]
+                      : Images.실패방
+                  }
+                  alt={`${item.idx}번째 방 ${challengesData?.result === 'success' ? '성공' : '실패'} 이미지`}
                   className="w-full h-auto object-contain"
                 />
               ) : null}
             </div>
           );
         })}
-
-        {/* TODO: 이미지 확인을 위한 임시 버튼 - 작업 후 삭제 예정 */}
-        <div className="absolute bottom-10 left-10 transform -translate-x-1/2 z-[1000]">
-          <button
-            className="px-6 py-2 bg-green-500 text-white font-bold rounded mr-4"
-            onClick={() => handleChallenge(true)}
-          >
-            챌린지 성공
-          </button>
-          <button className="px-6 py-2 bg-red-500 text-white font-bold rounded" onClick={() => handleChallenge(false)}>
-            챌린지 실패
-          </button>
-        </div>
       </div>
     </div>
   );

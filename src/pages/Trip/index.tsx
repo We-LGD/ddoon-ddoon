@@ -10,7 +10,7 @@ import getTodayDate from '@/utils/getTodayDate';
 
 export default function Trip() {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const navigation = useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
   const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
   const [initialLoad, setInitialLoad] = useState(true);
@@ -90,7 +90,8 @@ export default function Trip() {
   useEffect(() => {
     if (currentSuccessCount === days) {
       Modal({ title: '챌린지 성공', desc: '개미굴이 오픈됩니다!', buttonTitle: '확인' }).then(() => {
-        navigation('/ddoon-ddoon-gool');
+        localStorage.setItem(`clickBtn${currentId}`, 'true');
+        navigate('/ddoon-ddoon-gool');
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
