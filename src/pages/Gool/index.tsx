@@ -18,9 +18,9 @@ export default function Gool() {
     idx,
     title,
   }: {
-    imgSrc: string;
+    imgSrc: keyof typeof Images;
     idx: number;
-    title: string | undefined;
+    title?: string | undefined;
   }) => {
     setSelectedImage(Images[imgSrc]);
     if (title) setTitle(title);
@@ -141,7 +141,7 @@ export default function Gool() {
 
           return (
             <div key={item.idx} className="absolute" style={successIdx ? { ...item.style } : { ...failureStyle }}>
-              {localStorage.getItem(`clickBtn${item.idx}`) ? (
+              {challengesData?.result === 'success' && localStorage.getItem(`clickBtn${item.idx}`) ? (
                 <button
                   className={`absolute z-30 ${isClickBtnTrue ? 'opacity-1 font-bold text-white animate-pulse' : 'opacity-0 w-full h-full top-0 left-0'}`}
                   style={{
@@ -151,7 +151,7 @@ export default function Gool() {
                   }}
                   onClick={() =>
                     handleSuccessImgClick({
-                      imgSrc: `${item.imgSrc}${challengesData?.days}일`,
+                      imgSrc: `${item.imgSrc}${challengesData?.days}일` as keyof typeof Images,
                       idx: item.idx,
                       title: challengesData?.title,
                     })
@@ -165,7 +165,7 @@ export default function Gool() {
                 <img
                   src={
                     challengesData?.result === 'success'
-                      ? Images[`${item.imgSrc}${challengesData.days}일`]
+                      ? Images[`${item.imgSrc}${challengesData.days}일` as keyof typeof Images]
                       : Images.실패방
                   }
                   alt={`${item.idx}번째 방 ${challengesData?.result === 'success' ? '성공' : '실패'} 이미지`}
