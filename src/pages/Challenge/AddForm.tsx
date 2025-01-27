@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import useDummyStore from '@/store/useDummyStore';
 import useInputStore from '@/store/useInputStore';
 import useSelectDayStore from '@/store/useSelectDayStore';
 import useNewChallengeStore from '@/store/useNewChallengeStore';
@@ -12,7 +11,6 @@ import SelectDay from '@/pages/Challenge/SelectDay';
 function AddForm() {
   const MySwal = withReactContent(Swal);
   const [disabledBtn, setDisabledBtn] = useState(true);
-  const { setDummy } = useDummyStore();
   const { inputs, resetInputs } = useInputStore();
   const { select, setSelect } = useSelectDayStore();
   const { setNewChallenge } = useNewChallengeStore();
@@ -23,7 +21,6 @@ function AddForm() {
     setDisabledBtn(true);
     setSelect(null);
     resetInputs();
-    setDummy(useNewChallengeStore.getState().newChallenge);
     MySwal.close();
   };
 
