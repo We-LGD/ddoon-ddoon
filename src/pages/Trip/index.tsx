@@ -41,10 +41,12 @@ export default function Trip() {
       console.log('lastSuccessDate : ', getTodayDate());
     };
 
-    SuccessCheckModal().then(() => {
-      RetryCheckModal({
-        event: confirmMove,
-      });
+    SuccessCheckModal().then((isConfirmed) => {
+      if (isConfirmed) {
+        RetryCheckModal({
+          event: confirmMove,
+        });
+      }
     });
   };
 
