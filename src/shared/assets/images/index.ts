@@ -48,4 +48,4 @@ export const Images = {
   실패방,
   통나무,
   튜토리얼오픈,
-};
+} as const;
