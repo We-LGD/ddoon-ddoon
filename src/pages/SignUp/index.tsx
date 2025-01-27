@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { isMobile } from 'react-device-detect';
 import useInputStore from '@/store/useInputStore';
 import Modal from '@/shared/components/organisms/Modal';
 import Button from '@/shared/components/atoms/Button';
@@ -46,7 +47,8 @@ export default function SignUp() {
   return (
     <div className="flex flex-col justify-center items-center h-full">
       <Title>회원가입</Title>
-      <div className="flex flex-col gap-3">
+
+      <div className={`flex flex-col gap-3 ${isMobile ? 'w-full p-5' : null}`}>
         <div>
           <Input theme="auth" name="id" placeholder="아이디 입력" maxLength={20} />
           {id && !isValidId(id) && (

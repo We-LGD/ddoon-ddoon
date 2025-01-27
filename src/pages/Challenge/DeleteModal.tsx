@@ -3,7 +3,7 @@ import withReactContent from 'sweetalert2-react-content';
 import Title from '@/shared/components/atoms/Title';
 import Button from '@/shared/components/atoms/Button';
 
-function DeleteModal({ handleDelete }: { handleDelete: () => void }) {
+export default function DeleteModal({ handleDelete }: { handleDelete: () => void }) {
   const MySwal = withReactContent(Swal);
 
   MySwal.fire({
@@ -29,9 +29,7 @@ function DeleteModal({ handleDelete }: { handleDelete: () => void }) {
     ),
     showConfirmButton: false,
     customClass: {
-      popup: 'max-w-[25.375rem] w-full',
+      popup: 'max-w-[22rem] w-full',
     },
   });
 }
-
-export default DeleteModal;
