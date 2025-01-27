@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { isMobile } from 'react-device-detect';
 import { Images } from '@/shared/assets/images';
 import ChallengesData from '@/shared/data/ChallengesData';
 import Modal from '@/shared/components/organisms/Modal';
@@ -120,23 +121,34 @@ export default function Trip() {
           <img
             src={Images.기본뚠뚠}
             alt="기본뚠뚠"
-            className={`absolute bottom-[3%] w-[12%] object-contain horizontal-center`}
+            className="absolute bottom-[3%] w-[12%] object-contain horizontal-center"
           />
         )}
         <div
           className="relative"
           style={{
-            height: `calc(100% - 200px)`,
+            height: isMobile ? 'calc(100% - 150px)' : 'calc(100% - 200px)',
           }}
         >
           {Array.from({ length: days }, (_, index) => (
             <div
               key={index + 1}
               onClick={!showMessage && index === currentSuccessCount ? handleCloudClick : undefined}
-              className="absolute text-center flex-center font-sub font-bold cursor-pointer"
+              className={`absolute text-center flex-center font-sub font-bold cursor-pointer 
+                ${isMobile ? (index % 2 !== 0 ? 'left-[15%]' : 'right-[15%]') : index % 2 !== 0 ? 'left-[20%]' : 'right-[20%]'}
+                `}
               style={{
-                bottom: days === 30 ? `${1 + index * 3.1}%` : days === 50 ? `${index * 1.9}%` : `${index * 0.98}%`,
-                [index % 2 !== 0 ? 'left' : 'right']: '20%',
+                bottom: !isMobile
+                  ? days === 30
+                    ? `${1 + index * 3.1}%`
+                    : days === 50
+                      ? `${index * 1.9}%`
+                      : `${index * 0.98}%`
+                  : days === 30
+                    ? `${index * 3}%`
+                    : days === 50
+                      ? `${index * 1.85}%`
+                      : `${index * 0.97}%`,
               }}
             >
               {index === currentSuccessCount - 1 && (

@@ -36,10 +36,10 @@ export default function ChallengeBox({ idx, title, memo, day, result }: Challeng
         </p>
         <DeleteBtn result={result} />
         {result === 'success' && (
-          <img className="absolute top-1 right-1 w-[5.875rem] h-[6.25rem]" src={Images.성공도장} alt="챌린지성공" />
+          <img className="absolute top-0 right-0 w-auto h-full p-1" src={Images.성공도장} alt="챌린지 성공 도장" />
         )}
         {result === 'fail' && (
-          <img className="absolute top-1 right-1 w-[5.875rem] h-[6.25rem]" src={Images.실패도장} alt="챌린지실패" />
+          <img className="absolute top-0 right-0 w-auto h-full p-1" src={Images.실패도장} alt="챌린지 실패 도장" />
         )}
       </div>
     </>

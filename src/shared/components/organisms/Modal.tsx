@@ -33,7 +33,7 @@ export default async function Modal({
       </div>
     ),
     customClass: {
-      popup: 'max-w-[25.375rem] w-full',
+      popup: 'max-w-[22rem] w-full',
     },
     showConfirmButton: false,
   });
