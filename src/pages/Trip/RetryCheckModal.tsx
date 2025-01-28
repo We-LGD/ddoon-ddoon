@@ -36,7 +36,7 @@ export default function RetryCheckModal({ event }: { event: () => void }) {
     ),
     showConfirmButton: false,
     customClass: {
-      popup: 'max-w-[25.375rem]',
+      popup: 'max-w-[22rem]',
     },
   });
 }

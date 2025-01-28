@@ -3,7 +3,7 @@ import { isMobile } from 'react-device-detect';
 import NavBar from '@/shared/components/organisms/NavBar';
 import { LayoutProps } from '@/shared/interface/templatesType';
 
-function Layout({ children }: LayoutProps) {
+export default function Layout({ children }: LayoutProps) {
   const location = useLocation();
   const excludeNavBarPaths = ['/ddoon-ddoon-gool', '/challenge', '/ddoon-ddoon-trip'];
 
@@ -20,5 +20,3 @@ function Layout({ children }: LayoutProps) {
     </div>
   );
 }
-
-export default Layout;

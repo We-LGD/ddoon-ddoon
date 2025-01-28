@@ -1,55 +1,30 @@
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 import { Images } from '@/shared/assets/images';
 import useInputStore from '@/store/useInputStore';
+import Modal from '@/shared/components/organisms/Modal';
 import Input from '@/shared/components/atoms/Input';
 import Button from '@/shared/components/atoms/Button';
 import SnsButton from '@/shared/components/atoms/SnsButton';
 
-function Login() {
-  const ReactSwal = withReactContent(Swal);
+export default function Login() {
   const navigate = useNavigate();
-  const { inputs } = useInputStore();
+  const { inputs, resetInputs } = useInputStore();
   const { id, password } = inputs;
 
   const handleLoginBtnClick = () => {
     // TODO: 백엔드 연결 후 제거
-    console.log(`로그인 버튼 클릭 : id: ${id} / password: ${password}`);
-
     // TODO: 튜토리얼 완료 여부 저장
     // - 튜토리얼 미 완료 시 navigate('/tutorial')
     // - 튜토리얼 완료 시 navigate('/challenge')
 
     if (id && password) {
       navigate('/challenge');
+      localStorage.setItem('isLoggedIn', 'true');
+      console.log(`로그인 버튼 클릭 : id: ${id} / password: ${password}`);
     } else {
-      ReactSwal.fire({
-        icon: 'info',
-        html: (
-          <div className="font-default text-sm">
-            <p className="mb-4">
-              아이디와 비밀번호를
-              <br />
-              모두 입력해주세요.
-            </p>
-            <Button
-              theme="modal"
-              event={() => {
-                Swal.close();
-              }}
-            >
-              확인
-            </Button>
-          </div>
-        ),
-        showConfirmButton: false,
-        customClass: {
-          popup: 'max-w-[25.375rem] w-full',
-        },
-      });
+      Modal({ icon: 'info', title: '아이디와 비밀번호를 확인해주세요.', buttonTitle: '확인' });
     }
   };
 
@@ -80,11 +55,15 @@ function Login() {
         </Button>
 
         <div>
-          <Link to="/signup" className="text-[0.75rem] text-disabledHover">
+          <Link to="/signup" onClick={resetInputs} className="text-[0.75rem] text-disabledHover">
             회원가입
           </Link>
           <span className="text-[0.75rem] text-disabledHover"> | </span>
-          <Link to="/nickname-setup" className="text-[0.75rem] text-disabledHover">
+          <Link
+            to="/nickname-setup"
+            onClick={() => localStorage.setItem('isLoggedIn', 'true')}
+            className="text-[0.75rem] text-disabledHover"
+          >
             게스트로 입장하기 {'>'}
           </Link>
         </div>
@@ -102,5 +81,3 @@ function Login() {
     </div>
   );
 }
-
-export default Login;

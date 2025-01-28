@@ -54,4 +54,8 @@ body {
   .wood-sign {
     @apply text-center font-woodSign text-xl font-bold text-[#b89d80] truncate;
   }
+
+  .bg-image {
+    @apply absolute top-0 left-0 w-full h-full bg-center bg-no-repeat;
+  }
 }

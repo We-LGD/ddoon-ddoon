@@ -1,16 +1,10 @@
 import Swal from 'sweetalert2';
-import useDummyStore from '@/store/useDummyStore';
 import DeleteModal from '@/pages/Challenge/DeleteModal';
 import { ResultProps } from '@/pages/interface';
 
-function DeleteBtn({ result, index }: ResultProps) {
-  const { deleteDummy } = useDummyStore();
-
+export default function DeleteBtn({ result }: ResultProps) {
   const handleDelete = () => {
     Swal.close();
-    if (index) {
-      deleteDummy(index);
-    }
   };
 
   const showDeleteModal = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -28,5 +22,3 @@ function DeleteBtn({ result, index }: ResultProps) {
     </button>
   );
 }
-
-export default DeleteBtn;
