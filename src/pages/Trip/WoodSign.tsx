@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { IoMdArrowDropup, IoMdArrowDropdown } from 'react-icons/io';
 import { Images } from '@/shared/assets/images';
 import ChallengesData from '@/shared/data/ChallengesData';
+import ToolTip from '@/shared/components/atoms/ToolTip';
 
 export default function WoodSign({
   currentId,
@@ -52,9 +53,7 @@ export default function WoodSign({
       >
         <div className="w-[60%] group">
           <p className="wood-sign">{currentName}</p>
-          <div className="absolute invisible top-[80%] horizontal-center opacity-0 group-hover:visible group-hover:opacity-80 transition text-[0.7rem] text-black bg-white rounded-md px-2 py-1 whitespace-nowrap">
-            {currentName}
-          </div>
+          <ToolTip>{currentName}</ToolTip>
         </div>
 
         {challengeSelectShow ? (

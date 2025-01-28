@@ -51,6 +51,7 @@ export default function Gool() {
         const isClickBtnTrue = localStorage.getItem(`clickBtn${item.idx}`) === 'true';
         const challengesData = ChallengesData.find((challenge) => challenge.idx === item.idx);
         const successChallenge = challengesData?.result === 'success';
+        const failChallenge = challengesData?.result === 'fail';
 
         return (
           <div
@@ -78,16 +79,26 @@ export default function Gool() {
               </button>
             ) : null}
 
-            {successIdx ? (
+            {successIdx && successChallenge ? (
               <img
                 src={
-                  challengesData?.result === 'success'
-                    ? Images[`${item.imgSrc}${challengesData.days}일` as keyof typeof Images]
-                    : Images.실패방
+                  successChallenge ? Images[`${item.imgSrc}${challengesData.days}일` as keyof typeof Images] : undefined
                 }
-                alt={`${item.idx}번째 방 ${challengesData?.result === 'success' ? '성공' : '실패'} 이미지`}
-                className="w-full h-auto object-contain"
+                alt={`${item.idx}번째 방 성공 이미지`}
+                className="w-full h-auto object-contain pointer-events-auto"
               />
+            ) : null}
+
+            {failChallenge ? (
+              <div className="relative group">
+                <div className="absolute w-full h-full opacity-0 z-50">Invisible Button</div>
+                <ToolTip>{challengesData?.title} 실패!</ToolTip>
+                <img
+                  src={failChallenge ? Images.실패방 : undefined}
+                  alt={`${item.idx}번째 방 실패 이미지`}
+                  className="w-full h-auto object-contain pointer-events-auto"
+                />
+              </div>
             ) : null}
           </div>
         );
