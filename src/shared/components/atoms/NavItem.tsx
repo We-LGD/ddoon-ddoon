@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { NavItemProps } from '@/shared/interface/atomsType';
 
-function NavItem({ icon, label, path, isSelected }: NavItemProps) {
+export default function NavItem({ icon, label, path, isSelected }: NavItemProps) {
   const navigate = useNavigate();
 
   return (
@@ -11,5 +11,3 @@ function NavItem({ icon, label, path, isSelected }: NavItemProps) {
     </button>
   );
 }
-
-export default NavItem;

@@ -8,7 +8,7 @@ import Button from '@/shared/components/atoms/Button';
 import Input from '@/shared/components/atoms/Input';
 import SelectDay from '@/pages/Challenge/SelectDay';
 
-function AddForm() {
+export default function AddForm() {
   const MySwal = withReactContent(Swal);
   const [disabledBtn, setDisabledBtn] = useState(true);
   const { inputs, resetInputs } = useInputStore();
@@ -71,5 +71,3 @@ function AddForm() {
     </form>
   );
 }
-
-export default AddForm;

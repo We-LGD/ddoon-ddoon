@@ -3,7 +3,7 @@ import { isMobile } from 'react-device-detect';
 import useInputStore from '@/store/useInputStore';
 import { InputProps } from '@/shared/interface/atomsType';
 
-function Input({ theme, type = 'text', title, placeholder, name, description, maxLength }: InputProps) {
+export default function Input({ theme, type = 'text', title, placeholder, name, description, maxLength }: InputProps) {
   const { inputs, setInput } = useInputStore();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,11 +31,12 @@ function Input({ theme, type = 'text', title, placeholder, name, description, ma
         value={inputs[name] || ''}
         onChange={handleChange}
         maxLength={maxLength}
-        className={`${title && 'mt-[0.5rem]'} w-full h-[3.5rem] px-[1rem] py-[0.5rem] border border-input rounded-[0.25rem] placeholder-input focus:outline-none focus:ring-transparent focus:border-main focus:ring-0  focus:ring-main`}
+        className={`
+          ${title && 'mt-[0.5rem]'} 
+          w-full h-[3.5rem] px-[1rem] py-[0.5rem] border border-input rounded-[0.25rem] placeholder-input focus:outline-none focus:ring-transparent focus:border-main focus:ring-0  focus:ring-main
+        `}
       />
       {description && <p className="text-[0.75rem] mt-[0.5rem] text-input">{description}</p>}
     </div>
   );
 }
-
-export default Input;

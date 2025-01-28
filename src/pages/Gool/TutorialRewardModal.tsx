@@ -3,7 +3,7 @@ import withReactContent from 'sweetalert2-react-content';
 import Title from '@/shared/components/atoms/Title';
 import Button from '@/shared/components/atoms/Button';
 
-const TutorialRewardModal = () => {
+export default function TutorialRewardModal() {
   const ReactSwal = withReactContent(Swal);
 
   ReactSwal.fire({
@@ -29,6 +29,4 @@ const TutorialRewardModal = () => {
       popup: 'max-w-[25.375rem]',
     },
   });
-};
-
-export default TutorialRewardModal;
+}

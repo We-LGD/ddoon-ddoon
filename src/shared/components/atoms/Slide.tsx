@@ -1,6 +1,6 @@
 import { SlideProps } from '@/shared/interface/atomsType';
 
-function Slide({ page }: SlideProps) {
+export default function Slide({ page }: SlideProps) {
   const totalPages = 7;
 
   return (
@@ -14,5 +14,3 @@ function Slide({ page }: SlideProps) {
     </div>
   );
 }
-
-export default Slide;
