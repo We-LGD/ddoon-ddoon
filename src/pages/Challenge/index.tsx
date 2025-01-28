@@ -1,78 +1,66 @@
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
-import useDummyStore from '@/store/useDummyStore';
+import { useNavigate } from 'react-router-dom';
 import useInputStore from '@/store/useInputStore';
 import useSelectDayStore from '@/store/useSelectDayStore';
 import useNewChallengeStore from '@/store/useNewChallengeStore';
+import ChallengesData from '@/shared/data/ChallengesData';
+import Modal from '@/shared/components/organisms/Modal';
 import Title from '@/shared/components/atoms/Title';
-import Button from '@/shared/components/atoms/Button';
 import ChallengeBox from '@/pages/Challenge/ChallengeBox';
 import AddBtn from '@/pages/Challenge/AddBtn';
-import AddForm from '@/pages/Challenge/AddForm';
+import AddModal from '@/pages/Challenge/AddModal';
 
-function Challenge() {
-  const MySwal = withReactContent(Swal);
-  const { dummy } = useDummyStore();
+export default function Challenge() {
+  const navigate = useNavigate();
   const { resetInputs } = useInputStore();
   const { setSelect } = useSelectDayStore();
   const { setNewChallenge } = useNewChallengeStore();
 
   const handleChallengeAddModal = () => {
-    if (dummy.length >= 10) {
-      MySwal.fire({
-        title: <Title>챌린지는 10개까지만 가능합니다.</Title>,
-        icon: 'info',
-        html: (
-          <Button
-            theme="modal"
-            event={() => {
-              Swal.close();
-            }}
-          >
-            확인
-          </Button>
-        ),
-        showConfirmButton: false,
-      });
+    if (ChallengesData.length >= 10) {
+      Modal({ icon: 'info', title: '챌린지는 10개까지만 가능합니다.', buttonTitle: '확인' });
     } else {
-      MySwal.fire({
-        title: '',
-        html: <AddForm />,
-        allowOutsideClick: () => {
+      AddModal({
+        outsideClick: () => {
           setSelect(null);
           setNewChallenge({ day: undefined });
           return true;
         },
-        allowEscapeKey: () => {
+        allowEscapKey: () => {
           setSelect(null);
           setNewChallenge({ day: undefined });
           return true;
-        },
-        showConfirmButton: false,
-        customClass: {
-          popup: 'w-full max-w-[31.125rem] h-auto px-2 font-default text-sm flex justify-center',
         },
       });
       resetInputs();
     }
   };
 
-  return (
-    <div className="flex flex-col items-center relative pb-[4.375rem] px-5 max-h-screen">
-      <Title>뚠뚠 챌린지</Title>
+  const handleLogout = () => {
+    navigate('/');
+    localStorage.setItem('isLoggedIn', 'false');
+    resetInputs();
+  };
 
-      <p className="max-w-[28.75rem] w-full mb-2 text-right text-base">{dummy.length} / 10</p>
-      <section className="flex flex-col gap-4 max-w-[28.75rem] w-full max-h-screen overflow-y-auto">
-        {dummy.map((v, i) => {
+  return (
+    <div className="flex flex-col items-center relative pb-[4.375rem] px-10 max-h-screen">
+      <div className="relative w-full text-center">
+        <Title>뚠뚠 챌린지</Title>
+        <button onClick={handleLogout} className="absolute top-5 right-0 text-disabledHover">
+          로그아웃
+        </button>
+      </div>
+
+      <p className="w-full mb-2 text-right text-base">{ChallengesData.length} / 10</p>
+      <section className="flex flex-col gap-4 w-full max-h-screen overflow-y-auto">
+        {ChallengesData.map((challenge) => {
           return (
             <ChallengeBox
-              key={i}
-              title={v.title}
-              memo={v.memo}
-              day={v.day}
-              index={v.idx}
-              result={v.result}
-              successCheck={v.successCheck}
+              key={challenge.idx}
+              idx={challenge.idx}
+              title={challenge.title}
+              memo={challenge.memo}
+              day={challenge.days}
+              result={challenge.result}
             />
           );
         })}
@@ -81,5 +69,3 @@ function Challenge() {
     </div>
   );
 }
-
-export default Challenge;

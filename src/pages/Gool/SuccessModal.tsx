@@ -4,7 +4,7 @@ import { Images } from '@/shared/assets/images';
 import Title from '@/shared/components/atoms/Title';
 import { SuccessModalProps } from '@/shared/interface/templatesType';
 
-function SuccessModal({ title, imageSrc, onClose }: SuccessModalProps) {
+export default function SuccessModal({ title, imageSrc, onClose }: SuccessModalProps) {
   const ReactSwal = withReactContent(Swal);
 
   ReactSwal.fire({
@@ -37,5 +37,3 @@ function SuccessModal({ title, imageSrc, onClose }: SuccessModalProps) {
     },
   });
 }
-
-export default SuccessModal;

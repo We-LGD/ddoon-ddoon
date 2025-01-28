@@ -1,7 +1,7 @@
 import { Images } from '@/shared/assets/images';
 import Layout from '@/shared/components/templates/Layout';
 
-function LoadingPage() {
+export default function LoadingPage() {
   return (
     <Layout>
       <div className="flex flex-col justify-center items-center w-full h-full">
@@ -14,5 +14,3 @@ function LoadingPage() {
     </Layout>
   );
 }
-
-export default LoadingPage;

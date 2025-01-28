@@ -1,19 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { isMobile } from 'react-device-detect';
 import { Images } from '@/shared/assets/images';
-import ChallengesData from '@/shared/data/challenges';
+import ChallengesData from '@/shared/data/ChallengesData';
+import Modal from '@/shared/components/organisms/Modal';
 import SuccessCheckModal from '@/pages/Trip/SuccessCheckModal';
 import RetryCheckModal from '@/pages/Trip/RetryCheckModal';
-import AllSuccessModal from '@/pages/Trip/AllSuccessModal';
 import WoodSign from '@/pages/Trip/WoodSign';
 import getTodayDate from '@/utils/getTodayDate';
 
-function Trip() {
+export default function Trip() {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const navigation = useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
   const [initialLoad, setInitialLoad] = useState(true);
-  const [currentId, setCurrentId] = useState(ChallengesData[0].idx);
+  const [currentId, setCurrentId] = useState(location.state ? location.state.idx : ChallengesData[0].idx);
   const [currentSuccessCount, setCurrentSuccessCount] = useState(0);
   const [days, setDays] = useState(30);
   const [showMessage, setShowMessage] = useState(false);
@@ -39,10 +41,12 @@ function Trip() {
       console.log('lastSuccessDate : ', getTodayDate());
     };
 
-    SuccessCheckModal().then(() => {
-      RetryCheckModal({
-        event: confirmMove,
-      });
+    SuccessCheckModal().then((isConfirmed) => {
+      if (isConfirmed) {
+        RetryCheckModal({
+          event: confirmMove,
+        });
+      }
     });
   };
 
@@ -88,8 +92,9 @@ function Trip() {
 
   useEffect(() => {
     if (currentSuccessCount === days) {
-      AllSuccessModal().then(() => {
-        navigation('/ddoon-ddoon-gool');
+      Modal({ title: '챌린지 성공', desc: '개미굴이 오픈됩니다!', buttonTitle: '확인' }).then(() => {
+        localStorage.setItem(`clickBtn${currentId}`, 'true');
+        navigate('/ddoon-ddoon-gool');
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -113,47 +118,57 @@ function Trip() {
           zIndex: 10,
         }}
       >
-        <WoodSign setCurrentId={setCurrentId} />
+        <WoodSign currentId={currentId} setCurrentId={setCurrentId} />
         {currentSuccessCount === 0 && (
           <img
             src={Images.기본뚠뚠}
             alt="기본뚠뚠"
-            className={`absolute bottom-[3%] w-[12%] object-contain horizontal-center`}
+            className="absolute bottom-[3%] w-[12%] object-contain horizontal-center"
           />
         )}
         <div
           className="relative"
           style={{
-            height: `calc(100% - 200px)`,
+            height: isMobile ? 'calc(100% - 150px)' : 'calc(100% - 200px)',
           }}
         >
           {Array.from({ length: days }, (_, index) => (
             <div
               key={index + 1}
               onClick={!showMessage && index === currentSuccessCount ? handleCloudClick : undefined}
-              className="absolute text-center flex-center font-sub font-bold cursor-pointer"
+              className={`absolute text-center flex-center font-sub font-bold cursor-pointer 
+                ${isMobile ? (index % 2 !== 0 ? 'left-[15%]' : 'right-[15%]') : index % 2 !== 0 ? 'left-[20%]' : 'right-[20%]'}
+                `}
               style={{
-                bottom: days === 30 ? `${1 + index * 3.1}%` : days === 50 ? `${index * 1.9}%` : `${index * 0.98}%`,
-                [index % 2 !== 0 ? 'left' : 'right']: '20%',
+                bottom: !isMobile
+                  ? days === 30
+                    ? `${1 + index * 3.1}%`
+                    : days === 50
+                      ? `${index * 1.9}%`
+                      : `${index * 0.98}%`
+                  : days === 30
+                    ? `${index * 3}%`
+                    : days === 50
+                      ? `${index * 1.85}%`
+                      : `${index * 0.97}%`,
               }}
             >
-              <img src={Images.cloud} alt="구름" />
-              <p className="absolute horizontal-center">{index + 1} Day</p>
-              {!showMessage && index === currentSuccessCount && (
-                <p className="absolute bottom-[100%] text-lg text-white animate-pulse animate-textGlow">Click!</p>
-              )}
-
               {index === currentSuccessCount - 1 && (
                 <>
                   <img
                     src={Images.기본뚠뚠}
                     alt="기본뚠뚠"
-                    className={`absolute w-[50%] bottom-[75%] object-contain`}
+                    className="absolute w-[50%] bottom-[75%] object-contain z-20"
                   />
                   {showMessage && currentSuccessCount < days && (
                     <p className="absolute bottom-[210%] right-[-30%] text-center z-20">내일도 화이팅!</p>
                   )}
                 </>
+              )}
+              <img src={Images.cloud} alt="구름" />
+              <p className="absolute horizontal-center">{index + 1} Day</p>
+              {!showMessage && index === currentSuccessCount && (
+                <p className="absolute bottom-[100%] text-lg text-white animate-textGlow">Click!</p>
               )}
             </div>
           ))}
@@ -162,5 +177,3 @@ function Trip() {
     </div>
   );
 }
-
-export default Trip;

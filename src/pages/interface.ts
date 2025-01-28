@@ -5,18 +5,15 @@ export interface PositionProps {
 }
 
 export interface ResultProps {
-  result: 'success' | 'fail' | 'progress';
-  index?: number;
+  result: string;
 }
 
 export interface ChallengeProps {
-  idx?: number;
+  idx: number;
   title: string;
   memo: string;
   day: number;
-  result: 'success' | 'fail' | 'progress';
-  index?: number;
-  successCheck: boolean;
+  result: string;
 }
 
 export interface NewChallengeProps {
