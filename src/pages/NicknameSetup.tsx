@@ -3,7 +3,7 @@ import useInputStore from '@/store/useInputStore';
 import Input from '@/shared/components/atoms/Input';
 import Button from '@/shared/components/atoms/Button';
 
-function NicknameSetup() {
+export default function NicknameSetup() {
   const { inputs } = useInputStore();
   const navigate = useNavigate();
 
@@ -33,5 +33,3 @@ function NicknameSetup() {
     </div>
   );
 }
-
-export default NicknameSetup;

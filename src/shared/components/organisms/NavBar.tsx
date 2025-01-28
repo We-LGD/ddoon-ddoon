@@ -3,7 +3,7 @@ import { TiFlowMerge, TiMap } from 'react-icons/ti';
 import { PiMedalBold } from 'react-icons/pi';
 import NavItem from '@/shared/components/atoms/NavItem';
 
-function NavBar() {
+export default function NavBar() {
   const location = useLocation();
 
   const navItemList = [
@@ -26,5 +26,3 @@ function NavBar() {
     </nav>
   );
 }
-
-export default NavBar;

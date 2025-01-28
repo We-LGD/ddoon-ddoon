@@ -1,4 +1,4 @@
-function NotFoundPage() {
+export default function NotFoundPage() {
   return (
     <div className="flex-center h-full text-center">
       <div>
@@ -8,5 +8,3 @@ function NotFoundPage() {
     </div>
   );
 }
-
-export default NotFoundPage;

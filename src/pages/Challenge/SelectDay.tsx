@@ -1,7 +1,7 @@
 import useNewChallengeStore from '@/store/useNewChallengeStore';
 import useSelectDayStore from '@/store/useSelectDayStore';
 
-function SelectDay() {
+export default function SelectDay() {
   const { setNewChallenge } = useNewChallengeStore();
   const { select, setSelect } = useSelectDayStore();
 
@@ -29,5 +29,3 @@ function SelectDay() {
     </div>
   );
 }
-
-export default SelectDay;

@@ -3,7 +3,7 @@ import { IoChatbubble } from 'react-icons/io5';
 import { Images } from '@/shared/assets/images';
 import Modal from '@/shared/components/organisms/Modal';
 
-const SnsButton = ({ type }: { type: 'kakao' | 'github' }) => {
+export default function SnsButton({ type }: { type: 'kakao' | 'github' }) {
   return (
     <>
       {type === 'kakao' ? (
@@ -26,6 +26,4 @@ const SnsButton = ({ type }: { type: 'kakao' | 'github' }) => {
       ) : null}
     </>
   );
-};
-
-export default SnsButton;
+}

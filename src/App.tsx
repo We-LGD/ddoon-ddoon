@@ -14,7 +14,7 @@ import Trip from '@/pages/Trip';
 import NotFound from '@pages/NotFound';
 import Loading from '@pages/Loading';
 
-function App() {
+export default function App() {
   const checkMobile = useMobileStore((state) => state.checkMobile);
 
   useEffect(() => {
@@ -94,5 +94,3 @@ function App() {
     </Router>
   );
 }
-
-export default App;

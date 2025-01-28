@@ -1,7 +1,7 @@
 import { isMobile } from 'react-device-detect';
 import { ButtonProps } from '@/shared/interface/atomsType';
 
-function Button({ theme, children, cancel, event, type = 'button', disabled }: ButtonProps) {
+export default function Button({ theme, children, cancel, event, type = 'button', disabled }: ButtonProps) {
   return (
     <button
       onClick={event}
@@ -18,5 +18,3 @@ function Button({ theme, children, cancel, event, type = 'button', disabled }: B
     </button>
   );
 }
-
-export default Button;
