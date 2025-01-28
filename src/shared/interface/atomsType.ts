@@ -20,7 +20,7 @@ export interface InputProps extends themeProps {
   maxLength: number;
 }
 
-export interface TitleProps {
+export interface ChildrenProps {
   children: React.ReactNode;
 }
 
