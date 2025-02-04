@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
+import { FirebaseError } from 'firebase/app';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import useInputStore from '@/store/useInputStore';
 import Modal from '@/shared/components/organisms/Modal';
 import Button from '@/shared/components/atoms/Button';
 import Input from '@/shared/components/atoms/Input';
 import Title from '@/shared/components/atoms/Title';
-import { isValidId, isValidPassword } from '@/utils/validation';
+import { auth } from '@/utils/firebase';
+import { isValidPassword } from '@/utils/validation';
 
 export default function SignUp() {
   const navigate = useNavigate();
   const { inputs, resetInputs } = useInputStore();
-  const { id, password, passwordCheck } = inputs;
+  const { email, password, passwordCheck } = inputs;
   const [disabledBtn, setDisabledBtn] = useState(true);
 
   const handleKeyDown = (event: KeyboardEvent) => {
@@ -20,17 +23,45 @@ export default function SignUp() {
     }
   };
 
-  const handleClick = () => {
-    if (id && password && passwordCheck) {
-      console.log(id, password, passwordCheck); //TODO: 데이터 확인 용, 백엔드 작업 후 삭제 예정
-      Modal({ icon: 'success', title: '회원가입이 완료되었습니다.', desc: '로그인을 해주세요.', buttonTitle: '확인' });
-      resetInputs();
-      navigate('/');
+  const handleClick = async () => {
+    if (email && password && passwordCheck) {
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        // 자동 로그아웃 방지
+        await auth.signOut();
+
+        Modal({
+          icon: 'success',
+          title: '회원가입이 완료되었습니다.',
+          desc: '로그인을 해주세요.',
+          buttonTitle: '확인',
+        });
+        resetInputs();
+        navigate('/');
+      } catch (error: unknown) {
+        if (error instanceof FirebaseError) {
+          let errorMessage = '회원가입에 실패했습니다. 다시 시도해주세요.';
+          if (error.code === 'auth/email-already-in-use') {
+            errorMessage = '이미 사용 중인 이메일입니다.';
+          } else if (error.code === 'auth/invalid-email') {
+            errorMessage = '유효하지 않은 이메일 형식입니다.';
+          }
+
+          Modal({
+            icon: 'error',
+            title: '회원가입 실패',
+            desc: errorMessage,
+            buttonTitle: '확인',
+          });
+        }
+      }
+    } else {
+      return;
     }
   };
 
   useEffect(() => {
-    if (id && password && passwordCheck && isValidId(id) && isValidPassword(password) && password === passwordCheck) {
+    if (email && password && passwordCheck && isValidPassword(password) && password === passwordCheck) {
       setDisabledBtn(false);
       window.addEventListener('keydown', handleKeyDown);
 
@@ -42,7 +73,7 @@ export default function SignUp() {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, password, passwordCheck]);
+  }, [email, password, passwordCheck]);
 
   return (
     <div className="flex flex-col justify-center items-center h-full">
@@ -50,10 +81,7 @@ export default function SignUp() {
 
       <div className={`flex flex-col gap-3 ${isMobile ? 'w-full p-5' : null}`}>
         <div>
-          <Input theme="auth" name="id" placeholder="아이디 입력" maxLength={20} />
-          {id && !isValidId(id) && (
-            <p className="mt-1 text-[#ff4949]">4-20자, 최소 하나의 영문자가 포함되도록 작성해주세요.</p>
-          )}
+          <Input theme="auth" name="email" placeholder="이메일 입력" maxLength={20} />
         </div>
         <div>
           <Input theme="auth" type="password" name="password" placeholder="비밀번호 입력" maxLength={20} />
