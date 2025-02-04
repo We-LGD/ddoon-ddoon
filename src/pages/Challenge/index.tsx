@@ -8,6 +8,7 @@ import Title from '@/shared/components/atoms/Title';
 import ChallengeBox from '@/pages/Challenge/ChallengeBox';
 import AddBtn from '@/pages/Challenge/AddBtn';
 import AddModal from '@/pages/Challenge/AddModal';
+import { auth } from '@/utils/firebase';
 
 export default function Challenge() {
   const navigate = useNavigate();
@@ -38,6 +39,7 @@ export default function Challenge() {
   const handleLogout = () => {
     navigate('/');
     localStorage.setItem('isLoggedIn', 'false');
+    auth.signOut();
     resetInputs();
   };
 
