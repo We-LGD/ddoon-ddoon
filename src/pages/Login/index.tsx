@@ -1,28 +1,35 @@
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { FirebaseError } from 'firebase/app';
 import { Images } from '@/shared/assets/images';
 import useInputStore from '@/store/useInputStore';
 import Modal from '@/shared/components/organisms/Modal';
 import Input from '@/shared/components/atoms/Input';
 import Button from '@/shared/components/atoms/Button';
 import SnsButton from '@/shared/components/atoms/SnsButton';
+import { auth } from '@/utils/firebase';
 
 export default function Login() {
   const navigate = useNavigate();
   const { inputs, resetInputs } = useInputStore();
-  const { id, password } = inputs;
+  const { email, password } = inputs;
 
-  const handleLoginBtnClick = () => {
-    // TODO: 백엔드 연결 후 제거
+  const handleLoginBtnClick = async () => {
     // TODO: 튜토리얼 완료 여부 저장
     // - 튜토리얼 미 완료 시 navigate('/tutorial')
     // - 튜토리얼 완료 시 navigate('/challenge')
 
-    if (id && password) {
-      navigate('/challenge');
-      localStorage.setItem('isLoggedIn', 'true');
-      console.log(`로그인 버튼 클릭 : id: ${id} / password: ${password}`);
+    if (email && password) {
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        navigate('/challenge');
+      } catch (error: unknown) {
+        if (error instanceof FirebaseError) {
+          Modal({ icon: 'info', title: '아이디와 비밀번호를 확인해주세요.', buttonTitle: '확인' });
+        }
+      }
     } else {
       Modal({ icon: 'info', title: '아이디와 비밀번호를 확인해주세요.', buttonTitle: '확인' });
     }
@@ -41,14 +48,14 @@ export default function Login() {
       window.removeEventListener('keydown', handleKeyDown);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, password]);
+  }, [email, password]);
 
   return (
     <div className="flex flex-col items-center justify-center h-full">
       <img src={Images.뚠뚠로고} alt="뚠뚠로고" className=" w-48 mb-[1rem]" />
 
       <section className={`flex flex-col items-center justify-center gap-3 mb-8 ${isMobile ? 'w-full' : null}`}>
-        <Input theme="auth" placeholder="아이디 입력" name="id" maxLength={20} />
+        <Input theme="auth" placeholder="이메일 입력" name="email" maxLength={20} />
         <Input theme="auth" type="password" placeholder="비밀번호 입력" name="password" maxLength={64} />
         <Button theme="auth" event={handleLoginBtnClick}>
           로그인
