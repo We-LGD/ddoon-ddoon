@@ -8,7 +8,8 @@ import useInputStore from '@/store/useInputStore';
 import Modal from '@/shared/components/organisms/Modal';
 import Input from '@/shared/components/atoms/Input';
 import Button from '@/shared/components/atoms/Button';
-import SnsButton from '@/shared/components/atoms/SnsButton';
+import GithubLoginButton from '@/shared/components/atoms/GithubLoginButton';
+import KakaoLoginButton from '@/shared/components/atoms/KakaoLoginButton';
 import { auth } from '@/utils/firebase';
 
 export default function Login() {
@@ -82,8 +83,8 @@ export default function Login() {
           <span className="whitespace-nowrap mx-2 text-[0.75rem] text-center text-disabledHover">SNS로 시작하기</span>
           <hr className="border-t-2 flex-grow border-gray-300" />
         </div>
-        <SnsButton type="kakao" />
-        <SnsButton type="github" />
+        <KakaoLoginButton />
+        <GithubLoginButton />
       </section>
     </div>
   );
