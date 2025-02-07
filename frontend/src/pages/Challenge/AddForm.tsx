@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import useInputStore from '@/store/useInputStore';
-import useSelectDayStore from '@/store/useSelectDayStore';
-import useNewChallengeStore from '@/store/useNewChallengeStore';
+import useInputStore from '@/shared/store/useInputStore';
+import useSelectDayStore from '@/shared/store/useSelectDayStore';
+import useNewChallengeStore from '@/shared/store/useNewChallengeStore';
 import Button from '@/shared/components/atoms/Button';
 import Input from '@/shared/components/atoms/Input';
 import SelectDay from '@/pages/Challenge/SelectDay';

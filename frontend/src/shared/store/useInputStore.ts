@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { InputStore } from '@store/storeType';
+import { InputStore } from '@/shared/store/storeType';
 
 const useInputStore = create<InputStore>((set) => ({
   inputs: {},

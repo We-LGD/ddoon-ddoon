@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import Modal from '@/shared/components/organisms/Modal';
-import { auth } from '@/utils/firebase';
+import { auth } from '@/shared/utils/firebase';
 
 export default function ProtectedRoute({ children }: { children: JSX.Element }) {
   const isGuestLoggedIn = localStorage.getItem('isLoggedIn') === 'true';

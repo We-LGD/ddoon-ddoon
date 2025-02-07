@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import useInputStore from '@/store/useInputStore';
+import useInputStore from '@/shared/store/useInputStore';
 import Input from '@/shared/components/atoms/Input';
 import Button from '@/shared/components/atoms/Button';
 

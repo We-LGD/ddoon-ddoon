@@ -7,7 +7,7 @@ import Modal from '@/shared/components/organisms/Modal';
 import SuccessCheckModal from '@/pages/Trip/SuccessCheckModal';
 import RetryCheckModal from '@/pages/Trip/RetryCheckModal';
 import WoodSign from '@/pages/Trip/WoodSign';
-import getTodayDate from '@/utils/getTodayDate';
+import getTodayDate from '@/shared/utils/getTodayDate';
 
 export default function Trip() {
   const containerRef = useRef<HTMLDivElement | null>(null);

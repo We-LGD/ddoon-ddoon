@@ -1,5 +1,5 @@
-import useNewChallengeStore from '@/store/useNewChallengeStore';
-import useSelectDayStore from '@/store/useSelectDayStore';
+import useNewChallengeStore from '@/shared/store/useNewChallengeStore';
+import useSelectDayStore from '@/shared/store/useSelectDayStore';
 
 export default function SelectDay() {
   const { setNewChallenge } = useNewChallengeStore();
