@@ -4,11 +4,11 @@
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"],
-      "@utils/*": ["src/utils/*"],
+      "@utils/*": ["src/shared/utils/*"],
       "@features/*": ["src/features/*"],
       "@pages/*": ["src/pages/*"],
       "@shared/*": ["src/shared/*"],
-      "@store/*": ["src/store/*"]
+      "@store/*": ["src/shared/store/*"]
     },
     "target": "ES2020",
     "useDefineForClassFields": true,

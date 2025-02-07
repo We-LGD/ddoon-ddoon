@@ -1,6 +1,6 @@
 import React from 'react';
 import { isMobile } from 'react-device-detect';
-import useInputStore from '@/store/useInputStore';
+import useInputStore from '@/shared/store/useInputStore';
 import { InputProps } from '@/shared/interface/atomsType';
 
 export default function Input({ theme, type = 'text', title, placeholder, name, description, maxLength }: InputProps) {

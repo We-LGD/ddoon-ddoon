@@ -4,13 +4,13 @@ import { isMobile } from 'react-device-detect';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { FirebaseError } from 'firebase/app';
 import { Images } from '@/shared/assets/images';
-import useInputStore from '@/store/useInputStore';
+import useInputStore from '@/shared/store/useInputStore';
 import Modal from '@/shared/components/organisms/Modal';
 import Input from '@/shared/components/atoms/Input';
 import Button from '@/shared/components/atoms/Button';
 import GithubLoginButton from '@/shared/components/atoms/GithubLoginButton';
 import KakaoLoginButton from '@/shared/components/atoms/KakaoLoginButton';
-import { auth } from '@/utils/firebase';
+import { auth } from '@/shared/utils/firebase';
 
 export default function Login() {
   const navigate = useNavigate();

@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 import { FirebaseError } from 'firebase/app';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import useInputStore from '@/store/useInputStore';
+import useInputStore from '@/shared/store/useInputStore';
 import Modal from '@/shared/components/organisms/Modal';
 import Button from '@/shared/components/atoms/Button';
 import Input from '@/shared/components/atoms/Input';
 import Title from '@/shared/components/atoms/Title';
-import { auth } from '@/utils/firebase';
-import { isValidPassword } from '@/utils/validation';
+import { auth } from '@/shared/utils/firebase';
+import { isValidPassword } from '@/shared/utils/validation';
 
 export default function SignUp() {
   const navigate = useNavigate();

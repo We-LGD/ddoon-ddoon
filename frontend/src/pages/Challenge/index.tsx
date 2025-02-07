@@ -1,14 +1,14 @@
 import { useNavigate } from 'react-router-dom';
-import useInputStore from '@/store/useInputStore';
-import useSelectDayStore from '@/store/useSelectDayStore';
-import useNewChallengeStore from '@/store/useNewChallengeStore';
+import useInputStore from '@/shared/store/useInputStore';
+import useSelectDayStore from '@/shared/store/useSelectDayStore';
+import useNewChallengeStore from '@/shared/store/useNewChallengeStore';
 import ChallengesData from '@/shared/data/ChallengesData';
 import Modal from '@/shared/components/organisms/Modal';
 import Title from '@/shared/components/atoms/Title';
 import ChallengeBox from '@/pages/Challenge/ChallengeBox';
 import AddBtn from '@/pages/Challenge/AddBtn';
 import AddModal from '@/pages/Challenge/AddModal';
-import { auth } from '@/utils/firebase';
+import { auth } from '@/shared/utils/firebase';
 
 export default function Challenge() {
   const navigate = useNavigate();

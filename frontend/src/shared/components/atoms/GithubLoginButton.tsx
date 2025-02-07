@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 import { GithubAuthProvider, signInWithPopup } from 'firebase/auth';
 import { Images } from '@/shared/assets/images';
-import { auth } from '@/utils/firebase';
+import { auth } from '@/shared/utils/firebase';
 
 export default function GithubLoginButton() {
   const navigate = useNavigate();
