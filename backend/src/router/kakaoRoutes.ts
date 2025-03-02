@@ -7,7 +7,6 @@ import qs from "qs";
 dotenv.config();
 
 export const kakaoRouter = express.Router();
-
 const usedCodes = new Set<string>();
 
 const kakao = {
@@ -61,12 +60,15 @@ const handleKakaoAuth: RequestHandler = async (req, res, next) => {
       provider: "kakao",
     };
 
-    // 4. 프론트엔드로 응답
-    res.json({
-      token: token.data.access_token,
-      userId: userData.id,
-      userData: userData,
+    // ✅ HTTP-Only 쿠키로 액세스 토큰 저장
+    res.cookie("token", token.data.access_token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7일 유지
     });
+
+    res.json({ userData });
   } catch (error: any) {
     console.error("Kakao login error:", error);
     if (error.response?.data?.error === "invalid_grant") {
@@ -82,4 +84,15 @@ const handleKakaoAuth: RequestHandler = async (req, res, next) => {
   }
 };
 
-kakaoRouter.post("/auth/kakao", handleKakaoAuth);
+const logout: RequestHandler = (req, res) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: false, 
+    sameSite: "lax", 
+    maxAge: 7 * 24 * 60 * 60 * 1000, 
+  });
+  res.json({ message: "Logged out successfully", isAuthenticated: false });
+};
+
+kakaoRouter.post("/logout", logout);
+kakaoRouter.post("/kakao", handleKakaoAuth);
