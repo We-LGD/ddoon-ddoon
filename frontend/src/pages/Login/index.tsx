@@ -16,6 +16,9 @@ export default function Login() {
   const navigate = useNavigate();
   const { inputs, resetInputs } = useInputStore();
   const { email, password } = inputs;
+  const isGuestLoggedIn = localStorage.getItem('isLoggedIn');
+  const isKaKaoLoggedIn = localStorage.getItem('isKaKaoLoggedIn');
+  const isEmailLoggedIn = !!auth.currentUser;
 
   const handleLoginBtnClick = async () => {
     // TODO: 튜토리얼 완료 여부 저장
@@ -50,6 +53,22 @@ export default function Login() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [email, password]);
+
+  useEffect(() => {
+    if (isKaKaoLoggedIn || isEmailLoggedIn) {
+      navigate('/challenge', { replace: true });
+    }
+
+    if (isGuestLoggedIn) {
+      // TODO: 닉네임 설정 완료 여부 저장 (BE에서 처리)
+      // - 닉네임 설정 완료 시 navigate('/tutorial')
+      // TODO: 튜토리얼 완료 여부 저장 (BE에서 처리)
+      // - 튜토리얼 미 완료 시 navigate('/tutorial')
+      // - 튜토리얼 완료 시 navigate('/challenge')
+      navigate('/nickname-setup', { replace: true });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center h-full">
