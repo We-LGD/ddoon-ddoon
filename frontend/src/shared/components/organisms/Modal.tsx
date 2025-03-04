@@ -2,18 +2,9 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import Title from '@/shared/components/atoms/Title';
 import Button from '@/shared/components/atoms/Button';
+import { ModalProps } from '@/shared/interface/organisms';
 
-export default async function Modal({
-  icon,
-  title,
-  desc,
-  buttonTitle,
-}: {
-  icon?: 'error' | 'info' | 'question' | 'success' | 'warning';
-  title?: string;
-  desc?: string;
-  buttonTitle: string;
-}) {
+export default async function Modal({ icon, title, desc, buttonTitle }: ModalProps) {
   const ReactSwal = withReactContent(Swal);
 
   await ReactSwal.fire({
