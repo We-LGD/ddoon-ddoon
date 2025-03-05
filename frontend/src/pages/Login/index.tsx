@@ -3,32 +3,32 @@ import { Link, useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { FirebaseError } from 'firebase/app';
+import useCheckUserNickname from '@/shared/hook/useCheckUserNickname';
+import saveUserToFirestore from '@/shared/utils/saveUserToFirestore';
 import { Images } from '@/shared/assets/images';
 import useInputStore from '@/shared/store/useInputStore';
 import Modal from '@/shared/components/organisms/Modal';
 import Input from '@/shared/components/atoms/Input';
 import Button from '@/shared/components/atoms/Button';
-import GithubLoginButton from '@/shared/components/atoms/GithubLoginButton';
-import KakaoLoginButton from '@/shared/components/atoms/KakaoLoginButton';
+import GithubLoginButton from '@/pages/Login/GithubLoginButton';
+import KakaoLoginButton from '@/pages/Login/KakaoLoginButton';
 import { auth } from '@/shared/utils/firebase';
 
 export default function Login() {
   const navigate = useNavigate();
   const { inputs, resetInputs } = useInputStore();
+  const { checkUserNickname } = useCheckUserNickname();
   const { email, password } = inputs;
   const isGuestLoggedIn = localStorage.getItem('isLoggedIn');
   const isKaKaoLoggedIn = localStorage.getItem('isKaKaoLoggedIn');
   const isEmailLoggedIn = !!auth.currentUser;
 
   const handleLoginBtnClick = async () => {
-    // TODO: 튜토리얼 완료 여부 저장
-    // - 튜토리얼 미 완료 시 navigate('/tutorial')
-    // - 튜토리얼 완료 시 navigate('/challenge')
-
     if (email && password) {
       try {
         await signInWithEmailAndPassword(auth, email, password);
-        navigate('/challenge');
+        await saveUserToFirestore();
+        await checkUserNickname();
       } catch (error: unknown) {
         if (error instanceof FirebaseError) {
           Modal({ icon: 'info', title: '아이디와 비밀번호를 확인해주세요.', buttonTitle: '확인' });

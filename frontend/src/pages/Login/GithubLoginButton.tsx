@@ -1,17 +1,19 @@
-import { useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 import { GithubAuthProvider, signInWithPopup } from 'firebase/auth';
 import { Images } from '@/shared/assets/images';
 import { auth } from '@/shared/utils/firebase';
+import useCheckUserNickname from '@/shared/hook/useCheckUserNickname';
+import saveUserToFirestore from '@/shared/utils/saveUserToFirestore';
 
 export default function GithubLoginButton() {
-  const navigate = useNavigate();
+  const { checkUserNickname } = useCheckUserNickname();
+
   const handleGithubLoginClick = async () => {
     try {
       const provider = new GithubAuthProvider();
       await signInWithPopup(auth, provider);
-
-      navigate('/tutorial');
+      await saveUserToFirestore();
+      await checkUserNickname();
     } catch (error) {
       console.error(error);
     }
