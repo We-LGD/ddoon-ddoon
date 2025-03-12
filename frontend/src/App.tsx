@@ -1,6 +1,7 @@
 import { Suspense, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useMobileStore } from '@/shared/store/useMobileStore';
+import { auth } from '@/shared/utils/firebase';
 import ProtectedRoute from '@/shared/Route/ProtectedRoute';
 import Layout from '@/shared/components/templates/Layout';
 import Login from '@/pages/Login';
@@ -12,7 +13,6 @@ import Challenge from '@/pages/Challenge';
 import Trip from '@/pages/Trip';
 import NotFound from '@/pages/NotFound';
 import Loading from '@/pages/Loading';
-import { auth } from '@/shared/utils/firebase';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);

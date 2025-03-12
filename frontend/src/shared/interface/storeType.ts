@@ -18,6 +18,6 @@ export interface NewChallengeStore {
 }
 
 export interface SelectDayProps {
-  select: null | string;
-  setSelect: (day: string | null) => void;
+  select: null | string | number;
+  setSelect: (day: string | number | null) => void;
 }

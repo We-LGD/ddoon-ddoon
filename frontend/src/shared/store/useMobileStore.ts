@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { MobileState } from '@/shared/store/storeType';
+import { MobileState } from '@/shared/interface/storeType';
 
 export const useMobileStore = create<MobileState>((set) => ({
   isMobile: window.innerWidth < 768,
