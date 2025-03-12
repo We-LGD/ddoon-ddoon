@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useFirebaseToken from '@/shared/hook/useFirebaseToken';
 import useInputStore from '@/shared/store/useInputStore';
+import useChallengeStore from '@/shared/store/useChallengeStore';
 import useSelectDayStore from '@/shared/store/useSelectDayStore';
 import Modal from '@/shared/components/organisms/Modal';
 import Title from '@/shared/components/atoms/Title';
@@ -8,8 +10,6 @@ import ChallengeBox from '@/pages/Challenge/ChallengeBox';
 import AddBtn from '@/pages/Challenge/AddBtn';
 import AddModal from '@/pages/Challenge/AddModal';
 import logout from '@/shared/utils/logout';
-import useFirebaseToken from '@/shared/hook/useFirebaseToken';
-import useChallengeStore from '@/shared/store/useChallengeStore';
 
 export default function Challenge() {
   const navigate = useNavigate();
