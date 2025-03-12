@@ -3,6 +3,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import { kakaoRouter } from "./router/kakaoRoutes";
 import authRouter from "./router/auth";
+import challengeRoutes from "./router/challenge";
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(
     allowedHeaders: "Content-Type, Authorization",
   })
 );
+app.use(challengeRoutes);
 app.use("/auth", kakaoRouter);
 app.use("/api", authRouter);
 
