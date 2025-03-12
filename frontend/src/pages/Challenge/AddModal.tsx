@@ -5,9 +5,11 @@ import AddForm from '@/pages/Challenge/AddForm';
 export default function AddModal({
   outsideClick,
   allowEscapKey,
+  onClose,
 }: {
   outsideClick: () => boolean;
   allowEscapKey: () => boolean;
+  onClose: () => void;
 }) {
   const ReactSwal = withReactContent(Swal);
   ReactSwal.fire({
@@ -19,5 +21,9 @@ export default function AddModal({
     customClass: {
       popup: 'w-full max-w-[31.125rem] h-auto px-2 font-default text-sm flex justify-center',
     },
+  }).then((result) => {
+    if (result.isDismissed) {
+      onClose();
+    }
   });
 }
