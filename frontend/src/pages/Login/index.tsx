@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
+import axios from 'axios';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { FirebaseError } from 'firebase/app';
 import useCheckUserNickname from '@/shared/hook/useCheckUserNickname';
@@ -26,9 +27,26 @@ export default function Login() {
   const handleLoginBtnClick = async () => {
     if (email && password) {
       try {
-        await signInWithEmailAndPassword(auth, email, password);
-        await saveUserToFirestore();
-        await checkUserNickname();
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        if (user) {
+          const idToken = await user.getIdToken();
+
+          await axios.post(
+            'http://localhost:3000/api/auth',
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${idToken}`,
+              },
+              withCredentials: true,
+            },
+          );
+
+          await saveUserToFirestore();
+          await checkUserNickname();
+        }
       } catch (error: unknown) {
         if (error instanceof FirebaseError) {
           Modal({ icon: 'info', title: '아이디와 비밀번호를 확인해주세요.', buttonTitle: '확인' });
