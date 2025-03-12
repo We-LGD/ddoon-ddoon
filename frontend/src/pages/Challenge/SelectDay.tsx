@@ -1,13 +1,10 @@
-import useNewChallengeStore from '@/shared/store/useNewChallengeStore';
 import useSelectDayStore from '@/shared/store/useSelectDayStore';
 
 export default function SelectDay() {
-  const { setNewChallenge } = useNewChallengeStore();
   const { select, setSelect } = useSelectDayStore();
 
   const handleSelectDay = (v: string) => {
-    setSelect(v);
-    setNewChallenge({ day: Number(v.slice(0, -1)) });
+    setSelect(Number(v.slice(0, -1)));
   };
 
   return (
@@ -19,7 +16,7 @@ export default function SelectDay() {
             type="button"
             onClick={() => handleSelectDay(v)}
             className={`w-full max-w-[5.75rem] h-[3.125rem] rounded-[0.25rem] ${
-              select === v ? 'bg-black text-white' : 'text-input bg-white border border-input'
+              select === Number(v.slice(0, -1)) ? 'bg-black text-white' : 'text-input bg-white border border-input'
             }`}
           >
             {v}

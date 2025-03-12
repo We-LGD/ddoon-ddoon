@@ -5,15 +5,21 @@ export interface PositionProps {
 }
 
 export interface ResultProps {
+  idx: number;
   result: string;
 }
 
-export interface ChallengeProps {
+export interface ChallengeBoxProps {
   idx: number;
   title: string;
   memo: string;
-  day: number;
-  result: string;
+  days: number;
+  result: 'success' | 'progress' | 'fail';
+}
+
+export interface ChallengeProps extends ChallengeBoxProps {
+  successCount: number;
+  lastSuccessDate: string;
 }
 
 export interface NewChallengeProps {
