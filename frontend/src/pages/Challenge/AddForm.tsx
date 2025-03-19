@@ -3,6 +3,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import useFirebaseToken from '@/shared/hook/useFirebaseToken';
+import useChallengeStore from '@/shared/store/useChallengeStore';
 import useInputStore from '@/shared/store/useInputStore';
 import useSelectDayStore from '@/shared/store/useSelectDayStore';
 import Button from '@/shared/components/atoms/Button';
@@ -12,6 +13,7 @@ import SelectDay from '@/pages/Challenge/SelectDay';
 export default function AddForm() {
   const MySwal = withReactContent(Swal);
   const userToken = useFirebaseToken();
+  const { getChallengeList } = useChallengeStore();
   const [disabledBtn, setDisabledBtn] = useState(true);
   const { inputs, resetInputs } = useInputStore();
   const { select, setSelect } = useSelectDayStore();
@@ -34,6 +36,8 @@ export default function AddForm() {
             },
           },
         );
+
+        if (userToken) await getChallengeList(userToken);
       } catch (error) {
         console.error('Error fetching challenges:', error);
       }

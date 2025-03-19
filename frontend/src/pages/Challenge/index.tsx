@@ -31,11 +31,6 @@ export default function Challenge() {
           setSelect(null);
           return true;
         },
-        onClose: () => {
-          if (userToken) {
-            getChallengeList(userToken);
-          }
-        },
       });
       resetInputs();
     }
