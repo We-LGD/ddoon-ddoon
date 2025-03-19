@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useFirebaseToken from '@/shared/hook/useFirebaseToken';
 import useInputStore from '@/shared/store/useInputStore';
 import useChallengeStore from '@/shared/store/useChallengeStore';
 import useSelectDayStore from '@/shared/store/useSelectDayStore';
@@ -15,7 +14,6 @@ export default function Challenge() {
   const navigate = useNavigate();
   const { resetInputs } = useInputStore();
   const { setSelect } = useSelectDayStore();
-  const userToken = useFirebaseToken();
   const { challengeList, getChallengeList } = useChallengeStore();
 
   const handleChallengeAddModal = () => {
@@ -43,11 +41,10 @@ export default function Challenge() {
   };
 
   useEffect(() => {
-    if (userToken) {
-      getChallengeList(userToken);
-    }
+    getChallengeList();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userToken]);
+  }, []);
 
   return (
     <div className="flex flex-col items-center relative pb-[4.375rem] px-10 max-h-screen">
