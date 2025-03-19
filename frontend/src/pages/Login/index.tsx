@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { FirebaseError } from 'firebase/app';
 import useCheckUserNickname from '@/shared/hook/useCheckUserNickname';
@@ -32,6 +33,8 @@ export default function Login() {
 
         if (user) {
           const idToken = await user.getIdToken();
+
+          Cookies.set('userToken', idToken, { expires: 1, secure: true, sameSite: 'Strict' });
 
           await axios.post(
             'http://localhost:3000/api/auth',

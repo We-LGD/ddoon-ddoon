@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import { isMobile } from 'react-device-detect';
 import { GithubAuthProvider, signInWithPopup } from 'firebase/auth';
 import { Images } from '@/shared/assets/images';
@@ -11,9 +12,17 @@ export default function GithubLoginButton() {
   const handleGithubLoginClick = async () => {
     try {
       const provider = new GithubAuthProvider();
-      await signInWithPopup(auth, provider);
-      await saveUserToFirestore();
-      await checkUserNickname();
+      const userCredential = await signInWithPopup(auth, provider);
+      const user = userCredential.user;
+
+      if (user) {
+        const idToken = await user.getIdToken();
+
+        Cookies.set('userToken', idToken, { expires: 1, secure: true, sameSite: 'Strict' });
+
+        await saveUserToFirestore();
+        await checkUserNickname();
+      }
     } catch (error) {
       console.error(error);
     }

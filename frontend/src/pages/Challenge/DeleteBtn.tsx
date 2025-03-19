@@ -1,24 +1,17 @@
-import axios from 'axios';
 import Swal from 'sweetalert2';
-import useFirebaseToken from '@/shared/hook/useFirebaseToken';
+import axiosInstance from '@/shared/utils/axios';
 import useChallengeStore from '@/shared/store/useChallengeStore';
 import DeleteModal from '@/pages/Challenge/DeleteModal';
 import { ResultProps } from '@/pages/interface';
 
 export default function DeleteBtn({ idx, result }: ResultProps) {
-  const userToken = useFirebaseToken();
   const { getChallengeList } = useChallengeStore();
 
   const handleDelete = () => {
     const deleteChallenge = async () => {
       try {
-        await axios.delete(`http://localhost:3000/challenge/${idx}`, {
-          headers: {
-            Authorization: `Bearer ${userToken}`,
-            'Content-Type': 'application/json',
-          },
-        });
-        if (userToken) await getChallengeList(userToken);
+        await axiosInstance.delete(`http://localhost:3000/challenge/${idx}`);
+        await getChallengeList();
       } catch (error) {
         console.error('Error fetching challenges:', error);
       }
