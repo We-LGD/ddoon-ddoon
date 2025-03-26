@@ -1,6 +1,7 @@
 import 첫번째굴30일 from '@shared/assets/images/1번굴_운동30일.png';
 import 첫번째굴50일 from '@shared/assets/images/1번굴_운동50일.png';
 import 첫번째굴100일 from '@shared/assets/images/1번굴_운동100일.png';
+import 준비중이미지 from '@shared/assets/images/준비중이미지.png';
 import 구름맵30일 from '@shared/assets/images/30일_구름맵.png';
 import 구름맵50일 from '@shared/assets/images/50일_구름맵.png';
 import 구름맵100일 from '@shared/assets/images/100일_구름맵.png';
@@ -48,4 +49,7 @@ export const Images = {
   실패방,
   통나무,
   튜토리얼오픈,
+  준비중이미지,
 } as const;
+
+export const getImageSrc = (key: keyof typeof Images) => Images[key] || Images.준비중이미지;
