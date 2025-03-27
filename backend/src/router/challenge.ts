@@ -151,6 +151,75 @@ router.get(
 );
 
 /**
+ * [PATCH] 챌린지 상태 업데이트
+ * 챌린지의 성공 횟수와 마지막 성공 날짜를 업데이트
+ */
+router.patch(
+  "/challenge/:idx",
+  verifyToken,
+  async (req: Request, res: Response) => {
+    try {
+      const { idx } = req.params;
+      const { successCount, lastSuccessDate } = req.body;
+
+      const challengeRef = db.collection("challenges").doc(idx);
+      const challengeDoc = await challengeRef.get();
+      const challengeData = challengeDoc.data();
+
+      // challengeData가 존재하지 않으면 404 에러 반환
+      if (!challengeData) {
+        res.status(404).send("Challenge not found");
+        return;
+      }
+
+      const result =
+        challengeData?.days === successCount
+          ? "success"
+          : challengeData?.result;
+
+      await challengeRef.update({
+        successCount,
+        lastSuccessDate,
+        result,
+      });
+
+      // result가 "success"일 때 goolList 업데이트
+      if (result === "success") {
+        const userId = (req as any).user.uid;
+        const goolRef = db.collection("goolList").doc(idx);
+        const goolDoc = await goolRef.get();
+
+        if (!goolDoc.exists) {
+          await goolRef.set({
+            userId,
+            idx,
+            result: "success",
+            title: challengeData.title,
+            days: challengeData.days,
+            isClicked: challengeData.isClicked,
+            createdAt: new Date(),
+          });
+        } else {
+          await goolRef.update({
+            result: "success",
+          });
+        }
+      }
+
+      if (!challengeData) {
+        res.status(500).send("Error retrieving challenge data");
+        return;
+      }
+
+      res.send("Challenge updated successfully");
+    } catch (error) {
+      console.error("Error updating challenge:", error);
+      res.status(500).send("Error updating challenge");
+    }
+  }
+);
+
+/**
  * [DELETE] 챌린지 삭제
  * 특정 챌린지와 관련된 goolList 데이터도 함께 삭제
  */
