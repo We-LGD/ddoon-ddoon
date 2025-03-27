@@ -93,6 +93,40 @@ const isAuthenticated = (
 };
 
 /**
+ * [GET] 특정 챌린지 조회
+ * 챌린지 ID로 특정 챌린지의 상세 정보를 조회
+ */
+router.get(
+  "/challenge/:idx",
+  verifyToken,
+  async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { idx } = req.params;
+
+      if (!isAuthenticated(req)) {
+        res.status(401).json({ error: "Unauthorized" });
+        return;
+      }
+
+      const doc = await db.collection("challenges").doc(idx).get();
+
+      if (!doc.exists) {
+        console.log("Challenge not found for idx:", idx);
+        res.status(404).send("Challenge not found");
+        return;
+      }
+
+      const { createdAt, userId, ...filteredData } = doc.data() as any;
+
+      res.json({ idx: doc.id, ...filteredData });
+    } catch (error) {
+      console.error("Error fetching challenge:", error);
+      res.status(500).send("Error fetching challenge");
+    }
+  }
+);
+
+/**
  * [DELETE] 챌린지 삭제
  * 특정 챌린지와 관련된 goolList 데이터도 함께 삭제
  */
