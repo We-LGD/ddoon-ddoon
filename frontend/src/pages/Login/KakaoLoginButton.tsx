@@ -3,6 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 import { IoChatbubble } from 'react-icons/io5';
 import axios, { AxiosError } from 'axios';
+import Cookies from 'js-cookie';
+import { getAuth, signInWithCustomToken } from 'firebase/auth';
 
 export default function KakaoLoginButton() {
   const navigate = useNavigate();
@@ -20,10 +22,18 @@ export default function KakaoLoginButton() {
     try {
       const response = await axios.post('http://localhost:3000/auth/kakao', { code }, { signal: controller.signal });
 
-      if (response.data) {
-        localStorage.setItem('isKaKaoLoggedIn', 'true');
-        navigate('/challenge');
-      }
+      const auth = getAuth();
+      const customToken = response.data.firebaseToken; // 서버에서 받은 Custom Token
+
+      // Firebase Custom Token을 이용해 ID Token으로 교환
+      signInWithCustomToken(auth, customToken).then((userCredential) => {
+        userCredential.user.getIdToken().then((idToken) => {
+          // ID Token을 이용해 인증 진행
+          Cookies.set('userToken', idToken, { expires: 1, secure: true, sameSite: 'Strict' });
+          localStorage.setItem('isKaKaoLoggedIn', 'true');
+          navigate('/challenge');
+        });
+      });
     } catch (error) {
       const axiosError = error as AxiosError;
       console.error('카카오 로그인 에러:', axiosError.response?.data || axiosError.message);
