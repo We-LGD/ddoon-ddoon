@@ -6,4 +6,5 @@ export interface Challenge {
   successCount: number;
   lastSuccessDate: string;
   result: "success" | "progress" | "fail";
+  isClicked: boolean;
 }

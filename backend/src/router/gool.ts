@@ -35,6 +35,31 @@ router.get(
 );
 
 /**
+ * [PATCH] 튜토리얼 성공 상태 저장
+ * 튜토리얼이 성공했는지 여부를 저장
+ */
+router.patch(
+  "/tutorial-status",
+  verifyToken,
+  async (req: Request, res: Response): Promise<void> => {
+    try {
+      const userId = (req as any).user.uid;
+      const { tutorialCompleted } = req.body;
+
+      const userRef = db.collection("users").doc(userId);
+      await userRef.update({
+        tutorialCompleted: tutorialCompleted,
+      });
+
+      res.send("Tutorial completion status updated");
+    } catch (error) {
+      console.error("Error updating tutorial status:", error);
+      res.status(500).send("Error updating tutorial status");
+    }
+  }
+);
+
+/**
  * [GET] Gool 리스트 가져오기
  */
 router.get("/gool-list", verifyToken, async (req: Request, res: Response) => {
