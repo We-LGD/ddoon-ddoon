@@ -5,6 +5,10 @@ import { verifyToken } from "../middleware/authMiddleware";
 
 const router = express.Router();
 
+/**
+ * [GET] 챌린지 목록 조회
+ * 사용자의 모든 챌린지를 가져오고, 상태를 업데이트
+ */
 router.get(
   "/challenge",
   verifyToken,
@@ -18,23 +22,33 @@ router.get(
         .orderBy("createdAt", "asc")
         .get();
 
+      const batch = db.batch();
+
       const challenges: Challenge[] = snapshot.docs.map((doc: any) => {
-        const challenge = doc.data() as Omit<Challenge, "idx">;
+        const challenge = { ...doc.data(), idx: doc.id } as Challenge;
         const lastSuccessDate = new Date(challenge.lastSuccessDate);
         const today = new Date();
         const timeDiff = today.getTime() - lastSuccessDate.getTime();
 
         // lastSuccessDate를 기준으로 24시간 이상 경과하면 fail 상태로 변경
         const result =
-          timeDiff > 24 * 60 * 60 * 1000 ? "fail" : challenge.result;
+          challenge.result === "success"
+            ? "success"
+            : timeDiff > 24 * 60 * 60 * 1000
+            ? "fail"
+            : challenge.result;
 
         return {
           ...challenge,
           idx: doc.id,
-          result: result,
+          result,
         };
       });
 
+      // 배치 커밋하여 모든 작업을 일괄 처리
+      await batch.commit();
+
+      console.log("Fetched Challenges:", challenges);
       res.json(challenges);
     } catch (error) {
       console.error("Error fetching challenges:", error);
@@ -43,6 +57,10 @@ router.get(
   }
 );
 
+/**
+ * [POST] 새로운 챌린지 생성
+ * 새로운 챌린지를 생성하고 데이터베이스에 저장
+ */
 router.post("/challenge", verifyToken, async (req, res) => {
   const { title, memo, days } = req.body;
   const userId = (req as any).user.uid;
@@ -54,8 +72,9 @@ router.post("/challenge", verifyToken, async (req, res) => {
       memo,
       days,
       successCount: 0,
-      lastSuccessDate: new Date().toISOString(),
+      lastSuccessDate: "",
       result: "progress",
+      isClicked: false,
       createdAt: new Date().toISOString(),
     };
 
@@ -73,6 +92,10 @@ const isAuthenticated = (
   return (req as any).user?.uid !== undefined;
 };
 
+/**
+ * [DELETE] 챌린지 삭제
+ * 특정 챌린지와 관련된 goolList 데이터도 함께 삭제
+ */
 router.delete(
   "/challenge/:idx",
   verifyToken,
