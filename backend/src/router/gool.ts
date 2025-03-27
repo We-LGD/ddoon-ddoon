@@ -83,4 +83,28 @@ router.get("/gool-list", verifyToken, async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * [PATCH] 첫 클릭 상태 변경 (firstClick → true)
+ * Click 버튼을 눌렀을 때 isClicked 상태 업데이트
+ */
+router.patch(
+  "/gool/:idx",
+  verifyToken,
+  async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { idx } = req.params;
+      const { isClicked } = req.body;
+
+      await db
+        .collection("goolList")
+        .doc(idx)
+        .update({ isClicked: Boolean(isClicked) });
+      res.send("Gool click status updated");
+    } catch (error) {
+      console.error("Error updating gool click status:", error);
+      res.status(500).send("Error updating gool click status");
+    }
+  }
+);
+
 export default router;
