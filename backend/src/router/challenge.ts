@@ -23,6 +23,7 @@ router.get(
         .get();
 
       const batch = db.batch();
+      let hasSuccess = false; // success인 챌린지가 있는지 체크
 
       const challenges: Challenge[] = snapshot.docs.map((doc: any) => {
         const challenge = { ...doc.data(), idx: doc.id } as Challenge;
@@ -37,6 +38,29 @@ router.get(
             : timeDiff > 24 * 60 * 60 * 1000
             ? "fail"
             : challenge.result;
+
+        // result가 "fail"이면 goolList에 추가
+        if (result === "fail") {
+          const goolRef = db.collection("goolList").doc(doc.id);
+          batch.set(
+            goolRef,
+            {
+              userId,
+              idx: challenge.idx,
+              title: challenge.title,
+              days: challenge.days,
+              result,
+              isClicked: challenge.isClicked,
+              createdAt: new Date(),
+            },
+            { merge: true }
+          ); // 중복 방지
+        }
+
+        // result가 "success"면 goolList에 추가
+        if (result === "success") {
+          hasSuccess = true;
+        }
 
         return {
           ...challenge,
