@@ -103,14 +103,16 @@ const handleKakaoAuth: RequestHandler = async (req, res, next) => {
     // 사용자 정보를 Firestore에 저장/업데이트
     try {
       const userRef = db.collection("users").doc(String(userData.id));
+      const userDoc = await userRef.get();
+      const existingData = userDoc.exists ? userDoc.data() : {};
+      const tutorialCompleted = existingData?.tutorialCompleted ?? false;
+
       await userRef.set(
         {
           email: userData.email,
-          nickname: userData.nickname,
           profileImage: userData.profileImage,
           provider: "kakao",
-          createdAt: new Date(),
-          tutorialCompleted: false,
+          tutorialCompleted,
         },
         { merge: true }
       );
