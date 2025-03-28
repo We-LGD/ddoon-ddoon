@@ -14,7 +14,7 @@ export const useCheckUserNickname = () => {
 
     if (userSnap.exists()) {
       const nickname = userSnap.data().nickname || '';
-      if (!nickname.trim()) {
+      if (!nickname.trim() || nickname === 'Unknown') {
         navigate('/nickname-setup');
       } else {
         navigate('/challenge');
