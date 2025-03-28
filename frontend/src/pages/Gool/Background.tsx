@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
 import { Images } from '@/shared/assets/images';
 import { LayoutProps } from '@/shared/interface/templatesType';
-import TutorialRewardModal from '@/pages/Gool/TutorialRewardModal';
 import { auth, db } from '@/shared/utils/firebase';
 
 export default function Background({ children }: LayoutProps) {
@@ -23,11 +22,6 @@ export default function Background({ children }: LayoutProps) {
     };
 
     getNickname();
-
-    const tutorialModal = localStorage.getItem('tutorialModal');
-    if (tutorialModal === 'true') {
-      TutorialRewardModal();
-    }
 
     const aspectRatio = 640 / 1283;
 

@@ -6,6 +6,7 @@ import Background from '@/pages/Gool/Background';
 import SuccessModal from '@/pages/Gool/SuccessModal';
 import { successImagesData } from '@/pages/Gool/SuccessImages';
 import { getFailureImagePosition } from '@/pages/Gool/FailurePositions';
+import TutorialRewardModal from '@/pages/Gool/TutorialRewardModal';
 
 export default function Gool() {
   const [goolList, setGoolList] = useState<
@@ -51,6 +52,7 @@ export default function Gool() {
     try {
       await axiosInstance.get('http://localhost:3000/tutorial-status').then((response) => {
         setTutorialClear(response.data.tutorialCompleted);
+        if (!response.data.tutorialCompleted) TutorialRewardModal();
       });
     } catch (error) {
       console.error('Error fetching tutorial status:', error);
