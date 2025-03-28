@@ -32,7 +32,6 @@ export default function KakaoLoginButton() {
       const idToken = await userCredential.user.getIdToken();
       // Firebase Custom Token을 이용해 ID Token으로 교환 ID Token 저장
       Cookies.set('userToken', idToken, { expires: 1, secure: true, sameSite: 'Strict' });
-      localStorage.setItem('isKaKaoLoggedIn', 'true');
       await checkUserNickname();
     } catch (error) {
       const axiosError = error as AxiosError;
