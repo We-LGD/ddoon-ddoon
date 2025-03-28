@@ -30,7 +30,7 @@ export default function Trip() {
   const activeChallenges = challengeList.filter(
     (challenge) => challenge.result !== 'fail' && challenge.result !== 'success',
   );
-  const firstActiveChallenge = activeChallenges[0].idx.toString();
+  const firstActiveChallenge = activeChallenges[0]?.idx.toString();
 
   const handleResize = () => {
     if (containerRef.current) {
