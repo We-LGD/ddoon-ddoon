@@ -4,7 +4,6 @@ import { ChallengeState } from '@shared/interface/storeType';
 
 const useChallengeStore = create<ChallengeState>((set) => ({
   challengeList: [],
-  selectedChallengeIdx: null,
   getChallengeList: async () => {
     try {
       const response = await axiosInstance.get('http://localhost:3000/challenge');
@@ -13,7 +12,6 @@ const useChallengeStore = create<ChallengeState>((set) => ({
       console.error('Error fetching challenges:', error);
     }
   },
-  setSelectedChallengeIdx: (idx: number | null) => set({ selectedChallengeIdx: idx }),
 }));
 
 export default useChallengeStore;

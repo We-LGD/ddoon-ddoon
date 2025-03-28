@@ -32,5 +32,5 @@ export interface ChallengeStore {
 
 export interface ChallengeState {
   challengeList: ChallengeStore[];
-  getChallengeList: (token: string) => Promise<void>;
+  getChallengeList: () => Promise<void>;
 }

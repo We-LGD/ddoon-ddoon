@@ -29,3 +29,10 @@ export interface NewChallengeProps {
   result: 'progress';
   successCheck: boolean;
 }
+
+export interface ChallengeData {
+  successCount: number;
+  days: 30 | 50 | 100;
+  title: string;
+  lastSuccessDate: string;
+}
