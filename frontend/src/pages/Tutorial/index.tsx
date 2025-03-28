@@ -18,7 +18,6 @@ export default function Tutorial() {
   };
 
   const handleFinishTutorial = () => {
-    localStorage.setItem('tutorialModal', 'true');
     navigate('/ddoon-ddoon-gool');
   };
 

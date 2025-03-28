@@ -16,7 +16,6 @@ export default function TutorialRewardModal() {
             theme="modal"
             event={() => {
               Swal.close();
-              localStorage.setItem('tutorialModal', 'false');
             }}
           >
             보상받기
