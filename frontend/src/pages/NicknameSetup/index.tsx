@@ -1,25 +1,23 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import useInputStore from '@/shared/store/useInputStore';
 import Input from '@/shared/components/atoms/Input';
 import Button from '@/shared/components/atoms/Button';
-import { db } from '@/shared/utils/firebase';
+import { auth, db } from '@/shared/utils/firebase';
 
 export default function NicknameSetup() {
   const { inputs } = useInputStore();
   const navigate = useNavigate();
-  const auth = getAuth();
   const [loading, setLoading] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
-  const [loginMethod, setLoginMethod] = useState<string | null>(null);
 
   const isButtonDisabled = !inputs.nickname || inputs.nickname.length === 0 || inputs.nickname.length > 10;
 
   const handleStart = async () => {
     if (!isButtonDisabled) {
-      if (isButtonDisabled || loading || !userId || !loginMethod) return;
+      if (isButtonDisabled || loading || !userId) return;
       setLoading(true);
 
       try {
@@ -36,17 +34,17 @@ export default function NicknameSetup() {
   };
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        if (user.providerData[0]?.providerId === 'password') {
-          setLoginMethod('email');
-        } else if (user.providerData[0]?.providerId === 'github.com') {
-          setLoginMethod('github');
-        }
         setUserId(user.uid);
+
+        return;
       }
+      setUserId(null);
     });
-  }, [auth]);
+
+    return () => unsubscribe(); // ✅ cleanup
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center h-full">
