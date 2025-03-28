@@ -256,8 +256,11 @@ router.delete(
         return;
       }
 
-      // 문서 삭제
-      await db.collection("challenges").doc(idx).delete();
+      // Batch를 사용하여 challenges와 goolList에서 동시 삭제
+      const batch = db.batch();
+      batch.delete(db.collection("challenges").doc(idx));
+      batch.delete(db.collection("goolList").doc(idx));
+      await batch.commit();
       res.status(200).send("Challenge deleted");
     } catch (error) {
       console.error("Error deleting challenge:", error);
