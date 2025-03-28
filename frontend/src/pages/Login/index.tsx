@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { FirebaseError } from 'firebase/app';
 import useCheckUserNickname from '@/shared/hook/useCheckUserNickname';
+import { auth } from '@/shared/utils/firebase';
 import saveUserToFirestore from '@/shared/utils/saveUserToFirestore';
 import { Images } from '@/shared/assets/images';
 import useInputStore from '@/shared/store/useInputStore';
@@ -14,16 +15,12 @@ import Input from '@/shared/components/atoms/Input';
 import Button from '@/shared/components/atoms/Button';
 import GithubLoginButton from '@/pages/Login/GithubLoginButton';
 import KakaoLoginButton from '@/pages/Login/KakaoLoginButton';
-import { auth } from '@/shared/utils/firebase';
+import GuestLoginButton from '@/pages/Login/GuestLoginButton';
 
 export default function Login() {
-  const navigate = useNavigate();
   const { inputs, resetInputs } = useInputStore();
   const { checkUserNickname } = useCheckUserNickname();
   const { email, password } = inputs;
-  const isGuestLoggedIn = localStorage.getItem('isLoggedIn');
-  const isKaKaoLoggedIn = localStorage.getItem('isKaKaoLoggedIn');
-  const isEmailLoggedIn = !!auth.currentUser;
 
   const handleLoginBtnClick = async () => {
     if (email && password) {
@@ -75,22 +72,6 @@ export default function Login() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [email, password]);
 
-  useEffect(() => {
-    if (isKaKaoLoggedIn || isEmailLoggedIn) {
-      navigate('/challenge', { replace: true });
-    }
-
-    if (isGuestLoggedIn) {
-      // TODO: 닉네임 설정 완료 여부 저장 (BE에서 처리)
-      // - 닉네임 설정 완료 시 navigate('/tutorial')
-      // TODO: 튜토리얼 완료 여부 저장 (BE에서 처리)
-      // - 튜토리얼 미 완료 시 navigate('/tutorial')
-      // - 튜토리얼 완료 시 navigate('/challenge')
-      navigate('/nickname-setup', { replace: true });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <div className="flex flex-col items-center justify-center h-full">
       <img src={Images.뚠뚠로고} alt="뚠뚠로고" className=" w-48 mb-[1rem]" />
@@ -107,13 +88,7 @@ export default function Login() {
             회원가입
           </Link>
           <span className="text-[0.75rem] text-disabledHover"> | </span>
-          <Link
-            to="/nickname-setup"
-            onClick={() => localStorage.setItem('isLoggedIn', 'true')}
-            className="text-[0.75rem] text-disabledHover"
-          >
-            게스트로 입장하기 {'>'}
-          </Link>
+          <GuestLoginButton />
         </div>
       </section>
 
