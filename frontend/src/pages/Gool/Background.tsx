@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
-import { getAuth } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { Images } from '@/shared/assets/images';
 import { LayoutProps } from '@/shared/interface/templatesType';
 import TutorialRewardModal from '@/pages/Gool/TutorialRewardModal';
-import { db } from '@/shared/utils/firebase';
+import { auth, db } from '@/shared/utils/firebase';
 
 export default function Background({ children }: LayoutProps) {
   const [width, setWidth] = useState(0);
@@ -12,7 +11,7 @@ export default function Background({ children }: LayoutProps) {
 
   useEffect(() => {
     const getNickname = async () => {
-      const user = getAuth().currentUser;
+      const user = auth.currentUser;
       if (user) {
         const userRef = doc(db, 'users', user.uid);
         const userSnap = await getDoc(userRef);

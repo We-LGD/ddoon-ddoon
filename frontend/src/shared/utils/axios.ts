@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { getAuth } from 'firebase/auth';
+import { auth } from '@shared/utils/firebase';
 
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:3000',
@@ -24,7 +24,6 @@ axiosInstance.interceptors.response.use(
   async (error) => {
     if (error.response && error.response.status === 401) {
       try {
-        const auth = getAuth();
         const user = auth.currentUser;
 
         if (user) {
