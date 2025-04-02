@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { auth } from '@/shared/utils/firebase';
 import useInputStore from '@/shared/store/useInputStore';
 import useChallengeStore from '@/shared/store/useChallengeStore';
 import useSelectDayStore from '@/shared/store/useSelectDayStore';
@@ -8,6 +9,7 @@ import Title from '@/shared/components/atoms/Title';
 import ChallengeBox from '@/pages/Challenge/ChallengeBox';
 import AddBtn from '@/pages/Challenge/AddBtn';
 import AddModal from '@/pages/Challenge/AddModal';
+import GuestLogoutModal from '@/pages/Challenge/GuestLogoutModal';
 import logout from '@/shared/utils/logout';
 
 export default function Challenge() {
@@ -35,14 +37,31 @@ export default function Challenge() {
   };
 
   const handleLogout = async () => {
-    await logout();
-    navigate('/');
-    resetInputs();
+    if (auth.currentUser?.isAnonymous) {
+      // 게스트 계정일 경우 경고 메시지 띄우기
+      GuestLogoutModal().then((isConfirmed) => {
+        if (isConfirmed) {
+          try {
+            // 게스트 계정 삭제
+            auth.currentUser?.delete();
+          } catch (error) {
+            console.error('게스트 계정 삭제 실패:', error);
+          }
+          logout();
+          navigate('/');
+          resetInputs();
+        }
+      });
+    } else {
+      // 일반 계정 로그아웃
+      await logout();
+      navigate('/');
+      resetInputs();
+    }
   };
 
   useEffect(() => {
     getChallengeList();
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
