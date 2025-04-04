@@ -1,5 +1,4 @@
 import Cookies from 'js-cookie';
-import { isMobile } from 'react-device-detect';
 import { GithubAuthProvider, signInWithPopup } from 'firebase/auth';
 import { Images } from '@/shared/assets/images';
 import { auth } from '@/shared/utils/firebase';
@@ -30,7 +29,7 @@ export default function GithubLoginButton() {
 
   return (
     <div
-      className={`flex-center  ${isMobile ? 'w-full' : 'w-[27.375rem]'} h-[2.75rem] bg-white text-black font-bold rounded-[0.25rem] border border-disabled cursor-pointer`}
+      className="flex-center w-full h-[2.75rem] bg-white text-black font-bold rounded-[0.25rem] border border-disabled cursor-pointer"
       onClick={handleGithubLoginClick}
     >
       <img src={Images.GithubLogo} className="h-5 mr-1 mb-1" />

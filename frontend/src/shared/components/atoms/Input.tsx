@@ -15,11 +15,11 @@ export default function Input({ theme, type = 'text', title, placeholder, name, 
   return (
     <div
       className={`
-        ${theme === 'auth' ? 'w-[27.375rem]' : null} 
-        ${theme === 'tutorial' || theme === 'challenge' ? 'mb-[1rem] w-full max-w-[20rem]' : null}
-        ${isMobile ? 'w-full' : null}
         text-center
-      `}
+        ${theme === 'auth' ? 'w-[27.375rem]' : null}  
+        ${theme === 'tutorial' || theme === 'challenge' ? 'w-full mb-[1rem] max-w-[20rem]' : null}
+        ${isMobile ? 'w-full' : null}
+        `}
     >
       {title && <label className="block mb-[0.25rem]">{title}</label>}
       <input
