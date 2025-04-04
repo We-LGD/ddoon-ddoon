@@ -73,10 +73,10 @@ export default function Login() {
   }, [email, password]);
 
   return (
-    <div className="flex flex-col items-center justify-center h-full">
+    <div className="flex flex-col items-center justify-center w-full h-full px-7">
       <img src={Images.뚠뚠로고} alt="뚠뚠로고" className=" w-48 mb-[1rem]" />
 
-      <section className={`flex flex-col items-center justify-center gap-3 mb-8 ${isMobile ? 'w-full' : null}`}>
+      <section className="w-full flex flex-col items-center justify-center gap-3  mb-8 box-border">
         <Input theme="auth" placeholder="이메일 입력" name="email" maxLength={20} />
         <Input theme="auth" type="password" placeholder="비밀번호 입력" name="password" maxLength={64} />
         <Button theme="auth" event={handleLoginBtnClick}>
