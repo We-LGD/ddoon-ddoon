@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import { auth } from '@shared/utils/firebase';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: import.meta.env.VITE_API_BASE_URL,
 });
 
 axiosInstance.interceptors.request.use(

@@ -10,7 +10,7 @@ export default function DeleteBtn({ idx, result }: ResultProps) {
   const handleDelete = () => {
     const deleteChallenge = async () => {
       try {
-        await axiosInstance.delete(`http://localhost:3000/challenge/${idx}`);
+        await axiosInstance.delete(`/challenge/${idx}`);
         await getChallengeList();
       } catch (error) {
         console.error('Error fetching challenges:', error);

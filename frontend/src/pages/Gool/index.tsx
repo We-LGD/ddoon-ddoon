@@ -24,7 +24,7 @@ export default function Gool() {
     title: string;
   }) => {
     if (idx) {
-      await axiosInstance.patch(`http://localhost:3000/gool/${idx}`, {
+      await axiosInstance.patch(`/gool/${idx}`, {
         isClicked: true,
       });
     }
@@ -40,7 +40,7 @@ export default function Gool() {
 
   const getGoolList = async () => {
     try {
-      await axiosInstance.get('http://localhost:3000/gool-list').then((response) => {
+      await axiosInstance.get('/gool-list').then((response) => {
         setGoolList(response.data);
       });
     } catch (error) {
@@ -50,7 +50,7 @@ export default function Gool() {
 
   const tutorialState = async () => {
     try {
-      await axiosInstance.get('http://localhost:3000/tutorial-status').then((response) => {
+      await axiosInstance.get('/tutorial-status').then((response) => {
         setTutorialClear(response.data.tutorialCompleted);
         if (!response.data.tutorialCompleted) TutorialRewardModal();
       });
@@ -61,9 +61,7 @@ export default function Gool() {
 
   const tutorialOk = async () => {
     try {
-      await axiosInstance
-        .patch('http://localhost:3000/tutorial-status', { tutorialCompleted: true })
-        .then(tutorialState);
+      await axiosInstance.patch('/tutorial-status', { tutorialCompleted: true }).then(tutorialState);
     } catch (error) {
       console.error('Error fetching tutorial status:', error);
     }

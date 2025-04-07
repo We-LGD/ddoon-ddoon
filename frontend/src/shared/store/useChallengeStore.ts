@@ -6,7 +6,7 @@ const useChallengeStore = create<ChallengeState>((set) => ({
   challengeList: [],
   getChallengeList: async () => {
     try {
-      const response = await axiosInstance.get('http://localhost:3000/challenge');
+      const response = await axiosInstance.get('/challenge');
       set({ challengeList: response.data });
     } catch (error) {
       console.error('Error fetching challenges:', error);

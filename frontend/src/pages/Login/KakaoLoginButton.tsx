@@ -22,7 +22,11 @@ export default function KakaoLoginButton() {
 
   const sendCodeToBackend = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/auth/kakao', { code }, { signal: controller.signal });
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_BASE_URL}/auth/kakao`,
+        { code },
+        { signal: controller.signal },
+      );
 
       const customToken = response.data.firebaseToken; // 서버에서 받은 Custom Token
 

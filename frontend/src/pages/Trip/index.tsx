@@ -34,13 +34,10 @@ export default function Trip() {
       if (challengeData.successCount < challengeData.days) {
         try {
           await axiosInstance
-            .patch(
-              `http://localhost:3000/challenge/${selectedChallengeIdx ? selectedChallengeIdx : firstActiveChallenge}`,
-              {
-                successCount: challengeData.successCount + 1,
-                lastSuccessDate: new Date().toISOString(),
-              },
-            )
+            .patch(`/challenge/${selectedChallengeIdx ? selectedChallengeIdx : firstActiveChallenge}`, {
+              successCount: challengeData.successCount + 1,
+              lastSuccessDate: new Date().toISOString(),
+            })
             .then(() => {
               if (challengeData.successCount + 1 === challengeData.days) {
                 Modal({ title: '챌린지 성공', desc: '개미굴이 오픈됩니다!', buttonTitle: '확인' }).then(() => {
@@ -73,7 +70,7 @@ export default function Trip() {
 
   const getChallengeData = async (selectedChallengeIdx: string) => {
     try {
-      const response = await axiosInstance.get(`http://localhost:3000/challenge/${selectedChallengeIdx}`);
+      const response = await axiosInstance.get(`/challenge/${selectedChallengeIdx}`);
       const challenges = response.data;
 
       setChallengeData(challenges);

@@ -20,7 +20,7 @@ export default function AddForm() {
   const handleFormSubmit = () => {
     const addChallenge = async () => {
       try {
-        await axiosInstance.post('http://localhost:3000/challenge', {
+        await axiosInstance.post('/challenge', {
           title: title,
           memo: memo,
           days: select,

@@ -34,7 +34,7 @@ export default function Login() {
           Cookies.set('userToken', idToken, { expires: 1, secure: true, sameSite: 'Strict' });
 
           await axios.post(
-            'http://localhost:3000/api/auth',
+            `${import.meta.env.VITE_API_BASE_URL}/api/auth`,
             {},
             {
               headers: {
