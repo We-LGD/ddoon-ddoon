@@ -18,6 +18,19 @@ export interface NewChallengeStore {
 }
 
 export interface SelectDayProps {
-  select: null | string;
-  setSelect: (day: string | null) => void;
+  select: null | string | number;
+  setSelect: (day: string | number | null) => void;
+}
+
+export interface ChallengeStore {
+  idx: number;
+  title: string;
+  memo: string;
+  days: number;
+  result: 'success' | 'progress' | 'fail';
+}
+
+export interface ChallengeState {
+  challengeList: ChallengeStore[];
+  getChallengeList: () => Promise<void>;
 }

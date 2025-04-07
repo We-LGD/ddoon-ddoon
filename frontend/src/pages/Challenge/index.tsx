@@ -1,34 +1,34 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { auth } from '@/shared/utils/firebase';
 import useInputStore from '@/shared/store/useInputStore';
+import useChallengeStore from '@/shared/store/useChallengeStore';
 import useSelectDayStore from '@/shared/store/useSelectDayStore';
-import useNewChallengeStore from '@/shared/store/useNewChallengeStore';
-import ChallengesData from '@/shared/data/ChallengesData';
 import Modal from '@/shared/components/organisms/Modal';
 import Title from '@/shared/components/atoms/Title';
 import ChallengeBox from '@/pages/Challenge/ChallengeBox';
 import AddBtn from '@/pages/Challenge/AddBtn';
 import AddModal from '@/pages/Challenge/AddModal';
+import GuestLogoutModal from '@/pages/Challenge/GuestLogoutModal';
 import logout from '@/shared/utils/logout';
 
 export default function Challenge() {
   const navigate = useNavigate();
   const { resetInputs } = useInputStore();
   const { setSelect } = useSelectDayStore();
-  const { setNewChallenge } = useNewChallengeStore();
+  const { challengeList, getChallengeList } = useChallengeStore();
 
   const handleChallengeAddModal = () => {
-    if (ChallengesData.length >= 10) {
+    if (challengeList.length >= 10) {
       Modal({ icon: 'info', title: '챌린지는 10개까지만 가능합니다.', buttonTitle: '확인' });
     } else {
       AddModal({
         outsideClick: () => {
           setSelect(null);
-          setNewChallenge({ day: undefined });
           return true;
         },
         allowEscapKey: () => {
           setSelect(null);
-          setNewChallenge({ day: undefined });
           return true;
         },
       });
@@ -37,10 +37,33 @@ export default function Challenge() {
   };
 
   const handleLogout = async () => {
-    await logout();
-    navigate('/');
-    resetInputs();
+    if (auth.currentUser?.isAnonymous) {
+      // 게스트 계정일 경우 경고 메시지 띄우기
+      GuestLogoutModal().then((isConfirmed) => {
+        if (isConfirmed) {
+          try {
+            // 게스트 계정 삭제
+            auth.currentUser?.delete();
+          } catch (error) {
+            console.error('게스트 계정 삭제 실패:', error);
+          }
+          logout();
+          navigate('/');
+          resetInputs();
+        }
+      });
+    } else {
+      // 일반 계정 로그아웃
+      await logout();
+      navigate('/');
+      resetInputs();
+    }
   };
+
+  useEffect(() => {
+    getChallengeList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="flex flex-col items-center relative pb-[4.375rem] px-10 max-h-screen">
@@ -50,17 +73,16 @@ export default function Challenge() {
           로그아웃
         </button>
       </div>
-
-      <p className="w-full mb-2 text-right text-base">{ChallengesData.length} / 10</p>
+      <p className="w-full mb-2 text-right text-base">{challengeList.length} / 10</p>
       <section className="flex flex-col gap-4 w-full max-h-screen overflow-y-auto">
-        {ChallengesData.map((challenge) => {
+        {challengeList.map((challenge) => {
           return (
             <ChallengeBox
               key={challenge.idx}
               idx={challenge.idx}
               title={challenge.title}
               memo={challenge.memo}
-              day={challenge.days}
+              days={challenge.days}
               result={challenge.result}
             />
           );

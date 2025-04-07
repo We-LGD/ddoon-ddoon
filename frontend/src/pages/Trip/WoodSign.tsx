@@ -1,19 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { IoMdArrowDropup, IoMdArrowDropdown } from 'react-icons/io';
+import useChallengeStore from '@/shared/store/useChallengeStore';
 import { Images } from '@/shared/assets/images';
-import ChallengesData from '@/shared/data/ChallengesData';
 import ToolTip from '@/shared/components/atoms/ToolTip';
 
 export default function WoodSign({
-  currentId,
-  setCurrentId,
+  title,
+  getChallengeData,
 }: {
-  currentId: number;
-  setCurrentId: React.Dispatch<React.SetStateAction<number>>;
+  title: string;
+  getChallengeData: (selectedChallengeIdx: string) => Promise<void>;
 }) {
   const woodSignRef = useRef<HTMLDivElement>(null);
   const [challengeSelectShow, setChallengeSelectShow] = useState(false);
-  const [currentName, setCurrentName] = useState(ChallengesData[currentId - 1].title);
+  const { challengeList, getChallengeList } = useChallengeStore();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -27,7 +27,17 @@ export default function WoodSign({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [setCurrentId]);
+  }, [challengeSelectShow]);
+
+  useEffect(() => {
+    getChallengeList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleSelectChallenge = (idx: string) => {
+    getChallengeData(idx);
+    setChallengeSelectShow(false);
+  };
 
   return (
     <>
@@ -52,8 +62,8 @@ export default function WoodSign({
         onClick={() => setChallengeSelectShow(!challengeSelectShow)}
       >
         <div className="w-[60%] group">
-          <p className="wood-sign">{currentName}</p>
-          <ToolTip>{currentName}</ToolTip>
+          <p className="wood-sign">{title}</p>
+          <ToolTip>{title}</ToolTip>
         </div>
 
         {challengeSelectShow ? (
@@ -63,18 +73,17 @@ export default function WoodSign({
               ref={woodSignRef}
               className="absolute top-[90%] horizontal-center bg-white w-[14rem] shadow-lg rounded-lg overflow-hidden"
             >
-              {ChallengesData.filter((challenge) => challenge.result !== 'fail').map((challenge) => (
-                <p
-                  key={challenge.idx}
-                  className="hover:bg-main hover:text-white transition-all  py-2 px-4"
-                  onClick={() => {
-                    setCurrentName(challenge.title);
-                    setCurrentId(challenge.idx);
-                  }}
-                >
-                  {challenge.title}
-                </p>
-              ))}
+              {challengeList
+                .filter((challenge) => challenge.result !== 'fail' && challenge.result !== 'success')
+                .map((challenge) => (
+                  <p
+                    key={challenge.idx}
+                    className="hover:bg-main hover:text-white transition-all  py-2 px-4"
+                    onClick={() => handleSelectChallenge(challenge.idx.toString())}
+                  >
+                    {challenge.title}
+                  </p>
+                ))}
             </div>
           </>
         ) : (

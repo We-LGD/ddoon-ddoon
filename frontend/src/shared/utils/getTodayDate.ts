@@ -1,6 +1,5 @@
 const getTodayDate = () => {
-  const now = new Date();
-  return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  return new Date().toISOString().split('T')[0]; // 'YYYY-MM-DD' 형식 반환
 };
 
 export default getTodayDate;

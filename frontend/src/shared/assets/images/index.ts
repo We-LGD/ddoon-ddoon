@@ -1,10 +1,8 @@
+// 뚠뚠굴
+import 튜토리얼오픈 from '@shared/assets/images/튜토리얼오픈.png';
 import 첫번째굴30일 from '@shared/assets/images/1번굴_운동30일.png';
 import 첫번째굴50일 from '@shared/assets/images/1번굴_운동50일.png';
 import 첫번째굴100일 from '@shared/assets/images/1번굴_운동100일.png';
-import 구름맵30일 from '@shared/assets/images/30일_구름맵.png';
-import 구름맵50일 from '@shared/assets/images/50일_구름맵.png';
-import 구름맵100일 from '@shared/assets/images/100일_구름맵.png';
-import 기본뚠뚠 from '@shared/assets/images/기본뚠뚠.png';
 import 실패방3번 from '@shared/assets/images/뚠뚠굴_3번실패.png';
 import 실패방8번 from '@shared/assets/images/뚠뚠굴_8번실패.png';
 import 뚠뚠굴_배경 from '@shared/assets/images/뚠뚠굴_배경.png';
@@ -12,13 +10,27 @@ import 뚠뚠굴_빈굴 from '@shared/assets/images/뚠뚠굴_빈굴.png';
 import 뚠뚠굴_튜토리얼 from '@shared/assets/images/뚠뚠굴_튜토리얼.png';
 import 뚠뚠굴_팻말 from '@shared/assets/images/뚠뚠굴_팻말.png';
 import 뚠뚠굴 from '@shared/assets/images/뚠뚠굴.png';
+// 뚠뚠여행
+import 구름맵30일 from '@shared/assets/images/30일_구름맵.png';
+import 구름맵50일 from '@shared/assets/images/50일_구름맵.png';
+import 구름맵100일 from '@shared/assets/images/100일_구름맵.png';
+
+// 튜토리얼
+import 튜토리얼2 from '@shared/assets/images/튜토리얼2.gif';
+import 튜토리얼3 from '@shared/assets/images/튜토리얼3.gif';
+import 튜토리얼4 from '@shared/assets/images/튜토리얼4.gif';
+import 튜토리얼5 from '@shared/assets/images/튜토리얼5.png';
+import 튜토리얼6 from '@shared/assets/images/튜토리얼6.png';
+
+// 기타
+import 준비중이미지 from '@shared/assets/images/준비중이미지.png';
+import 기본뚠뚠 from '@shared/assets/images/기본뚠뚠.png';
 import 뚠뚠로고 from '@shared/assets/images/뚠뚠로고.png';
 import 로딩뚠뚠 from '@shared/assets/images/로딩뚠뚠.png';
 import 성공도장 from '@shared/assets/images/성공도장.png';
 import 실패도장 from '@shared/assets/images/실패도장.png';
 import 실패방 from '@shared/assets/images/실패방.png';
 import 통나무 from '@shared/assets/images/통나무.png';
-import 튜토리얼오픈 from '@shared/assets/images/튜토리얼오픈.png';
 import GithubLogo from '@/shared/assets/images/github-logo.svg';
 import LoadingBar from '@/shared/assets/images/LoadingBar.png';
 import cloud from '@/shared/assets/images/cloud.png';
@@ -27,6 +39,11 @@ export const Images = {
   GithubLogo,
   LoadingBar,
   cloud,
+  튜토리얼2,
+  튜토리얼3,
+  튜토리얼4,
+  튜토리얼5,
+  튜토리얼6,
   뚠뚠로고,
   뚠뚠굴,
   뚠뚠굴_배경,
@@ -48,4 +65,7 @@ export const Images = {
   실패방,
   통나무,
   튜토리얼오픈,
+  준비중이미지,
 } as const;
+
+export const getImageSrc = (key: keyof typeof Images) => Images[key] || Images.준비중이미지;

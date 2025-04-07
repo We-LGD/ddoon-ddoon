@@ -5,15 +5,21 @@ export interface PositionProps {
 }
 
 export interface ResultProps {
+  idx: number;
   result: string;
 }
 
-export interface ChallengeProps {
+export interface ChallengeBoxProps {
   idx: number;
   title: string;
   memo: string;
-  day: number;
-  result: string;
+  days: number;
+  result: 'success' | 'progress' | 'fail';
+}
+
+export interface ChallengeProps extends ChallengeBoxProps {
+  successCount: number;
+  lastSuccessDate: string;
 }
 
 export interface NewChallengeProps {
@@ -24,10 +30,9 @@ export interface NewChallengeProps {
   successCheck: boolean;
 }
 
-//TODO - 서버 연결시 삭제하기
-export interface DummyProps {
-  dummy: ChallengeProps[];
-  setDummy: (challenge: ChallengeProps) => void;
-  deleteDummy: (index: number) => void;
-  updateDummy: (index: number, result?: 'progress' | 'success' | 'fail', successCheck?: boolean) => void;
+export interface ChallengeData {
+  successCount: number;
+  days: 30 | 50 | 100;
+  title: string;
+  lastSuccessDate: string;
 }

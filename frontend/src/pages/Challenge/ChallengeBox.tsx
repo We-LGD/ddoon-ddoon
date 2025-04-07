@@ -1,23 +1,23 @@
 import { useNavigate } from 'react-router-dom';
 import { Images } from '@/shared/assets/images';
 import DeleteBtn from '@/pages/Challenge/DeleteBtn';
-import { ChallengeProps } from '@/pages/interface';
+import { ChallengeBoxProps } from '@/pages/interface';
 
-export default function ChallengeBox({ idx, title, memo, day, result }: ChallengeProps) {
+export default function ChallengeBox({ idx, title, memo, days, result }: ChallengeBoxProps) {
   const navigate = useNavigate();
 
-  const handleOpen = () => {
+  const handleChallengeClick = () => {
     if (result === 'progress') {
-      navigate('/ddoon-ddoon-trip', { state: { idx } });
+      navigate('/ddoon-ddoon-trip', { state: idx });
     } else if (result === 'success') {
-      navigate('/ddoon-ddoon-gool', { state: { idx } });
+      navigate('/ddoon-ddoon-gool');
     }
   };
 
   return (
     <>
       <div
-        onClick={handleOpen}
+        onClick={handleChallengeClick}
         className={`w-full h-[7rem] rounded-lg flex space-x-10 justify-between items-center p-4 relative 
           ${result === 'success' && ' text-white border shadow-light animate-successLight bg-main  hover:bg-active group cursor-pointer'} 
           ${result === 'progress' && 'text-white bg-main hover:bg-active group cursor-pointer'} 
@@ -32,9 +32,9 @@ export default function ChallengeBox({ idx, title, memo, day, result }: Challeng
         <p
           className={`text-active text-[1.125rem] font-bold whitespace-nowrap ${result !== 'progress' ? 'text-gray-400' : 'group-hover:text-main'}`}
         >
-          D-{day}
+          D-{days}일
         </p>
-        <DeleteBtn result={result} />
+        <DeleteBtn idx={idx} result={result} />
         {result === 'success' && (
           <img className="absolute top-0 right-0 w-auto h-full p-1" src={Images.성공도장} alt="챌린지 성공 도장" />
         )}

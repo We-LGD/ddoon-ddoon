@@ -1,23 +1,38 @@
 import { useEffect, useState } from 'react';
+import axiosInstance from '@/shared/utils/axios';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import useChallengeStore from '@/shared/store/useChallengeStore';
 import useInputStore from '@/shared/store/useInputStore';
 import useSelectDayStore from '@/shared/store/useSelectDayStore';
-import useNewChallengeStore from '@/shared/store/useNewChallengeStore';
 import Button from '@/shared/components/atoms/Button';
 import Input from '@/shared/components/atoms/Input';
 import SelectDay from '@/pages/Challenge/SelectDay';
 
 export default function AddForm() {
   const MySwal = withReactContent(Swal);
+  const { getChallengeList } = useChallengeStore();
   const [disabledBtn, setDisabledBtn] = useState(true);
   const { inputs, resetInputs } = useInputStore();
   const { select, setSelect } = useSelectDayStore();
-  const { setNewChallenge } = useNewChallengeStore();
   const { title, memo } = inputs;
 
   const handleFormSubmit = () => {
-    setNewChallenge({ memo, title });
+    const addChallenge = async () => {
+      try {
+        await axiosInstance.post('http://localhost:3000/challenge', {
+          title: title,
+          memo: memo,
+          days: select,
+        });
+
+        await getChallengeList();
+      } catch (error) {
+        console.error('Error fetching challenges:', error);
+      }
+    };
+
+    addChallenge();
     setDisabledBtn(true);
     setSelect(null);
     resetInputs();
@@ -59,7 +74,6 @@ export default function AddForm() {
           event={() => {
             MySwal.close();
             setSelect(null);
-            setNewChallenge({ day: undefined });
           }}
         >
           취소

@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { SelectDayProps } from '@/shared/store/storeType';
+import { SelectDayProps } from '@/shared/interface/storeType';
 
 const useSelectDayStore = create<SelectDayProps>((set) => ({
   select: null,

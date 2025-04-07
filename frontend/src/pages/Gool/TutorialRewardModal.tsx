@@ -8,7 +8,7 @@ export default function TutorialRewardModal() {
 
   ReactSwal.fire({
     html: (
-      <>
+      <div>
         <Title>튜토리얼 성공!</Title>
         <div className="font-default text-sm">
           <p className="mb-4">성공 보상으로 굴 하나를 열어줄께</p>
@@ -16,17 +16,16 @@ export default function TutorialRewardModal() {
             theme="modal"
             event={() => {
               Swal.close();
-              localStorage.setItem('tutorialModal', 'false');
             }}
           >
             보상받기
           </Button>
         </div>
-      </>
+      </div>
     ),
     showConfirmButton: false,
     customClass: {
-      popup: 'max-w-[25.375rem]',
+      popup: 'max-w-[22rem] w-full',
     },
   });
 }
