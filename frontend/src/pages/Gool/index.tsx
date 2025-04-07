@@ -138,7 +138,13 @@ export default function Gool() {
               <div className="absolute w-full h-full opacity-0 z-50">Invisible Button</div>
               <ToolTip>{gool.title} 실패!</ToolTip>
               <img
-                src={gool.result === 'fail' ? Images.실패방 : undefined}
+                src={
+                  gool.result === 'fail'
+                    ? successImagesData[index].idx === 3
+                      ? Images.실패방3번
+                      : Images.실패방
+                    : undefined
+                }
                 alt={`${successImagesData[index].idx}번째 방 실패 이미지`}
                 className="w-full h-auto object-contain pointer-events-auto"
               />
