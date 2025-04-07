@@ -1,5 +1,5 @@
 export const successImagesData = [
-  { idx: 1, style: { top: '39.5%', left: '5.8%', width: '29%' }, imgSrc: '첫번째굴' },
+  { idx: 1, style: { top: '38.8%', left: '5.2%', width: '29.7%' }, imgSrc: '첫번째굴' },
   { idx: 2, style: { top: '42.5%', left: '44.8%', width: '27%' }, imgSrc: '두번째굴' },
   { idx: 3, style: { top: '34.2%', left: '68.6%', width: '31.5%' }, imgSrc: '세번째굴' },
   { idx: 4, style: { top: '54%', left: '19%', width: '26%' }, imgSrc: '네번째굴' },
