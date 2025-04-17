@@ -1,0 +1,10 @@
+{
+  "name": "ddoon-ddoon",
+  "private": true,
+  "dependencies": {
+    "firebase-tools": "^14.1.0"
+  },
+  "scripts": {
+    "deploy": "firebase deploy"
+  }
+}
