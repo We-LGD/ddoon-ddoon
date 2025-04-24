@@ -1,6 +1,7 @@
 name: Deploy Frontend to Firebase Hosting
 
 on:
+  workflow_dispatch: # 수동 배포 추가
   push:
     branches: [Develop]
     paths:
