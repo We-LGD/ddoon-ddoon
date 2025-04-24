@@ -1,10 +1,9 @@
-name: Deploy Backend (Functions) to Firebase
+name: Deploy Backend to Netlify
 
 on:
   push:
-    branches: [Develop]
     paths:
-      - "backend/functions/**"
+      - "backend/**"
 
 jobs:
   deploy:
@@ -18,12 +17,12 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install Firebase CLI
-        run: npm install -g firebase-tools
+      - run: npm install -g netlify-cli
 
-      - name: Deploy Firebase Functions
-        run: |
-          cd backend
-          firebase deploy --only functions --project your-firebase-project-id
+      - run: cd backend && npm ci
+
+      - name: Deploy to Netlify
+        run: netlify deploy --prod
         env:
-          FIREBASE_TOKEN: AIzaSyAaWx4xenehB_My2hK0XFCc5HZCEupAuAU
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
