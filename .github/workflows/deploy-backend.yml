@@ -1,6 +1,7 @@
 name: Deploy Backend to Netlify
 
 on:
+  workflow_dispatch: # 수동 배포 추가
   push:
     paths:
       - "backend/**"
