@@ -17,9 +17,9 @@ jobs:
         with:
           node-version: 18
 
-      - run: npm install -g netlify-cli
+      - run: yarn global add netlify-cli
 
-      - run: cd backend && npm ci
+      - run: cd backend && yarn install
 
       - name: Deploy to Netlify
         run: netlify deploy --prod
