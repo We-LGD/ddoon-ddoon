@@ -1,11 +1,13 @@
 {
   "name": "ddoon-ddoon-backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "netlify/functions/api.ts",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --exec ts-node src/server.ts",
-    "watch": "npx tsc --watch"
+    "dev": "netlify dev",
+    "build": "npx tsc",
+    "watch": "npx tsc --watch",
+    "start": "netlify dev"
   },
   "dependencies": {
     "axios": "^1.7.9",
