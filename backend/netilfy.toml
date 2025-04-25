@@ -4,6 +4,7 @@
 
 [functions]
   node_bundler = "esbuild"
+  included_files = ["backend/netlify/functions/firebaseServiceAccountKey.json"]
 
 [dev]
   functions = "netlify/functions"

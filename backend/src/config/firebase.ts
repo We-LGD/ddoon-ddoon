@@ -5,7 +5,10 @@ import * as path from "path";
 if (admin.apps.length === 0) {
   admin.initializeApp({
     credential: admin.credential.cert(
-      require(path.join(__dirname, "firebaseServiceAccountKey.json"))
+      require(path.join(
+        __dirname,
+        "../../netlify/functions/firebaseServiceAccountKey.json"
+      ))
     ),
   });
 }
