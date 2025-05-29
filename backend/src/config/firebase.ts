@@ -1,15 +1,13 @@
 import * as admin from "firebase-admin";
-import * as path from "path";
 
 // Firebase Admin SDK 초기화
 if (admin.apps.length === 0) {
+  const serviceAccount = JSON.parse(
+    process.env.FIREBASE_SERVICE_ACCOUNT_KEY as string
+  );
+
   admin.initializeApp({
-    credential: admin.credential.cert(
-      require(path.join(
-        __dirname,
-        "../../netlify/functions/firebaseServiceAccountKey.json"
-      ))
-    ),
+    credential: admin.credential.cert(serviceAccount),
   });
 }
 
